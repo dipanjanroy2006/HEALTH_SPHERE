@@ -13,6 +13,7 @@
     />
     <title>AI Health Assistant - HEALTH SPHERE</title>
     <link rel="stylesheet" href="../css/main.css" />
+    <script src="../public/i18n.js"></script>
 
     <script
       type="module"
@@ -26,6 +27,15 @@
     ></script>
   </head>
   <body class="bg-surface">
+    <script>
+      // Auth guard: redirect to sign-in if not logged in
+      (function(){
+        const auth = localStorage.getItem('authUser');
+        if(!auth) {
+          window.location.href = 'sign_in_screen.html';
+        }
+      })();
+    </script>
     <!-- Emergency Banner -->
     <div id="emergencyBanner" class="emergency-banner hidden">
       <div class="container-custom flex items-center justify-between">
@@ -35,7 +45,7 @@
             alt="Emergency alert icon"
             class="w-6 h-6"
           />
-          <p class="font-semibold">
+          <p class="font-semibold" data-i18n="emergency_text">
             In case of medical emergency, call your local emergency services
             immediately
           </p>
@@ -83,10 +93,11 @@
             <div>
               <h1
                 class="text-xl font-headline font-bold text-violet-500 group-hover:text-violet-500-600 transition-colors"
+                data-i18n="site_title"
               >
                 HEALTH SPHERE
               </h1>
-              <p class="text-xs text-slate-500">Health Knowledge Ecosystem</p>
+              <p class="text-xs text-slate-500" data-i18n="site_subtitle">Health Knowledge Ecosystem</p>
             </div>
           </a>
 
@@ -95,31 +106,37 @@
             <a
               href="homepage.html"
               class="text-slate-600 hover:text-violet-500 transition-colors"
+              data-i18n="nav_home"
               >Home</a
             >
             <a
               href="dashboard.html"
               class="text-slate-600 hover:text-violet-500 transition-colors"
+              data-i18n="nav_dashboard"
               >Dashboard</a
             >
             <a
               href="healthopedia.html"
               class="text-slate-600 hover:text-violet-500 transition-colors"
+              data-i18n="nav_healthopedia"
               >Healthopedia</a
             >
             <a
               href="chatbot.html"
               class="text-violet-500 font-semibold border-b-2 border-violet-500 pb-1"
+              data-i18n="nav_chatbot"
               >AI Assistant</a
             >
             <a
               href="symptom_checker.html"
               class="text-slate-600 hover:text-violet-500 transition-colors"
+              data-i18n="nav_symptom"
               >Symptom Checker</a
             >
             <a
               href="emergency_resources.html"
               class="btn-emergency text-sm py-2 px-4"
+              data-i18n="nav_emergency"
             >
               <img
                 src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
@@ -134,6 +151,7 @@
           <div class="flex items-center gap-4">
             <select
               id="languageSelector"
+              data-i18n-select
               class="hidden lg:block px-4 py-2 border border-slate-200 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
               aria-label="Select language"
             >
@@ -218,8 +236,8 @@
           class="w-6 h-6 flex-shrink-0"
         />
         <div>
-          <h4 class="font-semibold mb-1">Important Medical Disclaimer</h4>
-          <p class="text-sm">
+          <h4 class="font-semibold mb-1" data-i18n="medical_disclaimer_title">Important Medical Disclaimer</h4>
+          <p class="text-sm" data-i18n="medical_disclaimer_text">
             This AI assistant provides general health information only and
             should not replace professional medical advice. For diagnosis or
             treatment, always consult a qualified healthcare provider. In

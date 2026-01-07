@@ -655,8 +655,18 @@
         }
       }
     </style>
+    <script src="../public/i18n.js"></script>
   </head>
   <body>
+    <script>
+      // Auth guard: redirect to sign-in if not logged in
+      (function(){
+        const auth = localStorage.getItem('authUser');
+        if(!auth) {
+          window.location.href = 'sign_in_screen.html';
+        }
+      })();
+    </script>
     <header class="medical-navbar">
       <div class="nav-container">
         <!-- Logo -->
@@ -664,20 +674,20 @@
           <div class="nav-logo">
             <span class="logo-icon">+</span>
             <div>
-              <h3>HEALTH SPHERE</h3>
-              <p>Health Knowledge Ecosystem</p>
+              <h3 data-i18n="site_title">HEALTH SPHERE</h3>
+              <p data-i18n="site_subtitle">Health Knowledge Ecosystem</p>
             </div>
           </div>
 
           <!-- Links -->
-          <div class="nav-links hidden lg-flex">
-            <a href="homepage.html">Home</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="healthopedia.html" class="active">Healthopedia</a>
-            <a href="chatbot.html">AI Assistant</a>
-            <a href="symptom_checker.html">Symptom Checker</a>
+            <div class="nav-links hidden lg-flex">
+            <a href="homepage.html" data-i18n="nav_home">Home</a>
+            <a href="dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+            <a href="healthopedia.html" class="active" data-i18n="nav_healthopedia">Healthopedia</a>
+            <a href="chatbot.html" data-i18n="nav_chatbot">AI Assistant</a>
+            <a href="symptom_checker.html" data-i18n="nav_symptom">Symptom Checker</a>
 
-            <a href="emergency_resources.html" class="btn-emergency">
+            <a href="emergency_resources.html" class="btn-emergency" data-i18n="nav_emergency">
               <img
                 src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
               />
@@ -688,9 +698,10 @@
 
         <!-- Right -->
         <div class="nav-right">
-          <select class="lang-select">
-            <option>English</option>
-            <option>Hindi</option>
+          <select class="lang-select" data-i18n-select>
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="bn">বাংলা</option>
           </select>
 
           <div class="user-profile">
@@ -716,14 +727,14 @@
               />
             </div>
             <div class="logo-text">
-              <h1>HealthSphere</h1>
-              <p>Your Trusted Health Companion</p>
+              <h1 data-i18n="site_title">HealthSphere</h1>
+              <p data-i18n="site_subtitle">Your Trusted Health Companion</p>
             </div>
           </div>
           <nav class="nav">
-            <a href="#features" id="features-link">Features</a>
-            <a href="#about" id="about-link">About</a>
-            <button class="btn btn-outline" id="get-started-btn">
+            <a href="#features" id="features-link" data-i18n="features_link">Features</a>
+            <a href="#about" id="about-link" data-i18n="about_link">About</a>
+            <button class="btn btn-outline" id="get-started-btn" data-i18n="get_started_btn">
               Get Started
             </button>
           </nav>
@@ -735,11 +746,11 @@
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <div class="badge">Trusted Health Information</div>
-          <h1 class="hero-title">
+          <div class="badge" data-i18n="badge_trusted_info">Trusted Health Information</div>
+          <h1 class="hero-title" data-i18n-html="hero_title_short">
             Health Literacy at <span class="text-primary">Every Step</span>
           </h1>
-          <p class="hero-description">
+          <p class="hero-description" data-i18n="hero_desc_short">
             We believe in health education's potential to make life better for
             everyone, which means making it accessible and reliable for
             everyone.
@@ -876,13 +887,13 @@
             <div class="search-input-wrapper">
               <input
                 type="text"
-                placeholder="Search diseases, symptoms, or treatments..."
+                data-i18n-placeholder="search_placeholder"
                 class="search-input"
                 id="search-input"
               />
               <div class="search-icon">🔍</div>
             </div>
-            <button class="btn btn-primary" id="search-btn">Search</button>
+            <button class="btn btn-primary" id="search-btn" data-i18n="search_btn">Search</button>
           </div>
         </div>
       </div>
@@ -900,11 +911,11 @@
           <input
             type="text"
             id="search-disease"
-            placeholder="Search diseases, symptoms, treatments..."
+            data-i18n-placeholder="search_placeholder"
             class="search-input-enhanced"
           />
           <button class="search-btn-enhanced" id="search-disease-btn">
-            🔍 Search
+            🔍 <span data-i18n="search_btn">Search</span>
           </button>
         </div>
       </div>
@@ -3423,36 +3434,65 @@
           return;
         }
 
-        list.forEach((d) => {
+        list.forEach((d, idx) => {
           const card = document.createElement("div");
           card.className = "disease-card";
+
+          // Build translation-aware strings: try hsT(key) then fall back to original
+          const keyBase = `disease_${idx}`;
+          function tryTrans(keySuffix, original) {
+            try {
+              if (window.hsT) {
+                const k = `${keyBase}_${keySuffix}`;
+                const res = window.hsT(k);
+                if (res && res !== k) return res;
+              }
+            } catch (e) {}
+            return original;
+          }
+
+          const title = escapeHtml(tryTrans("name", d.name));
+          const category = escapeHtml(tryTrans("category", d.category || ""));
+          const description = escapeHtml(tryTrans("description", d.description || ""));
+
+          const symptomsHtml = (d.symptoms || [])
+            .map((symptom, sidx) => {
+              const text = tryTrans(`sym_${sidx}`, symptom);
+              return `<li>${escapeHtml(text)}</li>`;
+            })
+            .join("");
+
+          const treatment = escapeHtml(tryTrans("treatment", d.treatment || ""));
+          const prevention = escapeHtml(tryTrans("prevention", d.prevention || ""));
+
           card.innerHTML = `
               <div class="disease-header">
-                <h3>${escapeHtml(d.name)}</h3>
-                <span class="disease-category">${escapeHtml(d.category)}</span>
+                <h3>${title}</h3>
+                <span class="disease-category">${category}</span>
               </div>
               <div class="disease-content">
-                <p class="disease-description">${escapeHtml(d.description)}</p>
+                <p class="disease-description">${description}</p>
                 <div class="disease-section">
-                  <h4>Symptoms:</h4>
+                  <h4 data-i18n="label_symptoms">Symptoms:</h4>
                   <ul>
-                    ${d.symptoms
-                      .map((symptom) => `<li>${escapeHtml(symptom)}</li>`)
-                      .join("")}
+                    ${symptomsHtml}
                   </ul>
                 </div>
                 <div class="disease-section">
-                  <h4>Treatment:</h4>
-                  <p>${escapeHtml(d.treatment)}</p>
+                  <h4 data-i18n="label_treatment">Treatment:</h4>
+                  <p>${treatment}</p>
                 </div>
                 <div class="disease-section">
-                  <h4>Prevention:</h4>
-                  <p>${escapeHtml(d.prevention)}</p>
+                  <h4 data-i18n="label_prevention">Prevention:</h4>
+                  <p>${prevention}</p>
                 </div>
               </div>
             `;
           grid.appendChild(card);
         });
+        // After adding dynamic elements, re-apply current language so
+        // any elements with data-i18n in the newly created nodes get translated.
+        try{ if(window.i18n && typeof window.i18n.applyLanguage === 'function') window.i18n.applyLanguage(localStorage.userLang || 'en'); }catch(e){}
       };
 
       // Simple HTML-escape helper
@@ -3625,7 +3665,7 @@
                           disease.description
                         }</p>
                         <div class="disease-section">
-                            <h4>Symptoms:</h4>
+                            <h4 data-i18n="label_symptoms">Symptoms:</h4>
                             <ul>
                                 ${disease.symptoms
                                   .map((symptom) => `<li>${symptom}</li>`)
@@ -3633,17 +3673,18 @@
                             </ul>
                         </div>
                         <div class="disease-section">
-                            <h4>Treatment:</h4>
+                            <h4 data-i18n="label_treatment">Treatment:</h4>
                             <p>${disease.treatment}</p>
                         </div>
                         <div class="disease-section">
-                            <h4>Prevention:</h4>
+                            <h4 data-i18n="label_prevention">Prevention:</h4>
                             <p>${disease.prevention}</p>
                         </div>
                     </div>
                 `;
           diseaseGrid.appendChild(diseaseCard);
         });
+        try{ if(window.i18n && typeof window.i18n.applyLanguage === 'function') window.i18n.applyLanguage(localStorage.userLang || 'en'); }catch(e){}
       }
 
       // Chat Functionality
@@ -3923,6 +3964,27 @@
       //         alert("Sorry, speech synthesis not supported in this browser.");
       //     }
       // }
+    </script>
+    <script src="../public/local_translations_data.js"></script>
+    <script src="../public/local_translations.js"></script>
+    <script>
+      (function(){
+        function setLang(lang){
+          try{ if(window.i18n && typeof window.i18n.applyLanguage==='function') window.i18n.applyLanguage(lang); }catch(e){}
+          try{ if(window.applyLanguage) window.applyLanguage(lang); }catch(e){}
+        }
+
+        // Wire any selects marked with data-i18n-select to update both runtimes
+        document.querySelectorAll('select[data-i18n-select]').forEach(sel=>{
+          sel.addEventListener('change', (e)=> setLang(e.target.value));
+        });
+
+        // Set initial value from storage and apply
+        const stored = localStorage.userLang || localStorage.userLang || 'en';
+        document.querySelectorAll('select[data-i18n-select]').forEach(sel=>{ try{ sel.value = stored; }catch(e){} });
+        // Give other scripts a moment to initialize then apply
+        setTimeout(()=> setLang(stored), 50);
+      })();
     </script>
   </body>
 </html>

@@ -11,6 +11,7 @@
       Type 2 Diabetes - Disease Information | HEALTH SPHERE Healthopedia
     </title>
     <link rel="stylesheet" href="../css/main.css" />
+    <script src="../public/i18n.js"></script>
     <script>
       // Initialize theme immediately before page renders to prevent flashing
       (function () {
@@ -38,6 +39,15 @@
     ></script>
   </head>
   <body class="bg-background min-h-screen">
+    <script>
+      // Auth guard: redirect to sign-in if not logged in
+      (function(){
+        const auth = localStorage.getItem('authUser');
+        if(!auth) {
+          window.location.href = 'sign_in_screen.html';
+        }
+      })();
+    </script>
     <!-- Header Navigation -->
     <header class="bg-white border-b border-border sticky top-0 z-50 shadow-sm">
       <nav class="container-custom py-4">
@@ -65,10 +75,10 @@
               </svg>
             </div>
             <div>
-              <h1 class="font-headline font-bold text-xl text-primary">
+              <h1 class="font-headline font-bold text-xl text-primary" data-i18n="site_title">
                 HEALTH SPHERE
               </h1>
-              <p class="text-xs text-text-secondary">Knowledge as Healthcare</p>
+              <p class="text-xs text-text-secondary" data-i18n="site_subtitle">Knowledge as Healthcare</p>
             </div>
           </a>
 
@@ -77,6 +87,7 @@
             <a
               href="healthopedia_main_screen.html"
               class="text-text-secondary hover:text-primary transition-colors duration-300 text-sm font-medium"
+              data-i18n="nav_healthopedia"
             >
               Healthopedia
             </a>
@@ -102,6 +113,7 @@
             <a
               href="language_selection_screen.html"
               class="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors duration-300"
+              data-i18n="language_label"
             >
               <svg
                 class="w-5 h-5"
@@ -118,7 +130,7 @@
               </svg>
               <span class="text-sm font-medium">Language</span>
             </a>
-            <a href="sign_in_screen.html" class="btn btn-primary"> Sign In </a>
+            <a href="sign_in_screen.html" class="btn btn-primary" data-i18n="sign_in_link"> Sign In </a>
           </div>
         </div>
       </nav>

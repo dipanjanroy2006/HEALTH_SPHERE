@@ -1287,6 +1287,48 @@ button {
   border-color: rgb(203 213 224 / var(--tw-border-opacity, 1));
 }
 
+/* Ensure icons placed with utility classes like 'absolute inset-y-0 left-0' are vertically centered
+   inside their relative parent (used for input icons). This prevents icons appearing above inputs. */
+.relative > .inset-y-0 {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+/* Only nudge icons that are explicitly left-aligned */
+.relative > .inset-y-0.left-0 {
+  left: 1rem; /* nudge left icons slightly to the right */
+  right: auto;
+}
+
+/* Ensure right-aligned icons stay pinned to the right */
+.relative > .inset-y-0.right-0 {
+  right: 1rem; /* small inset so icon doesn't touch edge */
+  left: auto;
+}
+
+/* Inputs inside a positioned container (with a left icon) need extra left padding
+   so the icon and the input text do not appear cramped. */
+.relative .input {
+  padding-left: 3.25rem; /* increased to match left icon shift */
+  padding-right: 3rem; /* ensure space when a right icon (eye) is present */
+}
+
+/* Hide native select dropdown arrow so only our custom SVG is shown */
+.relative select.input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+}
+
+/* Internet Explorer / Edge specific: hide the dropdown arrow */
+.relative select.input::-ms-expand {
+  display: none;
+}
+
 /* Badge Components */
 
 .badge-primary {

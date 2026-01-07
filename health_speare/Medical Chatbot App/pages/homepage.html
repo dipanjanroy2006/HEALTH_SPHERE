@@ -13,6 +13,7 @@
     />
     <title>HEALTH SPHERE - Empowering Health Through Knowledge</title>
     <link rel="stylesheet" href="../css/main.css" />
+    <script src="../public/i18n.js"></script>
   </head>
   <body
     style="
@@ -21,6 +22,15 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     "
   >
+    <script>
+      // Auth guard: redirect to sign-in if not logged in
+      (function(){
+        const auth = localStorage.getItem('authUser');
+        if(!auth) {
+          window.location.href = 'sign_in_screen.html';
+        }
+      })();
+    </script>
     <!-- Emergency Banner -->
     <div id="emergencyBanner" class="emergency-banner hidden">
       <div class="container-custom flex items-center justify-between">
@@ -109,10 +119,11 @@
             <div>
               <h1
                 class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors"
+                data-i18n="site_title"
               >
                 HEALTH SPHERE
               </h1>
-              <p class="text-xs text-text-tertiary">
+              <p class="text-xs text-text-tertiary" data-i18n="site_subtitle">
                 Health Knowledge Ecosystem
               </p>
             </div>
@@ -161,7 +172,8 @@
           <!-- Language Selector & Mobile Menu -->
           <div class="flex items-center gap-4">
             <select
-              id="languageSelector"
+              id="pageLangSelect"
+              data-i18n-select
               class="hidden lg:block px-4 py-2 border border-border rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary dark:bg-surface-dark dark:text-text-primary-dark dark:border-border-dark"
               aria-label="Select language"
             >
@@ -278,19 +290,19 @@
 
             <h1
               class="text-5xl lg:text-6xl font-headline font-bold text-text-primary mb-6 leading-tight"
+              data-i18n-html="hero_title"
             >
               Empowering Health Through
               <span class="gradient-text">Knowledge</span>
             </h1>
-
-            <p class="text-xl text-text-secondary mb-8 leading-relaxed">
+            <p class="text-xl text-text-secondary mb-8 leading-relaxed" data-i18n="hero_desc">
               Your comprehensive health knowledge ecosystem. Access reliable
               medical information, reduce health anxiety through understanding,
               and make informed decisions across diverse communities.
             </p>
 
             <div class="flex flex-wrap gap-4">
-              <a href="dashboard.html" class="btn-primary">
+              <a href="dashboard.html" class="btn-primary" data-i18n="explore_dashboard_btn">
                 <img
                   src="https://api.iconify.design/mdi/view-dashboard.svg?color=white"
                   alt="Dashboard icon"
@@ -298,7 +310,7 @@
                 />
                 Explore Dashboard
               </a>
-              <a href="healthopedia.html" class="btn-outline">
+              <a href="healthopedia.html" class="btn-outline" data-i18n="browse_healthopedia_btn">
                 <img
                   src="https://api.iconify.design/mdi/book-open-page-variant.svg?color=%232E86AB"
                   alt="Book icon"
@@ -318,7 +330,7 @@
                 />
                 <div>
                   <p class="text-2xl font-bold text-primary">50K+</p>
-                  <p class="text-sm text-text-tertiary">Active Users</p>
+                  <p class="text-sm text-text-tertiary" data-i18n="active_users">Active Users</p>
                 </div>
               </div>
               <div class="flex items-center gap-2">
@@ -329,7 +341,7 @@
                 />
                 <div>
                   <p class="text-2xl font-bold text-primary">1000+</p>
-                  <p class="text-sm text-text-tertiary">Medical Articles</p>
+                  <p class="text-sm text-text-tertiary" data-i18n="medical_articles">Medical Articles</p>
                 </div>
               </div>
               <div class="flex items-center gap-2">
@@ -340,7 +352,7 @@
                 />
                 <div>
                   <p class="text-2xl font-bold text-primary">3+</p>
-                  <p class="text-sm text-text-tertiary">Languages</p>
+                  <p class="text-sm text-text-tertiary" data-i18n="languages">Languages</p>
                 </div>
               </div>
             </div>
@@ -1620,5 +1632,7 @@
       id="dhws-dataInjector"
       src="../public/dhws-data-injector.js"
     ></script>
+    <script src="../public/local_translations_data.js"></script>
+    <script src="../public/local_translations.js"></script>
   </body>
 </html>

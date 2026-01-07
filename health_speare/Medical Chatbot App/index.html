@@ -111,21 +111,22 @@
         services
       </p>
 
-      <a href="pages/homepage.html" class="manual-link">
-        Continue to Homepage →
-      </a>
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <a href="pages/sign_up_screen.html" class="manual-link">Get Started →</a>
+        <a href="pages/sign_in_screen.html" class="manual-link">Sign In →</a>
+      </div>
     </div>
 
     <script>
-      // Auto-redirect to homepage after 3 seconds
+      // Auto-redirect to sign-up page after 2 seconds
       setTimeout(function () {
-        window.location.href = "pages/homepage.html";
-      }, 3000);
+        window.location.href = "pages/sign_up_screen.html";
+      }, 2000);
 
       // Preload the target page for faster loading
       const link = document.createElement("link");
       link.rel = "prefetch";
-      link.href = "pages/homepage.html";
+      link.href = "pages/sign_up_screen.html";
       document.head.appendChild(link);
     </script>
     <script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
