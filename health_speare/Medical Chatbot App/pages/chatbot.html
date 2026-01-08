@@ -1,813 +1,1403 @@
 <!DOCTYPE html>
 <html lang="en" class="smooth-scroll">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MediCare Hub AI Health Assistant - Get instant answers to your health questions through our conversational chatbot with multilingual support and evidence-based guidance.">
-    <meta name="keywords" content="health chatbot, medical assistant, AI health guidance, symptom consultation, multilingual health support">
-    <title>AI Health Assistant - MediCare Hub</title>
-    <link rel="stylesheet" href="../css/main.css">
-  
-  <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"></script>
-  <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HEALTH SPHERE AI Health Assistant - Get instant answers to your health questions through our conversational chatbot with multilingual support and evidence-based guidance."
+    />
+    <meta
+      name="keywords"
+      content="health chatbot, medical assistant, AI health guidance, symptom consultation, multilingual health support"
+    />
+    <title>AI Health Assistant - HEALTH SPHERE</title>
+    <link rel="stylesheet" href="../css/main.css" />
+
+    <script
+      type="module"
+      async
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"
+    ></script>
+    <script
+      type="module"
+      defer
+      src="https://static.rocket.new/rocket-shot.js?v=0.0.2"
+    ></script>
   </head>
-<body class="bg-surface">
+  <body class="bg-surface">
     <!-- Emergency Banner -->
     <div id="emergencyBanner" class="emergency-banner hidden">
-        <div class="container-custom flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="https://api.iconify.design/mdi/alert-circle.svg?color=white" alt="Emergency alert icon" class="w-6 h-6">
-                <p class="font-semibold">In case of medical emergency, call your local emergency services immediately</p>
-            </div>
-            <button onclick="toggleEmergencyBanner()" class="text-white hover:text-error-100 transition-colors" aria-label="Close emergency banner">
-                <img src="https://api.iconify.design/mdi/close.svg?color=white" alt="Close icon" class="w-6 h-6">
-            </button>
+      <div class="container-custom flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://api.iconify.design/mdi/alert-circle.svg?color=white"
+            alt="Emergency alert icon"
+            class="w-6 h-6"
+          />
+          <p class="font-semibold">
+            In case of medical emergency, call your local emergency services
+            immediately
+          </p>
         </div>
+        <button
+          onclick="toggleEmergencyBanner()"
+          class="text-white hover:text-error-100 transition-colors"
+          aria-label="Close emergency banner"
+        >
+          <img
+            src="https://api.iconify.design/mdi/close.svg?color=white"
+            alt="Close icon"
+            class="w-6 h-6"
+          />
+        </button>
+      </div>
     </div>
 
     <!-- Navigation Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container-custom py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <a href="homepage.html" class="flex items-center gap-3 group">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MediCare Hub logo">
-                        <rect width="48" height="48" rx="12" fill="#2E86AB"/>
-                        <path d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z" fill="#A8DADC"/>
-                        <path d="M24 18V30M18 24H30" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                    </svg>
-                    <div>
-                        <h1 class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors">MediCare Hub</h1>
-                        <p class="text-xs text-text-tertiary">Health Knowledge Ecosystem</p>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
-                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
-                    <a href="healthopedia.html" class="text-text-secondary hover:text-primary transition-colors">Healthopedia</a>
-                    <a href="chatbot.html" class="text-primary font-semibold border-b-2 border-primary pb-1">AI Assistant</a>
-                    <a href="symptom_checker.html" class="text-text-secondary hover:text-primary transition-colors">Symptom Checker</a>
-                    <a href="emergency_resources.html" class="btn-emergency text-sm py-2 px-4">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Emergency icon" class="w-5 h-5">
-                        Emergency
-                    </a>
-                </div>
-
-                <!-- Language Selector & Mobile Menu -->
-                <div class="flex items-center gap-4">
-                    <select id="languageSelector" class="hidden lg:block px-4 py-2 border border-border rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Select language">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="bn">বাংলা</option>
-                    </select>
-                    
-                    <button id="mobileMenuBtn" class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors" aria-label="Toggle mobile menu">
-                        <img src="https://api.iconify.design/mdi/menu.svg?color=%232E86AB" alt="Menu icon" class="w-6 h-6">
-                    </button>
-                </div>
+      <nav class="container-custom py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="homepage.html" class="flex items-center gap-3 group">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="HEALTH SPHERE logo"
+            >
+              <rect width="48" height="48" rx="12" fill="#2E86AB" />
+              <path
+                d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z"
+                fill="#A8DADC"
+              />
+              <path
+                d="M24 18V30M18 24H30"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div>
+              <h1
+                class="text-xl font-headline font-bold text-violet-500 group-hover:text-violet-500-600 transition-colors"
+              >
+                HEALTH SPHERE
+              </h1>
+              <p class="text-xs text-slate-500">Health Knowledge Ecosystem</p>
             </div>
+          </a>
 
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden lg:hidden mt-4 pb-4 border-t border-border pt-4">
-                <div class="flex flex-col gap-4">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
-                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
-                    <a href="healthopedia.html" class="text-text-secondary hover:text-primary transition-colors">Healthopedia</a>
-                    <a href="chatbot.html" class="text-primary font-semibold">AI Assistant</a>
-                    <a href="symptom_checker.html" class="text-text-secondary hover:text-primary transition-colors">Symptom Checker</a>
-                    <select class="px-4 py-2 border border-border rounded-lg bg-white text-text-primary" aria-label="Select language mobile">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="bn">বাংলা</option>
-                    </select>
-                    <a href="emergency_resources.html" class="btn-emergency justify-center">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Emergency icon" class="w-5 h-5">
-                        Emergency Resources
-                    </a>
-                </div>
-            </div>
-        </nav>
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center gap-8">
+            <a
+              href="homepage.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Home</a
+            >
+            <a
+              href="dashboard.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Dashboard</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-violet-500 font-semibold border-b-2 border-violet-500 pb-1"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Symptom Checker</a
+            >
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency text-sm py-2 px-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency
+            </a>
+          </div>
+
+          <!-- Language Selector & Mobile Menu -->
+          <div class="flex items-center gap-4">
+            <select
+              id="languageSelector"
+              class="hidden lg:block px-4 py-2 border border-slate-200 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              aria-label="Select language"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+
+            <button
+              id="mobileMenuBtn"
+              class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              <img
+                src="https://api.iconify.design/mdi/menu.svg?color=%23a855f7"
+                alt="Menu icon"
+                class="w-6 h-6"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="hidden lg:hidden mt-4 pb-4 border-t border-slate-200 pt-4"
+        >
+          <div class="flex flex-col gap-4">
+            <a
+              href="homepage.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Home</a
+            >
+            <a
+              href="dashboard.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Dashboard</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Healthopedia</a
+            >
+            <a href="chatbot.html" class="text-violet-500 font-semibold"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Symptom Checker</a
+            >
+            <select
+              class="px-4 py-2 border border-slate-200 rounded-lg bg-white text-slate-900"
+              aria-label="Select language mobile"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency justify-center"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency Resources
+            </a>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- Medical Disclaimer Alert -->
     <div class="container-custom mt-6">
-        <div class="alert-warning">
-            <img src="https://api.iconify.design/mdi/alert.svg?color=%23D69E2E" alt="Warning icon" class="w-6 h-6 flex-shrink-0">
-            <div>
-                <h4 class="font-semibold mb-1">Important Medical Disclaimer</h4>
-                <p class="text-sm">This AI assistant provides general health information only and should not replace professional medical advice. For diagnosis or treatment, always consult a qualified healthcare provider. In emergencies, call your local emergency services immediately.</p>
-            </div>
+      <div class="alert-warning">
+        <img
+          src="https://api.iconify.design/mdi/alert.svg?color=%23D69E2E"
+          alt="Warning icon"
+          class="w-6 h-6 flex-shrink-0"
+        />
+        <div>
+          <h4 class="font-semibold mb-1">Important Medical Disclaimer</h4>
+          <p class="text-sm">
+            This AI assistant provides general health information only and
+            should not replace professional medical advice. For diagnosis or
+            treatment, always consult a qualified healthcare provider. In
+            emergencies, call your local emergency services immediately.
+          </p>
         </div>
+      </div>
     </div>
 
     <!-- Main Chat Interface -->
     <main class="container-custom py-8">
-        <div class="max-w-5xl mx-auto">
-            <!-- Chat Header -->
-            <div class="bg-white rounded-t-xl shadow-md p-6 border-b border-border">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="bg-primary-100 p-3 rounded-full">
-                            <img src="https://api.iconify.design/mdi/robot.svg?color=%232E86AB" alt="AI assistant icon" class="w-8 h-8">
-                        </div>
-                        <div>
-                            <h2 class="text-2xl font-headline font-bold text-text-primary">AI Health Assistant</h2>
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="w-2 h-2 bg-success rounded-full animate-pulse"></span>
-                                <p class="text-sm text-text-tertiary">Online - Ready to help</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button id="clearChatBtn" class="btn-ghost text-sm" aria-label="Clear conversation">
-                        <img src="https://api.iconify.design/mdi/refresh.svg?color=%232E86AB" alt="Refresh icon" class="w-5 h-5">
-                        Clear Chat
-                    </button>
+      <div class="max-w-5xl mx-auto">
+        <!-- Chat Header -->
+        <div
+          class="bg-white rounded-t-xl shadow-md p-6 border-b border-slate-200"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div
+                class="bg-gradient-to-br from-violet-500 to-purple-600 p-3 rounded-full shadow-lg"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/robot.svg?color=%23ffffff"
+                  alt="AI assistant icon"
+                  class="w-8 h-8"
+                />
+              </div>
+              <div>
+                <h2
+                  class="text-2xl font-headline font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent"
+                >
+                  Health AI
+                </h2>
+                <div class="flex items-center gap-2 mt-1">
+                  <span
+                    class="w-3 h-3 bg-emerald-500 rounded-full animate-pulse shadow-lg shadow-emerald-500"
+                  ></span>
+                  <p class="text-sm text-slate-600 font-medium">
+                    Ready to assist
+                  </p>
                 </div>
+              </div>
             </div>
-
-            <!-- Chat Messages Container -->
-            <div id="chatContainer" class="bg-white shadow-md" style="height: 500px; overflow-y: auto;">
-                <div id="chatMessages" class="p-6 space-y-4">
-                    <!-- Welcome Message -->
-                    <div class="flex gap-3 animate-fade-in-up">
-                        <div class="flex-shrink-0">
-                            <div class="bg-primary-100 p-2 rounded-full">
-                                <img src="https://api.iconify.design/mdi/robot.svg?color=%232E86AB" alt="AI assistant avatar" class="w-6 h-6">
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="bg-primary-50 rounded-lg p-4 max-w-2xl">
-                                <p class="text-text-primary mb-3">Hello! I'm your AI Health Assistant. I'm here to provide general health information and guidance. How can I help you today?</p>
-                                <p class="text-sm text-text-tertiary">Remember: I provide educational information only. For medical diagnosis or treatment, please consult a healthcare professional.</p>
-                            </div>
-                            <p class="text-xs text-text-tertiary mt-1">Just now</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Typing Indicator (Hidden by default) -->
-                <div id="typingIndicator" class="px-6 pb-4 hidden">
-                    <div class="flex gap-3">
-                        <div class="flex-shrink-0">
-                            <div class="bg-primary-100 p-2 rounded-full">
-                                <img src="https://api.iconify.design/mdi/robot.svg?color=%232E86AB" alt="AI assistant typing" class="w-6 h-6">
-                            </div>
-                        </div>
-                        <div class="bg-primary-50 rounded-lg p-4">
-                            <div class="flex gap-1">
-                                <span class="w-2 h-2 bg-primary rounded-full animate-bounce"></span>
-                                <span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
-                                <span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Response Buttons -->
-            <div id="quickResponses" class="bg-white border-t border-border p-4">
-                <p class="text-sm text-text-tertiary mb-3">Quick questions:</p>
-                <div class="flex flex-wrap gap-2">
-                    <button class="quick-response-btn" data-query="What are common cold symptoms?">
-                        <img src="https://api.iconify.design/mdi/thermometer.svg?color=%232E86AB" alt="Temperature icon" class="w-4 h-4">
-                        Common Cold Symptoms
-                    </button>
-                    <button class="quick-response-btn" data-query="How to manage stress?">
-                        <img src="https://api.iconify.design/mdi/meditation.svg?color=%232E86AB" alt="Meditation icon" class="w-4 h-4">
-                        Stress Management
-                    </button>
-                    <button class="quick-response-btn" data-query="Healthy eating tips">
-                        <img src="https://api.iconify.design/mdi/food-apple.svg?color=%232E86AB" alt="Apple icon" class="w-4 h-4">
-                        Healthy Eating
-                    </button>
-                    <button class="quick-response-btn" data-query="Exercise benefits">
-                        <img src="https://api.iconify.design/mdi/run.svg?color=%232E86AB" alt="Running icon" class="w-4 h-4">
-                        Exercise Benefits
-                    </button>
-                    <button class="quick-response-btn" data-query="Sleep hygiene tips">
-                        <img src="https://api.iconify.design/mdi/sleep.svg?color=%232E86AB" alt="Sleep icon" class="w-4 h-4">
-                        Better Sleep
-                    </button>
-                </div>
-            </div>
-
-            <!-- Chat Input -->
-            <div class="bg-white rounded-b-xl shadow-md p-4 border-t border-border">
-                <form id="chatForm" class="flex gap-3">
-                    <input 
-                        type="text" 
-                        id="chatInput" 
-                        placeholder="Type your health question here..." 
-                        class="input flex-1"
-                        aria-label="Chat message input"
-                        autocomplete="off"
-                    >
-                    <button type="submit" class="btn-primary px-6" aria-label="Send message">
-                        <img src="https://api.iconify.design/mdi/send.svg?color=white" alt="Send icon" class="w-5 h-5">
-                        Send
-                    </button>
-                </form>
-                <p class="text-xs text-text-tertiary mt-2">Press Enter to send • This is an educational tool, not a substitute for medical advice</p>
-            </div>
+            <button
+              id="clearChatBtn"
+              class="btn-ghost text-sm"
+              aria-label="Clear conversation"
+            >
+              <img
+                src="https://api.iconify.design/mdi/refresh.svg?color=%23a855f7"
+                alt="Refresh icon"
+                class="w-5 h-5"
+              />
+              Clear Chat
+            </button>
+          </div>
         </div>
+
+        <!-- Chat Messages Container -->
+        <div
+          id="chatContainer"
+          class="bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 shadow-xl rounded-t-xl border-t border-slate-200"
+          style="
+            height: 500px;
+            overflow-y: auto;
+            background: linear-gradient(
+              to bottom,
+              #f8fafc 0%,
+              #f1f5f9 50%,
+              #e2e8f0 100%
+            );
+          "
+        >
+          <div id="chatMessages" class="p-6 space-y-4">
+            <!-- Welcome Message -->
+            <div class="flex gap-3 animate-fade-in-up">
+              <div class="flex-shrink-0">
+                <div
+                  class="bg-gradient-to-br from-violet-500 to-purple-600 p-2 rounded-full shadow-lg"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/robot.svg?color=%23ffffff"
+                    alt="AI assistant avatar"
+                    class="w-6 h-6"
+                  />
+                </div>
+              </div>
+              <div class="flex-1">
+                <div
+                  class="bg-white rounded-2xl rounded-tl-none p-4 max-w-2xl shadow-sm border border-slate-200"
+                >
+                  <p class="text-slate-900 mb-3 font-semibold">
+                    Hello! I'm your Health AI Assistant. I'm here to provide
+                    general health information and guidance. How can I help you
+                    today?
+                  </p>
+                  <p class="text-sm text-slate-600">
+                    💡 Tip: I provide educational information only. For medical
+                    diagnosis or treatment, please consult a healthcare
+                    professional.
+                  </p>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">Just now</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Typing Indicator (Hidden by default) -->
+          <div id="typingIndicator" class="px-6 pb-4 hidden">
+            <div class="flex gap-3">
+              <div class="flex-shrink-0">
+                <div class="bg-violet-100 p-2 rounded-full">
+                  <img
+                    src="https://api.iconify.design/mdi/robot.svg?color=%23a855f7"
+                    alt="AI assistant typing"
+                    class="w-6 h-6"
+                  />
+                </div>
+              </div>
+              <div class="bg-violet-50 rounded-lg p-4">
+                <div class="flex gap-1">
+                  <span
+                    class="w-2 h-2 bg-violet-500 rounded-full animate-bounce"
+                  ></span>
+                  <span
+                    class="w-2 h-2 bg-violet-500 rounded-full animate-bounce"
+                    style="animation-delay: 0.1s"
+                  ></span>
+                  <span
+                    class="w-2 h-2 bg-violet-500 rounded-full animate-bounce"
+                    style="animation-delay: 0.2s"
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Response Buttons -->
+        <div
+          id="quickResponses"
+          class="bg-white border-t border-slate-200 p-4"
+          style="display: none"
+        >
+          <p class="text-sm text-slate-500 mb-3">Quick questions:</p>
+          <div class="flex flex-wrap gap-2">
+            <button
+              class="quick-response-btn"
+              data-query="What are common cold symptoms?"
+            >
+              <img
+                src="https://api.iconify.design/mdi/thermometer.svg?color=%23a855f7"
+                alt="Temperature icon"
+                class="w-4 h-4"
+              />
+              Common Cold Symptoms
+            </button>
+            <button
+              class="quick-response-btn"
+              data-query="How to manage stress?"
+            >
+              <img
+                src="https://api.iconify.design/mdi/meditation.svg?color=%23a855f7"
+                alt="Meditation icon"
+                class="w-4 h-4"
+              />
+              Stress Management
+            </button>
+            <button class="quick-response-btn" data-query="Healthy eating tips">
+              <img
+                src="https://api.iconify.design/mdi/food-apple.svg?color=%23a855f7"
+                alt="Apple icon"
+                class="w-4 h-4"
+              />
+              Healthy Eating
+            </button>
+            <button class="quick-response-btn" data-query="Exercise benefits">
+              <img
+                src="https://api.iconify.design/mdi/run.svg?color=%23a855f7"
+                alt="Running icon"
+                class="w-4 h-4"
+              />
+              Exercise Benefits
+            </button>
+            <button class="quick-response-btn" data-query="Sleep hygiene tips">
+              <img
+                src="https://api.iconify.design/mdi/sleep.svg?color=%23a855f7"
+                alt="Sleep icon"
+                class="w-4 h-4"
+              />
+              Better Sleep
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div
+          class="bg-gradient-to-b from-slate-50 via-slate-50 to-white rounded-b-xl shadow-xl p-6 border-t border-slate-200"
+        >
+          <form id="chatForm" class="flex gap-3 items-end">
+            <div class="flex-1 relative">
+              <input
+                type="text"
+                id="chatInput"
+                placeholder="Ask about symptoms, diseases, treatments..."
+                class="input flex-1 px-4 py-3 pl-5 pr-4 rounded-full border-2 border-slate-200 focus:border-violet-500 focus:ring-2 focus:ring-violet-400 focus:ring-opacity-30 transition-all duration-300 shadow-sm hover:border-slate-300 bg-white text-slate-900 placeholder-slate-400"
+                aria-label="Chat message input"
+                autocomplete="off"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 whitespace-nowrap shadow-md"
+              aria-label="Send message"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              Send
+            </button>
+          </form>
+          <p class="text-xs text-slate-600 mt-3 text-center">
+            💡 Press Enter to send • Available 24/7
+          </p>
+        </div>
+      </div>
     </main>
 
     <!-- Features Section -->
     <section class="section-compact bg-white">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">How Our AI Assistant Helps You</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Get instant, evidence-based health information in your preferred language</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Feature 1 -->
-                <div class="card text-center scroll-reveal">
-                    <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <img src="https://api.iconify.design/mdi/clock-fast.svg?color=%232E86AB" alt="Instant responses icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-lg font-semibold text-text-primary mb-2">Instant Responses</h3>
-                    <p class="text-text-secondary text-sm">Get immediate answers to your health questions 24/7</p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="card text-center scroll-reveal">
-                    <div class="bg-secondary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <img src="https://api.iconify.design/mdi/translate.svg?color=%2364B0B4" alt="Multilingual icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-lg font-semibold text-text-primary mb-2">Multilingual Support</h3>
-                    <p class="text-text-secondary text-sm">Communicate in English, Hindi, or Bengali</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="card text-center scroll-reveal">
-                    <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <img src="https://api.iconify.design/mdi/shield-check.svg?color=%23F4A261" alt="Evidence-based icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-lg font-semibold text-text-primary mb-2">Evidence-Based</h3>
-                    <p class="text-text-secondary text-sm">Information backed by medical research and guidelines</p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="card text-center scroll-reveal">
-                    <div class="bg-success-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <img src="https://api.iconify.design/mdi/lock-check.svg?color=%2338A169" alt="Privacy icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-lg font-semibold text-text-primary mb-2">Privacy Protected</h3>
-                    <p class="text-text-secondary text-sm">Your conversations are secure and confidential</p>
-                </div>
-            </div>
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-slate-900 mb-4">
+            How Our AI Assistant Helps You
+          </h2>
+          <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+            Get instant, evidence-based health information in your preferred
+            language
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Feature 1 -->
+          <div class="card text-center scroll-reveal">
+            <div
+              class="bg-violet-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/clock-fast.svg?color=%23a855f7"
+                alt="Instant responses icon"
+                class="w-8 h-8"
+              />
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">
+              Instant Responses
+            </h3>
+            <p class="text-slate-600 text-sm">
+              Get immediate answers to your health questions 24/7
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="card text-center scroll-reveal">
+            <div
+              class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/translate.svg?color=%2364B0B4"
+                alt="Multilingual icon"
+                class="w-8 h-8"
+              />
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">
+              Multilingual Support
+            </h3>
+            <p class="text-slate-600 text-sm">
+              Communicate in English, Hindi, or Bengali
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="card text-center scroll-reveal">
+            <div
+              class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/shield-check.svg?color=%23F4A261"
+                alt="Evidence-based icon"
+                class="w-8 h-8"
+              />
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">
+              Evidence-Based
+            </h3>
+            <p class="text-slate-600 text-sm">
+              Information backed by medical research and guidelines
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="card text-center scroll-reveal">
+            <div
+              class="bg-success-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/lock-check.svg?color=%2338A169"
+                alt="Privacy icon"
+                class="w-8 h-8"
+              />
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">
+              Privacy Protected
+            </h3>
+            <p class="text-slate-600 text-sm">
+              Your conversations are secure and confidential
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Common Topics Section -->
-    <section class="section-compact bg-gradient-to-br from-primary-50 to-secondary-50">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">Popular Health Topics</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Explore commonly asked questions and health concerns</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Topic 1 -->
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-primary-100 p-3 rounded-lg flex-shrink-0">
-                            <img src="https://api.iconify.design/mdi/heart-pulse.svg?color=%232E86AB" alt="Heart health icon" class="w-6 h-6">
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-text-primary mb-2">Heart Health</h3>
-                            <p class="text-text-secondary text-sm mb-3">Learn about cardiovascular wellness, prevention, and healthy lifestyle choices</p>
-                            <button class="text-primary text-sm font-semibold hover:text-primary-600 transition-colors quick-response-btn" data-query="Tell me about heart health">
-                                Ask about this →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Topic 2 -->
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-secondary-100 p-3 rounded-lg flex-shrink-0">
-                            <img src="https://api.iconify.design/mdi/brain.svg?color=%2364B0B4" alt="Mental health icon" class="w-6 h-6">
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-text-primary mb-2">Mental Wellness</h3>
-                            <p class="text-text-secondary text-sm mb-3">Understand stress, anxiety, and strategies for emotional wellbeing</p>
-                            <button class="text-primary text-sm font-semibold hover:text-primary-600 transition-colors quick-response-btn" data-query="How to improve mental health?">
-                                Ask about this →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Topic 3 -->
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-accent-100 p-3 rounded-lg flex-shrink-0">
-                            <img src="https://api.iconify.design/mdi/food-apple.svg?color=%23F4A261" alt="Nutrition icon" class="w-6 h-6">
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-text-primary mb-2">Nutrition & Diet</h3>
-                            <p class="text-text-secondary text-sm mb-3">Discover balanced eating habits and nutritional guidelines</p>
-                            <button class="text-primary text-sm font-semibold hover:text-primary-600 transition-colors quick-response-btn" data-query="What is a healthy diet?">
-                                Ask about this →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Topic 4 -->
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-success-100 p-3 rounded-lg flex-shrink-0">
-                            <img src="https://api.iconify.design/mdi/run.svg?color=%2338A169" alt="Exercise icon" class="w-6 h-6">
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-text-primary mb-2">Physical Activity</h3>
-                            <p class="text-text-secondary text-sm mb-3">Learn about exercise benefits and fitness recommendations</p>
-                            <button class="text-primary text-sm font-semibold hover:text-primary-600 transition-colors quick-response-btn" data-query="How much exercise do I need?">
-                                Ask about this →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Topic 5 -->
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-warning-100 p-3 rounded-lg flex-shrink-0">
-                            <img src="https://api.iconify.design/mdi/sleep.svg?color=%23D69E2E" alt="Sleep icon" class="w-6 h-6">
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-text-primary mb-2">Sleep Health</h3>
-                            <p class="text-text-secondary text-sm mb-3">Understand sleep importance and improve sleep quality</p>
-                            <button class="text-primary text-sm font-semibold hover:text-primary-600 transition-colors quick-response-btn" data-query="How to sleep better?">
-                                Ask about this →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Topic 6 -->
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-error-100 p-3 rounded-lg flex-shrink-0">
-                            <img src="https://api.iconify.design/mdi/medical-bag.svg?color=%23E53E3E" alt="Chronic conditions icon" class="w-6 h-6">
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-text-primary mb-2">Chronic Conditions</h3>
-                            <p class="text-text-secondary text-sm mb-3">Information about managing long-term health conditions</p>
-                            <button class="text-primary text-sm font-semibold hover:text-primary-600 transition-colors quick-response-btn" data-query="Tell me about diabetes management">
-                                Ask about this →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section
+      class="section-compact bg-gradient-to-br from-violet-50 to-purple-50"
+    >
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-slate-900 mb-4">
+            Popular Health Topics
+          </h2>
+          <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+            Explore commonly asked questions and health concerns
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Topic 1 -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div class="flex items-start gap-4">
+              <div class="bg-violet-100 p-3 rounded-lg flex-shrink-0">
+                <img
+                  src="https://api.iconify.design/mdi/heart-pulse.svg?color=%23a855f7"
+                  alt="Heart health icon"
+                  class="w-6 h-6"
+                />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">
+                  Heart Health
+                </h3>
+                <p class="text-slate-600 text-sm mb-3">
+                  Learn about cardiovascular wellness, prevention, and healthy
+                  lifestyle choices
+                </p>
+                <button
+                  class="text-violet-500 text-sm font-semibold hover:text-violet-500-600 transition-colors quick-response-btn"
+                  data-query="Tell me about heart health"
+                >
+                  Ask about this →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic 2 -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div class="flex items-start gap-4">
+              <div class="bg-purple-100 p-3 rounded-lg flex-shrink-0">
+                <img
+                  src="https://api.iconify.design/mdi/brain.svg?color=%2364B0B4"
+                  alt="Mental health icon"
+                  class="w-6 h-6"
+                />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">
+                  Mental Wellness
+                </h3>
+                <p class="text-slate-600 text-sm mb-3">
+                  Understand stress, anxiety, and strategies for emotional
+                  wellbeing
+                </p>
+                <button
+                  class="text-violet-500 text-sm font-semibold hover:text-violet-500-600 transition-colors quick-response-btn"
+                  data-query="How to improve mental health?"
+                >
+                  Ask about this →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic 3 -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div class="flex items-start gap-4">
+              <div class="bg-accent-100 p-3 rounded-lg flex-shrink-0">
+                <img
+                  src="https://api.iconify.design/mdi/food-apple.svg?color=%23F4A261"
+                  alt="Nutrition icon"
+                  class="w-6 h-6"
+                />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">
+                  Nutrition & Diet
+                </h3>
+                <p class="text-slate-600 text-sm mb-3">
+                  Discover balanced eating habits and nutritional guidelines
+                </p>
+                <button
+                  class="text-violet-500 text-sm font-semibold hover:text-violet-500-600 transition-colors quick-response-btn"
+                  data-query="What is a healthy diet?"
+                >
+                  Ask about this →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic 4 -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div class="flex items-start gap-4">
+              <div class="bg-success-100 p-3 rounded-lg flex-shrink-0">
+                <img
+                  src="https://api.iconify.design/mdi/run.svg?color=%2338A169"
+                  alt="Exercise icon"
+                  class="w-6 h-6"
+                />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">
+                  Physical Activity
+                </h3>
+                <p class="text-slate-600 text-sm mb-3">
+                  Learn about exercise benefits and fitness recommendations
+                </p>
+                <button
+                  class="text-violet-500 text-sm font-semibold hover:text-violet-500-600 transition-colors quick-response-btn"
+                  data-query="How much exercise do I need?"
+                >
+                  Ask about this →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic 5 -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div class="flex items-start gap-4">
+              <div class="bg-warning-100 p-3 rounded-lg flex-shrink-0">
+                <img
+                  src="https://api.iconify.design/mdi/sleep.svg?color=%23D69E2E"
+                  alt="Sleep icon"
+                  class="w-6 h-6"
+                />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">
+                  Sleep Health
+                </h3>
+                <p class="text-slate-600 text-sm mb-3">
+                  Understand sleep importance and improve sleep quality
+                </p>
+                <button
+                  class="text-violet-500 text-sm font-semibold hover:text-violet-500-600 transition-colors quick-response-btn"
+                  data-query="How to sleep better?"
+                >
+                  Ask about this →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic 6 -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div class="flex items-start gap-4">
+              <div class="bg-error-100 p-3 rounded-lg flex-shrink-0">
+                <img
+                  src="https://api.iconify.design/mdi/medical-bag.svg?color=%23E53E3E"
+                  alt="Chronic conditions icon"
+                  class="w-6 h-6"
+                />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">
+                  Chronic Conditions
+                </h3>
+                <p class="text-slate-600 text-sm mb-3">
+                  Information about managing long-term health conditions
+                </p>
+                <button
+                  class="text-violet-500 text-sm font-semibold hover:text-violet-500-600 transition-colors quick-response-btn"
+                  data-query="Tell me about diabetes management"
+                >
+                  Ask about this →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="section bg-gradient-to-br from-primary via-primary-600 to-secondary text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
+    <section
+      class="section bg-gradient-to-br from-violet-500 via-purple-500 to-purple-600 text-white relative overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"
+        ></div>
+      </div>
 
-        <div class="container-custom relative z-10">
-            <div class="max-w-3xl mx-auto text-center scroll-reveal">
-                <h2 class="text-4xl lg:text-5xl font-headline font-bold mb-6">Need More Comprehensive Health Tools?</h2>
-                <p class="text-xl mb-8 text-primary-100">Explore our full suite of health management features</p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="symptom_checker.html" class="btn bg-white text-primary hover:bg-primary-50">
-                        <img src="https://api.iconify.design/mdi/stethoscope.svg?color=%232E86AB" alt="Symptom checker icon" class="w-5 h-5">
-                        Try Symptom Checker
-                    </a>
-                    <a href="healthopedia.html" class="btn border-2 border-white text-white hover:bg-white/10">
-                        <img src="https://api.iconify.design/mdi/book-open-variant.svg?color=white" alt="Healthopedia icon" class="w-5 h-5">
-                        Browse Healthopedia
-                    </a>
-                </div>
-            </div>
+      <div class="container-custom relative z-10">
+        <div class="max-w-3xl mx-auto text-center scroll-reveal">
+          <h2 class="text-4xl lg:text-5xl font-headline font-bold mb-6">
+            Need More Comprehensive Health Tools?
+          </h2>
+          <p class="text-xl mb-8 text-violet-500-100">
+            Explore our full suite of health management features
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="symptom_checker.html"
+              class="btn bg-white text-violet-500 hover:bg-violet-50"
+            >
+              <img
+                src="https://api.iconify.design/mdi/stethoscope.svg?color=%23a855f7"
+                alt="Symptom checker icon"
+                class="w-5 h-5"
+              />
+              Try Symptom Checker
+            </a>
+            <a
+              href="healthopedia.html"
+              class="btn border-2 border-white text-white hover:bg-white/10"
+            >
+              <img
+                src="https://api.iconify.design/mdi/book-open-variant.svg?color=white"
+                alt="Healthopedia icon"
+                class="w-5 h-5"
+              />
+              Browse Healthopedia
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-text-primary text-white">
-        <div class="container-custom py-12">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MediCare Hub footer logo">
-                            <rect width="48" height="48" rx="12" fill="#2E86AB"/>
-                            <path d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z" fill="#A8DADC"/>
-                            <path d="M24 18V30M18 24H30" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-lg font-bold">MediCare Hub</h3>
-                            <p class="text-sm text-gray-400">Health Knowledge Ecosystem</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4">Empowering health through accessible, evidence-based medical information for diverse communities.</p>
-                    <div class="flex gap-4">
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Facebook">
-                            <img src="https://api.iconify.design/mdi/facebook.svg?color=%23A8DADC" alt="Facebook icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Twitter">
-                            <img src="https://api.iconify.design/mdi/twitter.svg?color=%23A8DADC" alt="Twitter icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Instagram">
-                            <img src="https://api.iconify.design/mdi/instagram.svg?color=%23A8DADC" alt="Instagram icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="LinkedIn">
-                            <img src="https://api.iconify.design/mdi/linkedin.svg?color=%23A8DADC" alt="LinkedIn icon" class="w-6 h-6">
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="homepage.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="dashboard.html" class="text-gray-400 hover:text-white transition-colors">Dashboard</a></li>
-                        <li><a href="healthopedia.html" class="text-gray-400 hover:text-white transition-colors">Healthopedia</a></li>
-                        <li><a href="chatbot.html" class="text-gray-400 hover:text-white transition-colors">AI Assistant</a></li>
-                        <li><a href="symptom_checker.html" class="text-gray-400 hover:text-white transition-colors">Symptom Checker</a></li>
-                    </ul>
-                </div>
-
-                <!-- Resources -->
-                <div>
-                    <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="emergency_resources.html" class="text-gray-400 hover:text-white transition-colors">Emergency Resources</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Health Guidelines</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Medical Glossary</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">First Aid Guide</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Community Forum</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal -->
-                <div>
-                    <h4 class="font-semibold mb-4">Legal & Support</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
-                    </ul>
-                </div>
+    <footer class="bg-text-violet-500 text-white">
+      <div class="container-custom py-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="HEALTH SPHERE footer logo"
+              >
+                <rect width="48" height="48" rx="12" fill="#2E86AB" />
+                <path
+                  d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z"
+                  fill="#A8DADC"
+                />
+                <path
+                  d="M24 18V30M18 24H30"
+                  stroke="white"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <div>
+                <h3 class="text-lg font-bold">HEALTH SPHERE</h3>
+                <p class="text-sm text-gray-400">Health Knowledge Ecosystem</p>
+              </div>
             </div>
-
-            <!-- Bottom Bar -->
-            <div class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-                <p>© 2025 MediCare Hub. All Rights Reserved.</p>
-                <div class="flex gap-6">
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Accessibility</a>
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Sitemap</a>
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Feedback</a>
-                </div>
+            <p class="text-gray-400 text-sm mb-4">
+              Empowering health through accessible, evidence-based medical
+              information for diverse communities.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="javascript:void(0)"
+                class="hover:text-purple-600 transition-colors"
+                aria-label="Facebook"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/facebook.svg?color=%23A8DADC"
+                  alt="Facebook icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-purple-600 transition-colors"
+                aria-label="Twitter"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/twitter.svg?color=%23A8DADC"
+                  alt="Twitter icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-purple-600 transition-colors"
+                aria-label="Instagram"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/instagram.svg?color=%23A8DADC"
+                  alt="Instagram icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-purple-600 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/linkedin.svg?color=%23A8DADC"
+                  alt="LinkedIn icon"
+                  class="w-6 h-6"
+                />
+              </a>
             </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="homepage.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="dashboard.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="healthopedia.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Healthopedia</a
+                >
+              </li>
+              <li>
+                <a
+                  href="chatbot.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >AI Assistant</a
+                >
+              </li>
+              <li>
+                <a
+                  href="symptom_checker.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Symptom Checker</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h4 class="font-semibold mb-4">Resources</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="emergency_resources.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Emergency Resources</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Health Guidelines</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Medical Glossary</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >First Aid Guide</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Community Forum</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4 class="font-semibold mb-4">Legal & Support</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Medical Disclaimer</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Help Center</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400"
+        >
+          <p>© 2025 HEALTH SPHERE. All Rights Reserved.</p>
+          <div class="flex gap-6">
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Accessibility</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Sitemap</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Feedback</a
+            >
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary-600 transition-all opacity-0 pointer-events-none z-50" aria-label="Scroll to top">
-        <img src="https://api.iconify.design/mdi/arrow-up.svg?color=white" alt="Arrow up icon" class="w-6 h-6">
+    <button
+      id="scrollToTop"
+      class="fixed bottom-8 right-8 bg-violet-500 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition-all opacity-0 pointer-events-none z-50"
+      aria-label="Scroll to top"
+    >
+      <img
+        src="https://api.iconify.design/mdi/arrow-up.svg?color=white"
+        alt="Arrow up icon"
+        class="w-6 h-6"
+      />
     </button>
 
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Emergency Banner Toggle
+      function toggleEmergencyBanner() {
+        const banner = document.getElementById("emergencyBanner");
+        banner.classList.toggle("hidden");
+      }
+
+      // Scroll Reveal Animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+          }
         });
+      }, observerOptions);
 
-        // Emergency Banner Toggle
-        function toggleEmergencyBanner() {
-            const banner = document.getElementById('emergencyBanner');
-            banner.classList.toggle('hidden');
+      document.querySelectorAll(".scroll-reveal").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Scroll to Top Button
+      const scrollToTopBtn = document.getElementById("scrollToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+          scrollToTopBtn.classList.add("opacity-100");
+        } else {
+          scrollToTopBtn.classList.add("opacity-0", "pointer-events-none");
+          scrollToTopBtn.classList.remove("opacity-100");
         }
+      });
 
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
+      scrollToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
         });
+      });
 
-        // Scroll to Top Button
-        const scrollToTopBtn = document.getElementById('scrollToTop');
+      // Language Selector
+      const languageSelector = document.getElementById("languageSelector");
 
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-                scrollToTopBtn.classList.add('opacity-100');
-            } else {
-                scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-                scrollToTopBtn.classList.remove('opacity-100');
-            }
-        });
+      languageSelector.addEventListener("change", (e) => {
+        const selectedLang = e.target.value;
+        localStorage.setItem("preferredLanguage", selectedLang);
 
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Language Selector
-        const languageSelector = document.getElementById('languageSelector');
-        
-        languageSelector.addEventListener('change', (e) => {
-            const selectedLang = e.target.value;
-            localStorage.setItem('preferredLanguage', selectedLang);
-            
-            const notification = document.createElement('div');
-            notification.className = 'fixed top-20 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-            notification.innerHTML = `
+        const notification = document.createElement("div");
+        notification.className =
+          "fixed top-20 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in";
+        notification.innerHTML = `
                 <div class="flex items-center gap-2">
                     <img src="https://api.iconify.design/mdi/check-circle.svg?color=white" alt="Success icon" class="w-5 h-5">
                     <span>Language preference saved</span>
                 </div>
             `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      });
+
+      // Load saved language preference
+      const savedLanguage = localStorage.getItem("preferredLanguage");
+      if (savedLanguage) {
+        languageSelector.value = savedLanguage;
+      }
+
+      // Chatbot Functionality
+      const chatForm = document.getElementById("chatForm");
+      const chatInput = document.getElementById("chatInput");
+      const chatMessages = document.getElementById("chatMessages");
+      const chatContainer = document.getElementById("chatContainer");
+      const typingIndicator = document.getElementById("typingIndicator");
+      const clearChatBtn = document.getElementById("clearChatBtn");
+
+      // Knowledge Base for Rule-Based Responses
+      const knowledgeBase = {
+        cold: {
+          keywords: ["cold", "cough", "sneeze", "runny nose", "congestion"],
+          response:
+            "Common cold symptoms include runny nose, congestion, cough, and sneezing. Rest, stay hydrated, and consider over-the-counter medications for symptom relief. If symptoms persist beyond 10 days or worsen, consult a healthcare provider.",
+        },
+        fever: {
+          keywords: ["fever", "temperature", "hot", "chills"],
+          response:
+            "Fever is often a sign your body is fighting an infection. Stay hydrated, rest, and monitor your temperature. For adults, seek medical attention if fever exceeds 103°F (39.4°C) or lasts more than 3 days. For children, consult a pediatrician for guidance.",
+        },
+        stress: {
+          keywords: ["stress", "anxiety", "worried", "nervous", "tension"],
+          response:
+            "Managing stress is important for overall health. Try deep breathing exercises, regular physical activity, adequate sleep, and mindfulness practices. Consider talking to a mental health professional if stress becomes overwhelming or persistent.",
+        },
+        diet: {
+          keywords: ["diet", "eating", "nutrition", "food", "healthy eating"],
+          response:
+            "A balanced diet includes fruits, vegetables, whole grains, lean proteins, and healthy fats. Aim for variety and moderation. Stay hydrated with water, limit processed foods and added sugars. Consult a registered dietitian for personalized nutrition advice.",
+        },
+        exercise: {
+          keywords: [
+            "exercise",
+            "workout",
+            "fitness",
+            "physical activity",
+            "gym",
+          ],
+          response:
+            "Adults should aim for at least 150 minutes of moderate-intensity aerobic activity per week, plus muscle-strengthening activities twice weekly. Start slowly if you're new to exercise and gradually increase intensity. Consult your doctor before starting a new exercise program.",
+        },
+        sleep: {
+          keywords: ["sleep", "insomnia", "tired", "rest", "sleeping"],
+          response:
+            "Adults need 7-9 hours of sleep nightly. Maintain a consistent sleep schedule, create a relaxing bedtime routine, keep your bedroom cool and dark, and avoid screens before bed. If sleep problems persist, consult a healthcare provider.",
+        },
+        headache: {
+          keywords: ["headache", "migraine", "head pain"],
+          response:
+            "Headaches can have various causes including tension, dehydration, or lack of sleep. Try resting in a quiet, dark room, staying hydrated, and using over-the-counter pain relievers as directed. Seek immediate medical attention for sudden, severe headaches or those accompanied by neurological symptoms.",
+        },
+        diabetes: {
+          keywords: ["diabetes", "blood sugar", "glucose", "insulin"],
+          response:
+            "Diabetes management involves monitoring blood sugar levels, following a balanced diet, regular physical activity, and taking medications as prescribed. Work closely with your healthcare team to develop a personalized management plan. Regular check-ups are essential.",
+        },
+        heart: {
+          keywords: ["heart", "cardiac", "cardiovascular", "chest pain"],
+          response:
+            "Heart health is crucial. Maintain a healthy diet, exercise regularly, manage stress, avoid smoking, and control blood pressure and cholesterol. If you experience chest pain, shortness of breath, or other concerning symptoms, seek immediate medical attention.",
+        },
+        emergency: {
+          keywords: ["emergency", "urgent", "serious", "severe", "911"],
+          response:
+            "If you're experiencing a medical emergency such as chest pain, difficulty breathing, severe bleeding, or loss of consciousness, call your local emergency services immediately. Don't wait - emergency situations require immediate professional medical care.",
+        },
+      };
+
+      // Function to find matching response
+      function findResponse(query) {
+        const lowerQuery = query.toLowerCase();
+
+        for (const [key, data] of Object.entries(knowledgeBase)) {
+          if (data.keywords.some((keyword) => lowerQuery.includes(keyword))) {
+            return data.response;
+          }
+        }
+
+        return "I understand you have a health question. While I can provide general information, I recommend consulting with a healthcare professional for personalized medical advice. You can also explore our Healthopedia for detailed articles on various health topics.";
+      }
+
+      // Function to get current time
+      function getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
         });
+      }
 
-        // Load saved language preference
-        const savedLanguage = localStorage.getItem('preferredLanguage');
-        if (savedLanguage) {
-            languageSelector.value = savedLanguage;
-        }
+      // Function to add message to chat
+      function addMessage(message, isUser = false) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "flex gap-3 animate-fade-in-up";
 
-        // Chatbot Functionality
-        const chatForm = document.getElementById('chatForm');
-        const chatInput = document.getElementById('chatInput');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatContainer = document.getElementById('chatContainer');
-        const typingIndicator = document.getElementById('typingIndicator');
-        const clearChatBtn = document.getElementById('clearChatBtn');
-
-        // Knowledge Base for Rule-Based Responses
-        const knowledgeBase = {
-            'cold': {
-                keywords: ['cold', 'cough', 'sneeze', 'runny nose', 'congestion'],
-                response: "Common cold symptoms include runny nose, congestion, cough, and sneezing. Rest, stay hydrated, and consider over-the-counter medications for symptom relief. If symptoms persist beyond 10 days or worsen, consult a healthcare provider."
-            },
-            'fever': {
-                keywords: ['fever', 'temperature', 'hot', 'chills'],
-                response: "Fever is often a sign your body is fighting an infection. Stay hydrated, rest, and monitor your temperature. For adults, seek medical attention if fever exceeds 103°F (39.4°C) or lasts more than 3 days. For children, consult a pediatrician for guidance."
-            },
-            'stress': {
-                keywords: ['stress', 'anxiety', 'worried', 'nervous', 'tension'],
-                response: "Managing stress is important for overall health. Try deep breathing exercises, regular physical activity, adequate sleep, and mindfulness practices. Consider talking to a mental health professional if stress becomes overwhelming or persistent."
-            },
-            'diet': {
-                keywords: ['diet', 'eating', 'nutrition', 'food', 'healthy eating'],
-                response: "A balanced diet includes fruits, vegetables, whole grains, lean proteins, and healthy fats. Aim for variety and moderation. Stay hydrated with water, limit processed foods and added sugars. Consult a registered dietitian for personalized nutrition advice."
-            },
-            'exercise': {
-                keywords: ['exercise', 'workout', 'fitness', 'physical activity', 'gym'],
-                response: "Adults should aim for at least 150 minutes of moderate-intensity aerobic activity per week, plus muscle-strengthening activities twice weekly. Start slowly if you're new to exercise and gradually increase intensity. Consult your doctor before starting a new exercise program."
-            },
-            'sleep': {
-                keywords: ['sleep', 'insomnia', 'tired', 'rest', 'sleeping'],
-                response: "Adults need 7-9 hours of sleep nightly. Maintain a consistent sleep schedule, create a relaxing bedtime routine, keep your bedroom cool and dark, and avoid screens before bed. If sleep problems persist, consult a healthcare provider."
-            },
-            'headache': {
-                keywords: ['headache', 'migraine', 'head pain'],
-                response: "Headaches can have various causes including tension, dehydration, or lack of sleep. Try resting in a quiet, dark room, staying hydrated, and using over-the-counter pain relievers as directed. Seek immediate medical attention for sudden, severe headaches or those accompanied by neurological symptoms."
-            },
-            'diabetes': {
-                keywords: ['diabetes', 'blood sugar', 'glucose', 'insulin'],
-                response: "Diabetes management involves monitoring blood sugar levels, following a balanced diet, regular physical activity, and taking medications as prescribed. Work closely with your healthcare team to develop a personalized management plan. Regular check-ups are essential."
-            },
-            'heart': {
-                keywords: ['heart', 'cardiac', 'cardiovascular', 'chest pain'],
-                response: "Heart health is crucial. Maintain a healthy diet, exercise regularly, manage stress, avoid smoking, and control blood pressure and cholesterol. If you experience chest pain, shortness of breath, or other concerning symptoms, seek immediate medical attention."
-            },
-            'emergency': {
-                keywords: ['emergency', 'urgent', 'serious', 'severe', '911'],
-                response: "If you're experiencing a medical emergency such as chest pain, difficulty breathing, severe bleeding, or loss of consciousness, call your local emergency services immediately. Don't wait - emergency situations require immediate professional medical care."
-            }
-        };
-
-        // Function to find matching response
-        function findResponse(query) {
-            const lowerQuery = query.toLowerCase();
-            
-            for (const [key, data] of Object.entries(knowledgeBase)) {
-                if (data.keywords.some(keyword => lowerQuery.includes(keyword))) {
-                    return data.response;
-                }
-            }
-            
-            return "I understand you have a health question. While I can provide general information, I recommend consulting with a healthcare professional for personalized medical advice. You can also explore our Healthopedia for detailed articles on various health topics.";
-        }
-
-        // Function to get current time
-        function getCurrentTime() {
-            const now = new Date();
-            return now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-        }
-
-        // Function to add message to chat
-        function addMessage(message, isUser = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'flex gap-3 animate-fade-in-up';
-            
-            if (isUser) {
-                messageDiv.innerHTML = `
+        if (isUser) {
+          messageDiv.innerHTML = `
                     <div class="flex-1"></div>
                     <div class="flex-shrink-0 order-2">
-                        <div class="bg-secondary-100 p-2 rounded-full">
+                        <div class="bg-purple-100 p-2 rounded-full">
                             <img src="https://api.iconify.design/mdi/account.svg?color=%2364B0B4" alt="User avatar" class="w-6 h-6">
                         </div>
                     </div>
                     <div class="flex-1 order-1">
-                        <div class="bg-secondary-100 rounded-lg p-4 max-w-2xl ml-auto">
-                            <p class="text-text-primary">${message}</p>
+                        <div class="bg-purple-100 rounded-lg p-4 max-w-2xl ml-auto">
+                            <p class="text-slate-900">${message}</p>
                         </div>
-                        <p class="text-xs text-text-tertiary mt-1 text-right">${getCurrentTime()}</p>
+                        <p class="text-xs text-slate-500 mt-1 text-right">${getCurrentTime()}</p>
                     </div>
                 `;
-            } else {
-                messageDiv.innerHTML = `
+        } else {
+          messageDiv.innerHTML = `
                     <div class="flex-shrink-0">
-                        <div class="bg-primary-100 p-2 rounded-full">
-                            <img src="https://api.iconify.design/mdi/robot.svg?color=%232E86AB" alt="AI assistant avatar" class="w-6 h-6">
+                        <div class="bg-violet-100 p-2 rounded-full">
+                            <img src="https://api.iconify.design/mdi/robot.svg?color=%23a855f7" alt="AI assistant avatar" class="w-6 h-6">
                         </div>
                     </div>
                     <div class="flex-1">
-                        <div class="bg-primary-50 rounded-lg p-4 max-w-2xl">
-                            <p class="text-text-primary">${message}</p>
+                        <div class="bg-violet-50 rounded-lg p-4 max-w-2xl">
+                            <p class="text-slate-900">${message}</p>
                         </div>
-                        <p class="text-xs text-text-tertiary mt-1">${getCurrentTime()}</p>
+                        <p class="text-xs text-slate-500 mt-1">${getCurrentTime()}</p>
                     </div>
                 `;
-            }
-            
-            chatMessages.appendChild(messageDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        // Function to show typing indicator
-        function showTypingIndicator() {
-            typingIndicator.classList.remove('hidden');
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
+        chatMessages.appendChild(messageDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
 
-        // Function to hide typing indicator
-        function hideTypingIndicator() {
-            typingIndicator.classList.add('hidden');
-        }
+      // Function to show typing indicator
+      function showTypingIndicator() {
+        typingIndicator.classList.remove("hidden");
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
 
-        // Handle form submission
-        chatForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const message = chatInput.value.trim();
-            if (!message) return;
-            
-            // Add user message
-            addMessage(message, true);
-            chatInput.value = '';
-            
-            // Show typing indicator
-            showTypingIndicator();
-            
-            // Simulate AI response delay
+      // Function to hide typing indicator
+      function hideTypingIndicator() {
+        typingIndicator.classList.add("hidden");
+      }
+
+      // Handle form submission
+      chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        // Add user message
+        addMessage(message, true);
+        chatInput.value = "";
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        // Simulate AI response delay
+        setTimeout(() => {
+          hideTypingIndicator();
+          const response = findResponse(message);
+          addMessage(response);
+
+          // Check if emergency keywords detected
+          if (
+            message.toLowerCase().includes("emergency") ||
+            message.toLowerCase().includes("urgent") ||
+            message.toLowerCase().includes("severe")
+          ) {
             setTimeout(() => {
-                hideTypingIndicator();
-                const response = findResponse(message);
-                addMessage(response);
-                
-                // Check if emergency keywords detected
-                if (message.toLowerCase().includes('emergency') || 
-                    message.toLowerCase().includes('urgent') ||
-                    message.toLowerCase().includes('severe')) {
-                    setTimeout(() => {
-                        addMessage("I notice you may be experiencing an urgent situation. Please access our Emergency Resources page or call your local emergency services if this is a medical emergency.", false);
-                    }, 1000);
-                }
-            }, 1500);
-        });
+              addMessage(
+                "I notice you may be experiencing an urgent situation. Please access our Emergency Resources page or call your local emergency services if this is a medical emergency.",
+                false
+              );
+            }, 1000);
+          }
+        }, 1500);
+      });
 
-        // Handle quick response buttons
-        document.querySelectorAll('.quick-response-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const query = btn.getAttribute('data-query');
-                chatInput.value = query;
-                chatForm.dispatchEvent(new Event('submit'));
-            });
+      // Handle quick response buttons
+      document.querySelectorAll(".quick-response-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const query = btn.getAttribute("data-query");
+          chatInput.value = query;
+          chatForm.dispatchEvent(new Event("submit"));
         });
+      });
 
-        // Clear chat functionality
-        clearChatBtn.addEventListener('click', () => {
-            if (confirm('Are you sure you want to clear the conversation?')) {
-                chatMessages.innerHTML = `
+      // Clear chat functionality
+      clearChatBtn.addEventListener("click", () => {
+        if (confirm("Are you sure you want to clear the conversation?")) {
+          chatMessages.innerHTML = `
                     <div class="flex gap-3 animate-fade-in-up">
                         <div class="flex-shrink-0">
-                            <div class="bg-primary-100 p-2 rounded-full">
-                                <img src="https://api.iconify.design/mdi/robot.svg?color=%232E86AB" alt="AI assistant avatar" class="w-6 h-6">
+                            <div class="bg-violet-100 p-2 rounded-full">
+                                <img src="https://api.iconify.design/mdi/robot.svg?color=%23a855f7" alt="AI assistant avatar" class="w-6 h-6">
                             </div>
                         </div>
                         <div class="flex-1">
-                            <div class="bg-primary-50 rounded-lg p-4 max-w-2xl">
-                                <p class="text-text-primary mb-3">Hello! I'm your AI Health Assistant. I'm here to provide general health information and guidance. How can I help you today?</p>
-                                <p class="text-sm text-text-tertiary">Remember: I provide educational information only. For medical diagnosis or treatment, please consult a healthcare professional.</p>
+                            <div class="bg-violet-50 rounded-lg p-4 max-w-2xl">
+                                <p class="text-slate-900 mb-3">Hello! I'm your AI Health Assistant. I'm here to provide general health information and guidance. How can I help you today?</p>
+                                <p class="text-sm text-slate-500">Remember: I provide educational information only. For medical diagnosis or treatment, please consult a healthcare professional.</p>
                             </div>
-                            <p class="text-xs text-text-tertiary mt-1">Just now</p>
+                            <p class="text-xs text-slate-500 mt-1">Just now</p>
                         </div>
                     </div>
                 `;
-            }
-        });
-
-        // Save conversation history (for logged-in users)
-        function saveConversation() {
-            const messages = Array.from(chatMessages.children).map(msg => ({
-                content: msg.querySelector('p').textContent,
-                isUser: msg.querySelector('.bg-secondary-100') !== null,
-                timestamp: msg.querySelector('.text-xs').textContent
-            }));
-            
-            localStorage.setItem('chatHistory', JSON.stringify(messages));
         }
+      });
 
-        // Load conversation history
-        function loadConversation() {
-            const savedHistory = localStorage.getItem('chatHistory');
-            if (savedHistory) {
-                const messages = JSON.parse(savedHistory);
-                chatMessages.innerHTML = '';
-                messages.forEach(msg => {
-                    addMessage(msg.content, msg.isUser);
-                });
-            }
+      // Save conversation history (for logged-in users)
+      function saveConversation() {
+        const messages = Array.from(chatMessages.children).map((msg) => ({
+          content: msg.querySelector("p").textContent,
+          isUser: msg.querySelector(".bg-purple-100") !== null,
+          timestamp: msg.querySelector(".text-xs").textContent,
+        }));
+
+        localStorage.setItem("chatHistory", JSON.stringify(messages));
+      }
+
+      // Load conversation history
+      function loadConversation() {
+        const savedHistory = localStorage.getItem("chatHistory");
+        if (savedHistory) {
+          const messages = JSON.parse(savedHistory);
+          chatMessages.innerHTML = "";
+          messages.forEach((msg) => {
+            addMessage(msg.content, msg.isUser);
+          });
         }
+      }
 
-        // Auto-save conversation periodically
-        setInterval(saveConversation, 30000); // Save every 30 seconds
+      // Auto-save conversation periodically
+      setInterval(saveConversation, 30000); // Save every 30 seconds
 
-        // Load conversation on page load
-        window.addEventListener('load', () => {
-            // Uncomment to enable conversation history
-            // loadConversation();
-        });
-        document.addEventListener("DOMContentLoaded", () => {
-    const navLinks = document.querySelectorAll(".nav-links a");
-    const currentPage = window.location.pathname.split("/").pop();
+      // Load conversation on page load
+      window.addEventListener("load", () => {
+        // Uncomment to enable conversation history
+        // loadConversation();
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav-links a");
+        const currentPage = window.location.pathname.split("/").pop();
 
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute("href");
+        navLinks.forEach((link) => {
+          const linkPage = link.getAttribute("href");
 
-        if (linkPage === currentPage) {
+          if (linkPage === currentPage) {
             link.classList.add(
-                "text-primary",
-                "font-semibold",
-                "border-b-2",
-                "border-primary",
-                "pb-1"
+              "text-violet-500",
+              "font-semibold",
+              "border-b-2",
+              "border-violet-500",
+              "pb-1"
             );
-        } else {
+          } else {
             link.classList.remove(
-                "text-primary",
-                "font-semibold",
-                "border-b-2",
-                "border-primary",
-                "pb-1"
+              "text-violet-500",
+              "font-semibold",
+              "border-b-2",
+              "border-violet-500",
+              "pb-1"
             );
-            link.classList.add("text-text-secondary");
-        }
-    });
-});
+            link.classList.add("text-slate-600");
+          }
+        });
+      });
     </script>
-<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
-</body>
+    <script></script>
+    <script
+      id="dhws-dataInjector"
+      src="../public/dhws-data-injector.js"
+    ></script>
+  </body>
 </html>

@@ -1,1136 +1,2043 @@
 <!DOCTYPE html>
 <html lang="en" class="smooth-scroll">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Emergency Resources - Quick access to emergency services, first aid guides, and crisis intervention resources. Get immediate help when you need it most.">
-    <meta name="keywords" content="emergency services, first aid, crisis intervention, emergency contacts, medical emergency, health emergency">
-    <title>Emergency Resources - MediCare Hub</title>
-    <link rel="stylesheet" href="../css/main.css">
-  
-  <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"></script>
-  <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Emergency Resources - Quick access to emergency services, first aid guides, and crisis intervention resources. Get immediate help when you need it most."
+    />
+    <meta
+      name="keywords"
+      content="emergency services, first aid, crisis intervention, emergency contacts, medical emergency, health emergency"
+    />
+    <title>Emergency Resources - HEALTH SPHERE</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script>
+      // Initialize theme immediately before page renders to prevent flashing
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const isDark =
+          savedTheme === "dark" || (savedTheme === null && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    <script
+      type="module"
+      async
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"
+    ></script>
+    <script
+      type="module"
+      defer
+      src="https://static.rocket.new/rocket-shot.js?v=0.0.2"
+    ></script>
   </head>
-<body class="bg-background">
+  <body class="bg-background">
     <!-- Emergency Alert Banner -->
     <div id="emergencyAlert" class="emergency-banner">
-        <div class="container-custom flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="https://api.iconify.design/mdi/alert-circle.svg?color=white" alt="Emergency alert icon" class="w-6 h-6 animate-pulse">
-                <p class="font-semibold">🚨 For immediate life-threatening emergencies, call your local emergency services now!</p>
-            </div>
-            <button onclick="toggleEmergencyAlert()" class="text-white hover:text-error-100 transition-colors" aria-label="Close emergency alert">
-                <img src="https://api.iconify.design/mdi/close.svg?color=white" alt="Close icon" class="w-6 h-6">
-            </button>
+      <div class="container-custom flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://api.iconify.design/mdi/alert-circle.svg?color=white"
+            alt="Emergency alert icon"
+            class="w-6 h-6 animate-pulse"
+          />
+          <p class="font-semibold">
+            🚨 For immediate life-threatening emergencies, call your local
+            emergency services now!
+          </p>
         </div>
+        <button
+          onclick="toggleEmergencyAlert()"
+          class="text-white hover:text-error-100 transition-colors"
+          aria-label="Close emergency alert"
+        >
+          <img
+            src="https://api.iconify.design/mdi/close.svg?color=white"
+            alt="Close icon"
+            class="w-6 h-6"
+          />
+        </button>
+      </div>
     </div>
 
     <!-- Navigation Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container-custom py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <a href="homepage.html" class="flex items-center gap-3 group">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MediCare Hub logo">
-                        <rect width="48" height="48" rx="12" fill="#2E86AB"/>
-                        <path d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z" fill="#A8DADC"/>
-                        <path d="M24 18V30M18 24H30" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                    </svg>
-                    <div>
-                        <h1 class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors">MediCare Hub</h1>
-                        <p class="text-xs text-text-tertiary">Health Knowledge Ecosystem</p>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
-                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
-                    <a href="healthopedia.html" class="text-text-secondary hover:text-primary transition-colors">Healthopedia</a>
-                    <a href="chatbot.html" class="text-text-secondary hover:text-primary transition-colors">AI Assistant</a>
-                    <a href="symptom_checker.html" class="text-text-secondary hover:text-primary transition-colors">Symptom Checker</a>
-                    <a href="emergency_resources.html" class="text-error font-semibold border-b-2 border-error pb-1">Emergency</a>
-                </div>
-
-                <!-- Language Selector & Mobile Menu -->
-                <div class="flex items-center gap-4">
-                    <select id="languageSelector" class="hidden lg:block px-4 py-2 border border-border rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Select language">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="bn">বাংলা</option>
-                    </select>
-                    
-                    <button id="mobileMenuBtn" class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors" aria-label="Toggle mobile menu">
-                        <img src="https://api.iconify.design/mdi/menu.svg?color=%232E86AB" alt="Menu icon" class="w-6 h-6">
-                    </button>
-                </div>
+      <nav class="container-custom py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="homepage.html" class="flex items-center gap-3 group">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="HEALTH SPHERE logo"
+            >
+              <rect width="48" height="48" rx="12" fill="#2E86AB" />
+              <path
+                d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z"
+                fill="#A8DADC"
+              />
+              <path
+                d="M24 18V30M18 24H30"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div>
+              <h1
+                class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors"
+              >
+                HEALTH SPHERE
+              </h1>
+              <p class="text-xs text-text-tertiary">
+                Health Knowledge Ecosystem
+              </p>
             </div>
+          </a>
 
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden lg:hidden mt-4 pb-4 border-t border-border pt-4">
-                <div class="flex flex-col gap-4">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
-                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
-                    <a href="healthopedia.html" class="text-text-secondary hover:text-primary transition-colors">Healthopedia</a>
-                    <a href="chatbot.html" class="text-text-secondary hover:text-primary transition-colors">AI Assistant</a>
-                    <a href="symptom_checker.html" class="text-text-secondary hover:text-primary transition-colors">Symptom Checker</a>
-                    <select class="px-4 py-2 border border-border rounded-lg bg-white text-text-primary" aria-label="Select language mobile">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="bn">বাংলা</option>
-                    </select>
-                    <a href="emergency_resources.html" class="btn-emergency justify-center">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Emergency icon" class="w-5 h-5">
-                        Emergency Resources
-                    </a>
-                </div>
-            </div>
-        </nav>
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center gap-8">
+            <a
+              href="homepage.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Home</a
+            >
+            <a
+              href="dashboard.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Dashboard</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Symptom Checker</a
+            >
+            <a
+              href="emergency_resources.html"
+              class="text-error font-semibold border-b-2 border-error pb-1"
+              >Emergency</a
+            >
+          </div>
+
+          <!-- Language Selector & Mobile Menu -->
+          <div class="flex items-center gap-4">
+            <select
+              id="languageSelector"
+              class="hidden lg:block px-4 py-2 border border-border rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+              aria-label="Select language"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+
+            <button
+              id="mobileMenuBtn"
+              class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              <img
+                src="https://api.iconify.design/mdi/menu.svg?color=%232E86AB"
+                alt="Menu icon"
+                class="w-6 h-6"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="hidden lg:hidden mt-4 pb-4 border-t border-border pt-4"
+        >
+          <div class="flex flex-col gap-4">
+            <a
+              href="homepage.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Home</a
+            >
+            <a
+              href="dashboard.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Dashboard</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Symptom Checker</a
+            >
+            <select
+              class="px-4 py-2 border border-border rounded-lg bg-white text-text-primary"
+              aria-label="Select language mobile"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency justify-center"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency Resources
+            </a>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-error-50 via-white to-warning-50 overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="emergency-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E53E3E" stroke-width="1"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#emergency-grid)"/>
-            </svg>
-        </div>
-        
-        <div class="container-custom section relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="scroll-reveal">
-                    <div class="inline-flex items-center gap-2 bg-error-100 text-error-700 px-4 py-2 rounded-full mb-6">
-                        <img src="https://api.iconify.design/mdi/shield-alert.svg?color=%23E53E3E" alt="Emergency shield icon" class="w-5 h-5">
-                        <span class="text-sm font-semibold">Emergency Resources Center</span>
-                    </div>
-                    
-                    <h1 class="text-5xl lg:text-6xl font-headline font-bold text-text-primary mb-6 leading-tight">
-                        Emergency Help When You <span class="gradient-text">Need It Most</span>
-                    </h1>
-                    
-                    <p class="text-xl text-text-secondary mb-8 leading-relaxed">
-                        Quick access to emergency services, first aid guides, and crisis intervention resources. Be prepared for any health emergency with our comprehensive emergency toolkit.
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-4">
-                        <button onclick="callEmergency()" class="btn-emergency">
-                            <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Phone icon" class="w-5 h-5">
-                            Call Emergency Services
-                        </button>
-                        <a href="#first-aid" class="btn-outline">
-                            <img src="https://api.iconify.design/mdi/medical-bag.svg?color=%232E86AB" alt="Medical bag icon" class="w-5 h-5">
-                            First Aid Guide
-                        </a>
-                    </div>
+    <section
+      class="relative bg-gradient-to-br from-error-50 via-white to-warning-50 overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="emergency-grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#E53E3E"
+                stroke-width="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#emergency-grid)" />
+        </svg>
+      </div>
 
-                    <!-- Emergency Stats -->
-                    <div class="mt-12 flex flex-wrap items-center gap-8">
-                        <div class="flex items-center gap-2">
-                            <img src="https://api.iconify.design/mdi/clock-fast.svg?color=%23E53E3E" alt="Fast response icon" class="w-6 h-6">
-                            <div>
-                                <p class="text-2xl font-bold text-error">24/7</p>
-                                <p class="text-sm text-text-tertiary">Available</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="https://api.iconify.design/mdi/map-marker.svg?color=%23E53E3E" alt="Location icon" class="w-6 h-6">
-                            <div>
-                                <p class="text-2xl font-bold text-error">GPS</p>
-                                <p class="text-sm text-text-tertiary">Location Based</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E" alt="Download icon" class="w-6 h-6">
-                            <div>
-                                <p class="text-2xl font-bold text-error">Offline</p>
-                                <p class="text-sm text-text-tertiary">Access</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative scroll-reveal">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?q=80&w=2940&auto=format&fit=crop" 
-                             alt="Emergency medical team responding to a health crisis with professional medical equipment and ambulance" 
-                             class="w-full h-[500px] object-cover"
-                             onerror="this.src='https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
-                    </div>
-                    
-                    <!-- Emergency Contact Card -->
-                    <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6 max-w-xs animate-fade-in-up border-l-4 border-error">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-error-100 p-3 rounded-lg">
-                                <img src="https://api.iconify.design/mdi/phone-alert.svg?color=%23E53E3E" alt="Emergency phone icon" class="w-6 h-6">
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-text-primary mb-1">Emergency Hotline</h3>
-                                <p class="text-sm text-text-secondary mb-2">Available 24/7 in your area</p>
-                                <button class="text-error font-semibold text-sm hover:underline">Call Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="container-custom section relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="scroll-reveal">
+            <div
+              class="inline-flex items-center gap-2 bg-error-100 text-error-700 px-4 py-2 rounded-full mb-6"
+            >
+              <img
+                src="https://api.iconify.design/mdi/shield-alert.svg?color=%23E53E3E"
+                alt="Emergency shield icon"
+                class="w-5 h-5"
+              />
+              <span class="text-sm font-semibold"
+                >Emergency Resources Center</span
+              >
             </div>
+
+            <h1
+              class="text-5xl lg:text-6xl font-headline font-bold text-text-primary mb-6 leading-tight"
+            >
+              Emergency Help When You
+              <span class="gradient-text">Need It Most</span>
+            </h1>
+
+            <p class="text-xl text-text-secondary mb-8 leading-relaxed">
+              Quick access to emergency services, first aid guides, and crisis
+              intervention resources. Be prepared for any health emergency with
+              our comprehensive emergency toolkit.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+              <button onclick="callEmergency()" class="btn-emergency">
+                <img
+                  src="https://api.iconify.design/mdi/phone.svg?color=white"
+                  alt="Phone icon"
+                  class="w-5 h-5"
+                />
+                Call Emergency Services
+              </button>
+              <a href="#first-aid" class="btn-outline">
+                <img
+                  src="https://api.iconify.design/mdi/medical-bag.svg?color=%232E86AB"
+                  alt="Medical bag icon"
+                  class="w-5 h-5"
+                />
+                First Aid Guide
+              </a>
+            </div>
+
+            <!-- Emergency Stats -->
+            <div class="mt-12 flex flex-wrap items-center gap-8">
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://api.iconify.design/mdi/clock-fast.svg?color=%23E53E3E"
+                  alt="Fast response icon"
+                  class="w-6 h-6"
+                />
+                <div>
+                  <p class="text-2xl font-bold text-error">24/7</p>
+                  <p class="text-sm text-text-tertiary">Available</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://api.iconify.design/mdi/map-marker.svg?color=%23E53E3E"
+                  alt="Location icon"
+                  class="w-6 h-6"
+                />
+                <div>
+                  <p class="text-2xl font-bold text-error">GPS</p>
+                  <p class="text-sm text-text-tertiary">Location Based</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E"
+                  alt="Download icon"
+                  class="w-6 h-6"
+                />
+                <div>
+                  <p class="text-2xl font-bold text-error">Offline</p>
+                  <p class="text-sm text-text-tertiary">Access</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative scroll-reveal">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?q=80&w=2940&auto=format&fit=crop"
+                alt="Emergency medical team responding to a health crisis with professional medical equipment and ambulance"
+                class="w-full h-[500px] object-cover"
+                onerror="this.src='https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;"
+              />
+            </div>
+
+            <!-- Emergency Contact Card -->
+            <div
+              class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6 max-w-xs animate-fade-in-up border-l-4 border-error"
+            >
+              <div class="flex items-start gap-4">
+                <div class="bg-error-100 p-3 rounded-lg">
+                  <img
+                    src="https://api.iconify.design/mdi/phone-alert.svg?color=%23E53E3E"
+                    alt="Emergency phone icon"
+                    class="w-6 h-6"
+                  />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-text-primary mb-1">
+                    Emergency Hotline
+                  </h3>
+                  <p class="text-sm text-text-secondary mb-2">
+                    Available 24/7 in your area
+                  </p>
+                  <button
+                    class="text-error font-semibold text-sm hover:underline"
+                  >
+                    Call Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Quick Emergency Actions -->
     <section class="section-compact bg-white">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">Quick Emergency Actions</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Immediate access to critical emergency resources and services</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Emergency Call -->
-                <div class="emergency-card group scroll-reveal">
-                    <div class="bg-error-50 p-4 rounded-xl mb-4 group-hover:bg-error-100 transition-colors">
-                        <img src="https://api.iconify.design/mdi/phone.svg?color=%23E53E3E" alt="Emergency call icon" class="w-12 h-12 mx-auto">
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Emergency Call</h3>
-                    <p class="text-text-secondary mb-4">One-click access to local emergency services with GPS location sharing</p>
-                    <button onclick="callEmergency()" class="btn-emergency w-full">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Phone alert icon" class="w-5 h-5">
-                        Call Now
-                    </button>
-                </div>
-
-                <!-- Location Services -->
-                <div class="card-interactive group scroll-reveal">
-                    <div class="bg-warning-50 p-4 rounded-xl mb-4 group-hover:bg-warning-100 transition-colors">
-                        <img src="https://api.iconify.design/mdi/map-marker-radius.svg?color=%23D69E2E" alt="Location services icon" class="w-12 h-12 mx-auto">
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Find Nearby Help</h3>
-                    <p class="text-text-secondary mb-4">Locate nearest hospitals, clinics, and emergency services</p>
-                    <button onclick="findNearbyServices()" class="btn-accent w-full">
-                        <img src="https://api.iconify.design/mdi/crosshairs-gps.svg?color=white" alt="GPS icon" class="w-5 h-5">
-                        Find Services
-                    </button>
-                </div>
-
-                <!-- Emergency Contacts -->
-                <div class="card-interactive group scroll-reveal">
-                    <div class="bg-primary-50 p-4 rounded-xl mb-4 group-hover:bg-primary-100 transition-colors">
-                        <img src="https://api.iconify.design/mdi/contacts.svg?color=%232E86AB" alt="Emergency contacts icon" class="w-12 h-12 mx-auto">
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Emergency Contacts</h3>
-                    <p class="text-text-secondary mb-4">Quick dial your saved emergency contacts and family</p>
-                    <button onclick="showEmergencyContacts()" class="btn-primary w-full">
-                        <img src="https://api.iconify.design/mdi/account-group.svg?color=white" alt="Contact group icon" class="w-5 h-5">
-                        View Contacts
-                    </button>
-                </div>
-
-                <!-- Medical Info -->
-                <div class="card-interactive group scroll-reveal">
-                    <div class="bg-success-50 p-4 rounded-xl mb-4 group-hover:bg-success-100 transition-colors">
-                        <img src="https://api.iconify.design/mdi/medical-bag.svg?color=%2338A169" alt="Medical information icon" class="w-12 h-12 mx-auto">
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Medical Info</h3>
-                    <p class="text-text-secondary mb-4">Access your medical history, allergies, and medications</p>
-                    <button onclick="showMedicalInfo()" class="btn-secondary w-full">
-                        <img src="https://api.iconify.design/mdi/file-document-outline.svg?color=%23264547" alt="Document icon" class="w-5 h-5">
-                        View Info
-                    </button>
-                </div>
-            </div>
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">
+            Quick Emergency Actions
+          </h2>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Immediate access to critical emergency resources and services
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Emergency Call -->
+          <div class="emergency-card group scroll-reveal">
+            <div
+              class="bg-error-50 p-4 rounded-xl mb-4 group-hover:bg-error-100 transition-colors"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone.svg?color=%23E53E3E"
+                alt="Emergency call icon"
+                class="w-12 h-12 mx-auto"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Emergency Call
+            </h3>
+            <p class="text-text-secondary mb-4">
+              One-click access to local emergency services with GPS location
+              sharing
+            </p>
+            <button onclick="callEmergency()" class="btn-emergency w-full">
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Phone alert icon"
+                class="w-5 h-5"
+              />
+              Call Now
+            </button>
+          </div>
+
+          <!-- Location Services -->
+          <div class="card-interactive group scroll-reveal">
+            <div
+              class="bg-warning-50 p-4 rounded-xl mb-4 group-hover:bg-warning-100 transition-colors"
+            >
+              <img
+                src="https://api.iconify.design/mdi/map-marker-radius.svg?color=%23D69E2E"
+                alt="Location services icon"
+                class="w-12 h-12 mx-auto"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Find Nearby Help
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Locate nearest hospitals, clinics, and emergency services
+            </p>
+            <button onclick="findNearbyServices()" class="btn-accent w-full">
+              <img
+                src="https://api.iconify.design/mdi/crosshairs-gps.svg?color=white"
+                alt="GPS icon"
+                class="w-5 h-5"
+              />
+              Find Services
+            </button>
+          </div>
+
+          <!-- Emergency Contacts -->
+          <div class="card-interactive group scroll-reveal">
+            <div
+              class="bg-primary-50 p-4 rounded-xl mb-4 group-hover:bg-primary-100 transition-colors"
+            >
+              <img
+                src="https://api.iconify.design/mdi/contacts.svg?color=%232E86AB"
+                alt="Emergency contacts icon"
+                class="w-12 h-12 mx-auto"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Emergency Contacts
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Quick dial your saved emergency contacts and family
+            </p>
+            <button
+              onclick="showEmergencyContacts()"
+              class="btn-primary w-full"
+            >
+              <img
+                src="https://api.iconify.design/mdi/account-group.svg?color=white"
+                alt="Contact group icon"
+                class="w-5 h-5"
+              />
+              View Contacts
+            </button>
+          </div>
+
+          <!-- Medical Info -->
+          <div class="card-interactive group scroll-reveal">
+            <div
+              class="bg-success-50 p-4 rounded-xl mb-4 group-hover:bg-success-100 transition-colors"
+            >
+              <img
+                src="https://api.iconify.design/mdi/medical-bag.svg?color=%2338A169"
+                alt="Medical information icon"
+                class="w-12 h-12 mx-auto"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Medical Info
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Access your medical history, allergies, and medications
+            </p>
+            <button onclick="showMedicalInfo()" class="btn-secondary w-full">
+              <img
+                src="https://api.iconify.design/mdi/file-document-outline.svg?color=%23264547"
+                alt="Document icon"
+                class="w-5 h-5"
+              />
+              View Info
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- First Aid Guide Section -->
-    <section id="first-aid" class="section bg-gradient-to-br from-surface to-white">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">First Aid Guide</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Step-by-step emergency procedures with visual aids for common medical emergencies</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- CPR Guide -->
-                <div class="card group hover:shadow-lg transition-all scroll-reveal">
-                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                             alt="Medical professional demonstrating CPR technique on training mannequin for emergency first aid education" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                             onerror="this.src='https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=2940&auto=format&fit=crop'; this.onerror=null;">
-                        <div class="absolute top-4 left-4">
-                            <span class="badge-error">Critical</span>
-                        </div>
-                        <div class="absolute bottom-4 right-4">
-                            <button onclick="downloadGuide('cpr')" class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors">
-                                <img src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E" alt="Download icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">CPR (Cardiopulmonary Resuscitation)</h3>
-                    <p class="text-text-secondary mb-4">Life-saving technique for cardiac arrest situations with step-by-step instructions</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-text-tertiary">⏱️ 5 min read</span>
-                        <button onclick="openFirstAidGuide('cpr')" class="text-error font-semibold hover:underline">View Guide</button>
-                    </div>
-                </div>
-
-                <!-- Choking Guide -->
-                <div class="card group hover:shadow-lg transition-all scroll-reveal">
-                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.pixabay.com/photo/2017/08/07/14/02/people-2604149_1280.jpg" 
-                             alt="First aid instructor teaching Heimlich maneuver technique for choking emergency response" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                             onerror="this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2940&auto=format&fit=crop'; this.onerror=null;">
-                        <div class="absolute top-4 left-4">
-                            <span class="badge-warning">Urgent</span>
-                        </div>
-                        <div class="absolute bottom-4 right-4">
-                            <button onclick="downloadGuide('choking')" class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors">
-                                <img src="https://api.iconify.design/mdi/download.svg?color=%23D69E2E" alt="Download icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Choking Response</h3>
-                    <p class="text-text-secondary mb-4">Heimlich maneuver and back blows for adults, children, and infants</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-text-tertiary">⏱️ 3 min read</span>
-                        <button onclick="openFirstAidGuide('choking')" class="text-warning font-semibold hover:underline">View Guide</button>
-                    </div>
-                </div>
-
-                <!-- Bleeding Control -->
-                <div class="card group hover:shadow-lg transition-all scroll-reveal">
-                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?q=80&w=2940&auto=format&fit=crop" 
-                             alt="Medical professional applying pressure bandage for wound care and bleeding control first aid" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                             onerror="this.src='https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
-                        <div class="absolute top-4 left-4">
-                            <span class="badge-error">Critical</span>
-                        </div>
-                        <div class="absolute bottom-4 right-4">
-                            <button onclick="downloadGuide('bleeding')" class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors">
-                                <img src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E" alt="Download icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Bleeding Control</h3>
-                    <p class="text-text-secondary mb-4">Pressure application, wound dressing, and severe bleeding management</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-text-tertiary">⏱️ 4 min read</span>
-                        <button onclick="openFirstAidGuide('bleeding')" class="text-error font-semibold hover:underline">View Guide</button>
-                    </div>
-                </div>
-
-                <!-- Burns Treatment -->
-                <div class="card group hover:shadow-lg transition-all scroll-reveal">
-                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                             alt="Healthcare worker treating burn injury with proper first aid cooling technique and sterile dressing" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                             onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2940&auto=format&fit=crop'; this.onerror=null;">
-                        <div class="absolute top-4 left-4">
-                            <span class="badge-warning">Urgent</span>
-                        </div>
-                        <div class="absolute bottom-4 right-4">
-                            <button onclick="downloadGuide('burns')" class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors">
-                                <img src="https://api.iconify.design/mdi/download.svg?color=%23D69E2E" alt="Download icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Burns Treatment</h3>
-                    <p class="text-text-secondary mb-4">Cooling, cleaning, and dressing burns of different degrees</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-text-tertiary">⏱️ 4 min read</span>
-                        <button onclick="openFirstAidGuide('burns')" class="text-warning font-semibold hover:underline">View Guide</button>
-                    </div>
-                </div>
-
-                <!-- Fractures -->
-                <div class="card group hover:shadow-lg transition-all scroll-reveal">
-                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=2940&auto=format&fit=crop" 
-                             alt="Medical professional immobilizing suspected fracture with splint for proper emergency bone injury care" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                             onerror="this.src='https://images.pixabay.com/photo/2017/08/07/14/02/people-2604149_1280.jpg'; this.onerror=null;">
-                        <div class="absolute top-4 left-4">
-                            <span class="badge-primary">Important</span>
-                        </div>
-                        <div class="absolute bottom-4 right-4">
-                            <button onclick="downloadGuide('fractures')" class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors">
-                                <img src="https://api.iconify.design/mdi/download.svg?color=%232E86AB" alt="Download icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Fracture Care</h3>
-                    <p class="text-text-secondary mb-4">Immobilization, splinting, and support for suspected bone injuries</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-text-tertiary">⏱️ 6 min read</span>
-                        <button onclick="openFirstAidGuide('fractures')" class="text-primary font-semibold hover:underline">View Guide</button>
-                    </div>
-                </div>
-
-                <!-- Allergic Reactions -->
-                <div class="card group hover:shadow-lg transition-all scroll-reveal">
-                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.pixabay.com/photo/2016/11/08/05/29/surgery-1807541_1280.jpg" 
-                             alt="Emergency medical response to severe allergic reaction with epinephrine auto-injector administration" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                             onerror="this.src='https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
-                        <div class="absolute top-4 left-4">
-                            <span class="badge-error">Critical</span>
-                        </div>
-                        <div class="absolute bottom-4 right-4">
-                            <button onclick="downloadGuide('allergic')" class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors">
-                                <img src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E" alt="Download icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-2">Allergic Reactions</h3>
-                    <p class="text-text-secondary mb-4">Recognition and treatment of mild to severe allergic reactions</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-text-tertiary">⏱️ 5 min read</span>
-                        <button onclick="openFirstAidGuide('allergic')" class="text-error font-semibold hover:underline">View Guide</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12 scroll-reveal">
-                <button onclick="downloadAllGuides()" class="btn-primary">
-                    <img src="https://api.iconify.design/mdi/download-multiple.svg?color=white" alt="Download multiple icon" class="w-5 h-5">
-                    Download All Guides for Offline Access
-                </button>
-            </div>
+    <section
+      id="first-aid"
+      class="section bg-gradient-to-br from-surface to-white"
+    >
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">
+            First Aid Guide
+          </h2>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Step-by-step emergency procedures with visual aids for common
+            medical emergencies
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- CPR Guide -->
+          <div class="card group hover:shadow-lg transition-all scroll-reveal">
+            <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+              <img
+                src="https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Medical professional demonstrating CPR technique on training mannequin for emergency first aid education"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                onerror="this.src='https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=2940&auto=format&fit=crop'; this.onerror=null;"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="badge-error">Critical</span>
+              </div>
+              <div class="absolute bottom-4 right-4">
+                <button
+                  onclick="downloadGuide('cpr')"
+                  class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E"
+                    alt="Download icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              CPR (Cardiopulmonary Resuscitation)
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Life-saving technique for cardiac arrest situations with
+              step-by-step instructions
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-tertiary">⏱️ 5 min read</span>
+              <button
+                onclick="openFirstAidGuide('cpr')"
+                class="text-error font-semibold hover:underline"
+              >
+                View Guide
+              </button>
+            </div>
+          </div>
+
+          <!-- Choking Guide -->
+          <div class="card group hover:shadow-lg transition-all scroll-reveal">
+            <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+              <img
+                src="https://images.pixabay.com/photo/2017/08/07/14/02/people-2604149_1280.jpg"
+                alt="First aid instructor teaching Heimlich maneuver technique for choking emergency response"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                onerror="this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2940&auto=format&fit=crop'; this.onerror=null;"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="badge-warning">Urgent</span>
+              </div>
+              <div class="absolute bottom-4 right-4">
+                <button
+                  onclick="downloadGuide('choking')"
+                  class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/download.svg?color=%23D69E2E"
+                    alt="Download icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Choking Response
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Heimlich maneuver and back blows for adults, children, and infants
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-tertiary">⏱️ 3 min read</span>
+              <button
+                onclick="openFirstAidGuide('choking')"
+                class="text-warning font-semibold hover:underline"
+              >
+                View Guide
+              </button>
+            </div>
+          </div>
+
+          <!-- Bleeding Control -->
+          <div class="card group hover:shadow-lg transition-all scroll-reveal">
+            <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+              <img
+                src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?q=80&w=2940&auto=format&fit=crop"
+                alt="Medical professional applying pressure bandage for wound care and bleeding control first aid"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                onerror="this.src='https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="badge-error">Critical</span>
+              </div>
+              <div class="absolute bottom-4 right-4">
+                <button
+                  onclick="downloadGuide('bleeding')"
+                  class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E"
+                    alt="Download icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Bleeding Control
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Pressure application, wound dressing, and severe bleeding
+              management
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-tertiary">⏱️ 4 min read</span>
+              <button
+                onclick="openFirstAidGuide('bleeding')"
+                class="text-error font-semibold hover:underline"
+              >
+                View Guide
+              </button>
+            </div>
+          </div>
+
+          <!-- Burns Treatment -->
+          <div class="card group hover:shadow-lg transition-all scroll-reveal">
+            <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+              <img
+                src="https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Healthcare worker treating burn injury with proper first aid cooling technique and sterile dressing"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2940&auto=format&fit=crop'; this.onerror=null;"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="badge-warning">Urgent</span>
+              </div>
+              <div class="absolute bottom-4 right-4">
+                <button
+                  onclick="downloadGuide('burns')"
+                  class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/download.svg?color=%23D69E2E"
+                    alt="Download icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Burns Treatment
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Cooling, cleaning, and dressing burns of different degrees
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-tertiary">⏱️ 4 min read</span>
+              <button
+                onclick="openFirstAidGuide('burns')"
+                class="text-warning font-semibold hover:underline"
+              >
+                View Guide
+              </button>
+            </div>
+          </div>
+
+          <!-- Fractures -->
+          <div class="card group hover:shadow-lg transition-all scroll-reveal">
+            <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+              <img
+                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=2940&auto=format&fit=crop"
+                alt="Medical professional immobilizing suspected fracture with splint for proper emergency bone injury care"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                onerror="this.src='https://images.pixabay.com/photo/2017/08/07/14/02/people-2604149_1280.jpg'; this.onerror=null;"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="badge-primary">Important</span>
+              </div>
+              <div class="absolute bottom-4 right-4">
+                <button
+                  onclick="downloadGuide('fractures')"
+                  class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/download.svg?color=%232E86AB"
+                    alt="Download icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Fracture Care
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Immobilization, splinting, and support for suspected bone injuries
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-tertiary">⏱️ 6 min read</span>
+              <button
+                onclick="openFirstAidGuide('fractures')"
+                class="text-primary font-semibold hover:underline"
+              >
+                View Guide
+              </button>
+            </div>
+          </div>
+
+          <!-- Allergic Reactions -->
+          <div class="card group hover:shadow-lg transition-all scroll-reveal">
+            <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+              <img
+                src="https://images.pixabay.com/photo/2016/11/08/05/29/surgery-1807541_1280.jpg"
+                alt="Emergency medical response to severe allergic reaction with epinephrine auto-injector administration"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                onerror="this.src='https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="badge-error">Critical</span>
+              </div>
+              <div class="absolute bottom-4 right-4">
+                <button
+                  onclick="downloadGuide('allergic')"
+                  class="bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/download.svg?color=%23E53E3E"
+                    alt="Download icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Allergic Reactions
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Recognition and treatment of mild to severe allergic reactions
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-tertiary">⏱️ 5 min read</span>
+              <button
+                onclick="openFirstAidGuide('allergic')"
+                class="text-error font-semibold hover:underline"
+              >
+                View Guide
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12 scroll-reveal">
+          <button onclick="downloadAllGuides()" class="btn-primary">
+            <img
+              src="https://api.iconify.design/mdi/download-multiple.svg?color=white"
+              alt="Download multiple icon"
+              class="w-5 h-5"
+            />
+            Download All Guides for Offline Access
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Emergency Contacts Management -->
     <section class="section-compact bg-white">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">Emergency Contacts</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Manage your emergency contacts and quick-dial important numbers</p>
-            </div>
-
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Personal Emergency Contacts -->
-                    <div class="card scroll-reveal">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-2xl font-semibold text-text-primary">Personal Contacts</h3>
-                            <button onclick="addEmergencyContact()" class="btn-primary">
-                                <img src="https://api.iconify.design/mdi/plus.svg?color=white" alt="Add icon" class="w-5 h-5">
-                                Add Contact
-                            </button>
-                        </div>
-
-                        <div class="space-y-4" id="personalContacts">
-                            <!-- Contact 1 -->
-                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-primary-100 p-3 rounded-full">
-                                        <img src="https://api.iconify.design/mdi/account.svg?color=%232E86AB" alt="Contact icon" class="w-6 h-6">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">Dr. Sarah Johnson</h4>
-                                        <p class="text-sm text-text-secondary">Family Doctor</p>
-                                        <p class="text-sm text-text-tertiary">+1 (555) 123-4567</p>
-                                    </div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="callContact('+15551234567')" class="btn-emergency p-2">
-                                        <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Call icon" class="w-5 h-5">
-                                    </button>
-                                    <button onclick="editContact('dr-sarah')" class="btn-ghost p-2">
-                                        <img src="https://api.iconify.design/mdi/pencil.svg?color=%232E86AB" alt="Edit icon" class="w-5 h-5">
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Contact 2 -->
-                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-secondary-100 p-3 rounded-full">
-                                        <img src="https://api.iconify.design/mdi/heart.svg?color=%2364B0B4" alt="Family icon" class="w-6 h-6">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">Michael Chen</h4>
-                                        <p class="text-sm text-text-secondary">Spouse</p>
-                                        <p class="text-sm text-text-tertiary">+1 (555) 987-6543</p>
-                                    </div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="callContact('+15559876543')" class="btn-emergency p-2">
-                                        <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Call icon" class="w-5 h-5">
-                                    </button>
-                                    <button onclick="editContact('michael')" class="btn-ghost p-2">
-                                        <img src="https://api.iconify.design/mdi/pencil.svg?color=%232E86AB" alt="Edit icon" class="w-5 h-5">
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Contact 3 -->
-                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-accent-100 p-3 rounded-full">
-                                        <img src="https://api.iconify.design/mdi/account-group.svg?color=%23F4A261" alt="Family group icon" class="w-6 h-6">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">Emma Chen</h4>
-                                        <p class="text-sm text-text-secondary">Daughter</p>
-                                        <p class="text-sm text-text-tertiary">+1 (555) 456-7890</p>
-                                    </div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="callContact('+15554567890')" class="btn-emergency p-2">
-                                        <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Call icon" class="w-5 h-5">
-                                    </button>
-                                    <button onclick="editContact('emma')" class="btn-ghost p-2">
-                                        <img src="https://api.iconify.design/mdi/pencil.svg?color=%232E86AB" alt="Edit icon" class="w-5 h-5">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Local Emergency Services -->
-                    <div class="card scroll-reveal">
-                        <h3 class="text-2xl font-semibold text-text-primary mb-6">Local Emergency Services</h3>
-                        
-                        <div class="space-y-4">
-                            <!-- Emergency Services -->
-                            <div class="flex items-center justify-between p-4 bg-error-50 rounded-lg border border-error-200">
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-error p-3 rounded-full">
-                                        <img src="https://api.iconify.design/mdi/ambulance.svg?color=white" alt="Ambulance icon" class="w-6 h-6">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">Emergency Services</h4>
-                                        <p class="text-sm text-text-secondary">Police, Fire, Ambulance</p>
-                                        <p class="text-sm font-bold text-error">911</p>
-                                    </div>
-                                </div>
-                                <button onclick="callEmergency()" class="btn-emergency">
-                                    <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Emergency call icon" class="w-5 h-5">
-                                    Call
-                                </button>
-                            </div>
-
-                            <!-- Poison Control -->
-                            <div class="flex items-center justify-between p-4 bg-warning-50 rounded-lg border border-warning-200">
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-warning p-3 rounded-full">
-                                        <img src="https://api.iconify.design/mdi/flask.svg?color=white" alt="Poison control icon" class="w-6 h-6">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">Poison Control</h4>
-                                        <p class="text-sm text-text-secondary">24/7 Poison Help</p>
-                                        <p class="text-sm font-bold text-warning">1-800-222-1222</p>
-                                    </div>
-                                </div>
-                                <button onclick="callContact('18002221222')" class="btn-accent">
-                                    <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Call icon" class="w-5 h-5">
-                                    Call
-                                </button>
-                            </div>
-
-                            <!-- Mental Health Crisis -->
-                            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg border border-primary-200">
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-primary p-3 rounded-full">
-                                        <img src="https://api.iconify.design/mdi/brain.svg?color=white" alt="Mental health icon" class="w-6 h-6">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">Crisis Helpline</h4>
-                                        <p class="text-sm text-text-secondary">Mental Health Support</p>
-                                        <p class="text-sm font-bold text-primary">988</p>
-                                    </div>
-                                </div>
-                                <button onclick="callContact('988')" class="btn-primary">
-                                    <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Call icon" class="w-5 h-5">
-                                    Call
-                                </button>
-                            </div>
-
-                            <!-- Local Hospital -->
-                            <div class="flex items-center justify-between p-4 bg-success-50 rounded-lg border border-success-200">
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-success p-3 rounded-full">
-                                        <img src="https://api.iconify.design/mdi/hospital-building.svg?color=white" alt="Hospital icon" class="w-6 h-6">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">City General Hospital</h4>
-                                        <p class="text-sm text-text-secondary">Emergency Department</p>
-                                        <p class="text-sm font-bold text-success">+1 (555) 100-2000</p>
-                                    </div>
-                                </div>
-                                <button onclick="callContact('+15551002000')" class="btn-secondary">
-                                    <img src="https://api.iconify.design/mdi/phone.svg?color=%23264547" alt="Call icon" class="w-5 h-5">
-                                    Call
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">
+            Emergency Contacts
+          </h2>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Manage your emergency contacts and quick-dial important numbers
+          </p>
         </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Personal Emergency Contacts -->
+            <div class="card scroll-reveal">
+              <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-semibold text-text-primary">
+                  Personal Contacts
+                </h3>
+                <button onclick="addEmergencyContact()" class="btn-primary">
+                  <img
+                    src="https://api.iconify.design/mdi/plus.svg?color=white"
+                    alt="Add icon"
+                    class="w-5 h-5"
+                  />
+                  Add Contact
+                </button>
+              </div>
+
+              <div class="space-y-4" id="personalContacts">
+                <!-- Contact 1 -->
+                <div
+                  class="flex items-center justify-between p-4 bg-surface rounded-lg"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="bg-primary-100 p-3 rounded-full">
+                      <img
+                        src="https://api.iconify.design/mdi/account.svg?color=%232E86AB"
+                        alt="Contact icon"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        Dr. Sarah Johnson
+                      </h4>
+                      <p class="text-sm text-text-secondary">Family Doctor</p>
+                      <p class="text-sm text-text-tertiary">
+                        +1 (555) 123-4567
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      onclick="callContact('+15551234567')"
+                      class="btn-emergency p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/phone.svg?color=white"
+                        alt="Call icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                    <button
+                      onclick="editContact('dr-sarah')"
+                      class="btn-ghost p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/pencil.svg?color=%232E86AB"
+                        alt="Edit icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Contact 2 -->
+                <div
+                  class="flex items-center justify-between p-4 bg-surface rounded-lg"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="bg-secondary-100 p-3 rounded-full">
+                      <img
+                        src="https://api.iconify.design/mdi/heart.svg?color=%2364B0B4"
+                        alt="Family icon"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        Michael Chen
+                      </h4>
+                      <p class="text-sm text-text-secondary">Spouse</p>
+                      <p class="text-sm text-text-tertiary">
+                        +1 (555) 987-6543
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      onclick="callContact('+15559876543')"
+                      class="btn-emergency p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/phone.svg?color=white"
+                        alt="Call icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                    <button
+                      onclick="editContact('michael')"
+                      class="btn-ghost p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/pencil.svg?color=%232E86AB"
+                        alt="Edit icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Contact 3 -->
+                <div
+                  class="flex items-center justify-between p-4 bg-surface rounded-lg"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="bg-accent-100 p-3 rounded-full">
+                      <img
+                        src="https://api.iconify.design/mdi/account-group.svg?color=%23F4A261"
+                        alt="Family group icon"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-text-primary">Emma Chen</h4>
+                      <p class="text-sm text-text-secondary">Daughter</p>
+                      <p class="text-sm text-text-tertiary">
+                        +1 (555) 456-7890
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      onclick="callContact('+15554567890')"
+                      class="btn-emergency p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/phone.svg?color=white"
+                        alt="Call icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                    <button onclick="editContact('emma')" class="btn-ghost p-2">
+                      <img
+                        src="https://api.iconify.design/mdi/pencil.svg?color=%232E86AB"
+                        alt="Edit icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Local Emergency Services -->
+            <div class="card scroll-reveal">
+              <h3 class="text-2xl font-semibold text-text-primary mb-6">
+                Local Emergency Services
+              </h3>
+
+              <div class="space-y-4">
+                <!-- Emergency Services -->
+                <div
+                  class="flex items-center justify-between p-4 bg-error-50 rounded-lg border border-error-200"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="bg-error p-3 rounded-full">
+                      <img
+                        src="https://api.iconify.design/mdi/ambulance.svg?color=white"
+                        alt="Ambulance icon"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        Emergency Services
+                      </h4>
+                      <p class="text-sm text-text-secondary">
+                        Police, Fire, Ambulance
+                      </p>
+                      <p class="text-sm font-bold text-error">911</p>
+                    </div>
+                  </div>
+                  <button onclick="callEmergency()" class="btn-emergency">
+                    <img
+                      src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                      alt="Emergency call icon"
+                      class="w-5 h-5"
+                    />
+                    Call
+                  </button>
+                </div>
+
+                <!-- Poison Control -->
+                <div
+                  class="flex items-center justify-between p-4 bg-warning-50 rounded-lg border border-warning-200"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="bg-warning p-3 rounded-full">
+                      <img
+                        src="https://api.iconify.design/mdi/flask.svg?color=white"
+                        alt="Poison control icon"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        Poison Control
+                      </h4>
+                      <p class="text-sm text-text-secondary">
+                        24/7 Poison Help
+                      </p>
+                      <p class="text-sm font-bold text-warning">
+                        1-800-222-1222
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onclick="callContact('18002221222')"
+                    class="btn-accent"
+                  >
+                    <img
+                      src="https://api.iconify.design/mdi/phone.svg?color=white"
+                      alt="Call icon"
+                      class="w-5 h-5"
+                    />
+                    Call
+                  </button>
+                </div>
+
+                <!-- Mental Health Crisis -->
+                <div
+                  class="flex items-center justify-between p-4 bg-primary-50 rounded-lg border border-primary-200"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="bg-primary p-3 rounded-full">
+                      <img
+                        src="https://api.iconify.design/mdi/brain.svg?color=white"
+                        alt="Mental health icon"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        Crisis Helpline
+                      </h4>
+                      <p class="text-sm text-text-secondary">
+                        Mental Health Support
+                      </p>
+                      <p class="text-sm font-bold text-primary">988</p>
+                    </div>
+                  </div>
+                  <button onclick="callContact('988')" class="btn-primary">
+                    <img
+                      src="https://api.iconify.design/mdi/phone.svg?color=white"
+                      alt="Call icon"
+                      class="w-5 h-5"
+                    />
+                    Call
+                  </button>
+                </div>
+
+                <!-- Local Hospital -->
+                <div
+                  class="flex items-center justify-between p-4 bg-success-50 rounded-lg border border-success-200"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="bg-success p-3 rounded-full">
+                      <img
+                        src="https://api.iconify.design/mdi/hospital-building.svg?color=white"
+                        alt="Hospital icon"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        City General Hospital
+                      </h4>
+                      <p class="text-sm text-text-secondary">
+                        Emergency Department
+                      </p>
+                      <p class="text-sm font-bold text-success">
+                        +1 (555) 100-2000
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onclick="callContact('+15551002000')"
+                    class="btn-secondary"
+                  >
+                    <img
+                      src="https://api.iconify.design/mdi/phone.svg?color=%23264547"
+                      alt="Call icon"
+                      class="w-5 h-5"
+                    />
+                    Call
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Emergency Preparedness -->
     <section class="section bg-gradient-to-br from-primary-50 to-secondary-50">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">Emergency Preparedness</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Build your emergency preparedness with interactive scenarios and checklists</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Emergency Kit Checklist -->
-                <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <img src="https://api.iconify.design/mdi/medical-bag.svg?color=%232E86AB" alt="Emergency kit icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-3">Emergency Kit</h3>
-                    <p class="text-text-secondary mb-4">Essential supplies checklist for home emergency preparedness</p>
-                    <button onclick="openEmergencyKit()" class="btn-primary w-full">
-                        <img src="https://api.iconify.design/mdi/clipboard-check.svg?color=white" alt="Checklist icon" class="w-5 h-5">
-                        View Checklist
-                    </button>
-                </div>
-
-                <!-- Practice Scenarios -->
-                <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="bg-secondary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <img src="https://api.iconify.design/mdi/school.svg?color=%2364B0B4" alt="Practice scenarios icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-3">Practice Scenarios</h3>
-                    <p class="text-text-secondary mb-4">Interactive emergency response training and simulations</p>
-                    <button onclick="startPracticeScenario()" class="btn-secondary w-full">
-                        <img src="https://api.iconify.design/mdi/play-circle.svg?color=%23264547" alt="Play icon" class="w-5 h-5">
-                        Start Practice
-                    </button>
-                </div>
-
-                <!-- Family Emergency Plan -->
-                <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow scroll-reveal">
-                    <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <img src="https://api.iconify.design/mdi/home-group.svg?color=%23F4A261" alt="Family plan icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-xl font-semibold text-text-primary mb-3">Family Plan</h3>
-                    <p class="text-text-secondary mb-4">Create and share emergency plans with household members</p>
-                    <button onclick="createFamilyPlan()" class="btn-accent w-full">
-                        <img src="https://api.iconify.design/mdi/file-document-plus.svg?color=white" alt="Create plan icon" class="w-5 h-5">
-                        Create Plan
-                    </button>
-                </div>
-            </div>
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">
+            Emergency Preparedness
+          </h2>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Build your emergency preparedness with interactive scenarios and
+            checklists
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Emergency Kit Checklist -->
+          <div
+            class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div
+              class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <img
+                src="https://api.iconify.design/mdi/medical-bag.svg?color=%232E86AB"
+                alt="Emergency kit icon"
+                class="w-8 h-8"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-3">
+              Emergency Kit
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Essential supplies checklist for home emergency preparedness
+            </p>
+            <button onclick="openEmergencyKit()" class="btn-primary w-full">
+              <img
+                src="https://api.iconify.design/mdi/clipboard-check.svg?color=white"
+                alt="Checklist icon"
+                class="w-5 h-5"
+              />
+              View Checklist
+            </button>
+          </div>
+
+          <!-- Practice Scenarios -->
+          <div
+            class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div
+              class="bg-secondary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <img
+                src="https://api.iconify.design/mdi/school.svg?color=%2364B0B4"
+                alt="Practice scenarios icon"
+                class="w-8 h-8"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-3">
+              Practice Scenarios
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Interactive emergency response training and simulations
+            </p>
+            <button
+              onclick="startPracticeScenario()"
+              class="btn-secondary w-full"
+            >
+              <img
+                src="https://api.iconify.design/mdi/play-circle.svg?color=%23264547"
+                alt="Play icon"
+                class="w-5 h-5"
+              />
+              Start Practice
+            </button>
+          </div>
+
+          <!-- Family Emergency Plan -->
+          <div
+            class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow scroll-reveal"
+          >
+            <div
+              class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <img
+                src="https://api.iconify.design/mdi/home-group.svg?color=%23F4A261"
+                alt="Family plan icon"
+                class="w-8 h-8"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-3">
+              Family Plan
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Create and share emergency plans with household members
+            </p>
+            <button onclick="createFamilyPlan()" class="btn-accent w-full">
+              <img
+                src="https://api.iconify.design/mdi/file-document-plus.svg?color=white"
+                alt="Create plan icon"
+                class="w-5 h-5"
+              />
+              Create Plan
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Location-Based Services -->
     <section class="section-compact bg-white">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">Location-Based Emergency Services</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Find nearby emergency services and healthcare facilities</p>
-            </div>
-
-            <div class="max-w-4xl mx-auto">
-                <div class="card scroll-reveal">
-                    <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-2xl font-semibold text-text-primary">Nearby Services</h3>
-                        <button onclick="getCurrentLocation()" class="btn-primary">
-                            <img src="https://api.iconify.design/mdi/crosshairs-gps.svg?color=white" alt="GPS icon" class="w-5 h-5">
-                            Update Location
-                        </button>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Map Placeholder -->
-                        <div class="bg-surface rounded-lg p-8 text-center">
-                            <img src="https://api.iconify.design/mdi/map.svg?color=%232E86AB" alt="Map icon" class="w-16 h-16 mx-auto mb-4">
-                            <h4 class="text-lg font-semibold text-text-primary mb-2">Interactive Map</h4>
-                            <p class="text-text-secondary mb-4">View nearby emergency services on map</p>
-                            <button onclick="openMap()" class="btn-outline">
-                                <img src="https://api.iconify.design/mdi/map-marker.svg?color=%232E86AB" alt="Map marker icon" class="w-5 h-5">
-                                Open Map
-                            </button>
-                        </div>
-
-                        <!-- Services List -->
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
-                                <div class="flex items-center gap-3">
-                                    <img src="https://api.iconify.design/mdi/hospital-building.svg?color=%232E86AB" alt="Hospital icon" class="w-6 h-6">
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">City General Hospital</h4>
-                                        <p class="text-sm text-text-secondary">0.8 miles away</p>
-                                    </div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="getDirections('hospital1')" class="btn-ghost p-2">
-                                        <img src="https://api.iconify.design/mdi/directions.svg?color=%232E86AB" alt="Directions icon" class="w-5 h-5">
-                                    </button>
-                                    <button onclick="callContact('+15551002000')" class="btn-primary p-2">
-                                        <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Call icon" class="w-5 h-5">
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
-                                <div class="flex items-center gap-3">
-                                    <img src="https://api.iconify.design/mdi/medical-bag.svg?color=%2338A169" alt="Clinic icon" class="w-6 h-6">
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">Urgent Care Center</h4>
-                                        <p class="text-sm text-text-secondary">1.2 miles away</p>
-                                    </div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="getDirections('clinic1')" class="btn-ghost p-2">
-                                        <img src="https://api.iconify.design/mdi/directions.svg?color=%232E86AB" alt="Directions icon" class="w-5 h-5">
-                                    </button>
-                                    <button onclick="callContact('+15551003000')" class="btn-secondary p-2">
-                                        <img src="https://api.iconify.design/mdi/phone.svg?color=%23264547" alt="Call icon" class="w-5 h-5">
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
-                                <div class="flex items-center gap-3">
-                                    <img src="https://api.iconify.design/mdi/pharmacy.svg?color=%23F4A261" alt="Pharmacy icon" class="w-6 h-6">
-                                    <div>
-                                        <h4 class="font-semibold text-text-primary">24/7 Pharmacy</h4>
-                                        <p class="text-sm text-text-secondary">0.5 miles away</p>
-                                    </div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="getDirections('pharmacy1')" class="btn-ghost p-2">
-                                        <img src="https://api.iconify.design/mdi/directions.svg?color=%232E86AB" alt="Directions icon" class="w-5 h-5">
-                                    </button>
-                                    <button onclick="callContact('+15551004000')" class="btn-accent p-2">
-                                        <img src="https://api.iconify.design/mdi/phone.svg?color=white" alt="Call icon" class="w-5 h-5">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">
+            Location-Based Emergency Services
+          </h2>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Find nearby emergency services and healthcare facilities
+          </p>
         </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="card scroll-reveal">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-2xl font-semibold text-text-primary">
+                Nearby Services
+              </h3>
+              <button onclick="getCurrentLocation()" class="btn-primary">
+                <img
+                  src="https://api.iconify.design/mdi/crosshairs-gps.svg?color=white"
+                  alt="GPS icon"
+                  class="w-5 h-5"
+                />
+                Update Location
+              </button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Map Placeholder -->
+              <div class="bg-surface rounded-lg p-8 text-center">
+                <img
+                  src="https://api.iconify.design/mdi/map.svg?color=%232E86AB"
+                  alt="Map icon"
+                  class="w-16 h-16 mx-auto mb-4"
+                />
+                <h4 class="text-lg font-semibold text-text-primary mb-2">
+                  Interactive Map
+                </h4>
+                <p class="text-text-secondary mb-4">
+                  View nearby emergency services on map
+                </p>
+                <button onclick="openMap()" class="btn-outline">
+                  <img
+                    src="https://api.iconify.design/mdi/map-marker.svg?color=%232E86AB"
+                    alt="Map marker icon"
+                    class="w-5 h-5"
+                  />
+                  Open Map
+                </button>
+              </div>
+
+              <!-- Services List -->
+              <div class="space-y-4">
+                <div
+                  class="flex items-center justify-between p-4 bg-surface rounded-lg"
+                >
+                  <div class="flex items-center gap-3">
+                    <img
+                      src="https://api.iconify.design/mdi/hospital-building.svg?color=%232E86AB"
+                      alt="Hospital icon"
+                      class="w-6 h-6"
+                    />
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        City General Hospital
+                      </h4>
+                      <p class="text-sm text-text-secondary">0.8 miles away</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      onclick="getDirections('hospital1')"
+                      class="btn-ghost p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/directions.svg?color=%232E86AB"
+                        alt="Directions icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                    <button
+                      onclick="callContact('+15551002000')"
+                      class="btn-primary p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/phone.svg?color=white"
+                        alt="Call icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  class="flex items-center justify-between p-4 bg-surface rounded-lg"
+                >
+                  <div class="flex items-center gap-3">
+                    <img
+                      src="https://api.iconify.design/mdi/medical-bag.svg?color=%2338A169"
+                      alt="Clinic icon"
+                      class="w-6 h-6"
+                    />
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        Urgent Care Center
+                      </h4>
+                      <p class="text-sm text-text-secondary">1.2 miles away</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      onclick="getDirections('clinic1')"
+                      class="btn-ghost p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/directions.svg?color=%232E86AB"
+                        alt="Directions icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                    <button
+                      onclick="callContact('+15551003000')"
+                      class="btn-secondary p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/phone.svg?color=%23264547"
+                        alt="Call icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  class="flex items-center justify-between p-4 bg-surface rounded-lg"
+                >
+                  <div class="flex items-center gap-3">
+                    <img
+                      src="https://api.iconify.design/mdi/pharmacy.svg?color=%23F4A261"
+                      alt="Pharmacy icon"
+                      class="w-6 h-6"
+                    />
+                    <div>
+                      <h4 class="font-semibold text-text-primary">
+                        24/7 Pharmacy
+                      </h4>
+                      <p class="text-sm text-text-secondary">0.5 miles away</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      onclick="getDirections('pharmacy1')"
+                      class="btn-ghost p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/directions.svg?color=%232E86AB"
+                        alt="Directions icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                    <button
+                      onclick="callContact('+15551004000')"
+                      class="btn-accent p-2"
+                    >
+                      <img
+                        src="https://api.iconify.design/mdi/phone.svg?color=white"
+                        alt="Call icon"
+                        class="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Medical Information Card -->
     <section class="section bg-gradient-to-br from-surface to-white">
-        <div class="container-custom">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">Medical Information Card</h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">Keep your critical medical information accessible for emergencies</p>
-            </div>
-
-            <div class="max-w-2xl mx-auto">
-                <div class="card scroll-reveal">
-                    <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-2xl font-semibold text-text-primary">Emergency Medical Info</h3>
-                        <button onclick="editMedicalInfo()" class="btn-primary">
-                            <img src="https://api.iconify.design/mdi/pencil.svg?color=white" alt="Edit icon" class="w-5 h-5">
-                            Edit Info
-                        </button>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Personal Information -->
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-text-primary mb-2">Personal Information</h4>
-                                <div class="space-y-2 text-sm">
-                                    <p><span class="font-medium">Name:</span> John Smith</p>
-                                    <p><span class="font-medium">DOB:</span> March 15, 1985</p>
-                                    <p><span class="font-medium">Blood Type:</span> O+</p>
-                                    <p><span class="font-medium">Emergency Contact:</span> Sarah Smith</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 class="font-semibold text-text-primary mb-2">Insurance</h4>
-                                <div class="space-y-2 text-sm">
-                                    <p><span class="font-medium">Provider:</span> HealthCare Plus</p>
-                                    <p><span class="font-medium">Policy #:</span> HC123456789</p>
-                                    <p><span class="font-medium">Group #:</span> GRP001</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Medical Information -->
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-text-primary mb-2">Allergies</h4>
-                                <div class="space-y-1">
-                                    <span class="badge-error">Penicillin</span>
-                                    <span class="badge-warning">Shellfish</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 class="font-semibold text-text-primary mb-2">Current Medications</h4>
-                                <div class="space-y-2 text-sm">
-                                    <p>• Lisinopril 10mg (daily)</p>
-                                    <p>• Metformin 500mg (twice daily)</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 class="font-semibold text-text-primary mb-2">Medical Conditions</h4>
-                                <div class="space-y-2 text-sm">
-                                    <p>• Hypertension</p>
-                                    <p>• Type 2 Diabetes</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 pt-6 border-t border-border">
-                        <div class="flex gap-4">
-                            <button onclick="downloadMedicalCard()" class="btn-outline flex-1">
-                                <img src="https://api.iconify.design/mdi/download.svg?color=%232E86AB" alt="Download icon" class="w-5 h-5">
-                                Download Card
-                            </button>
-                            <button onclick="shareMedicalInfo()" class="btn-secondary flex-1">
-                                <img src="https://api.iconify.design/mdi/share.svg?color=%23264547" alt="Share icon" class="w-5 h-5">
-                                Share Info
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">
+            Medical Information Card
+          </h2>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Keep your critical medical information accessible for emergencies
+          </p>
         </div>
+
+        <div class="max-w-2xl mx-auto">
+          <div class="card scroll-reveal">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-2xl font-semibold text-text-primary">
+                Emergency Medical Info
+              </h3>
+              <button onclick="editMedicalInfo()" class="btn-primary">
+                <img
+                  src="https://api.iconify.design/mdi/pencil.svg?color=white"
+                  alt="Edit icon"
+                  class="w-5 h-5"
+                />
+                Edit Info
+              </button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Personal Information -->
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">
+                    Personal Information
+                  </h4>
+                  <div class="space-y-2 text-sm">
+                    <p><span class="font-medium">Name:</span> John Smith</p>
+                    <p><span class="font-medium">DOB:</span> March 15, 1985</p>
+                    <p><span class="font-medium">Blood Type:</span> O+</p>
+                    <p>
+                      <span class="font-medium">Emergency Contact:</span> Sarah
+                      Smith
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">
+                    Insurance
+                  </h4>
+                  <div class="space-y-2 text-sm">
+                    <p>
+                      <span class="font-medium">Provider:</span> HealthCare Plus
+                    </p>
+                    <p>
+                      <span class="font-medium">Policy #:</span> HC123456789
+                    </p>
+                    <p><span class="font-medium">Group #:</span> GRP001</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Medical Information -->
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">
+                    Allergies
+                  </h4>
+                  <div class="space-y-1">
+                    <span class="badge-error">Penicillin</span>
+                    <span class="badge-warning">Shellfish</span>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">
+                    Current Medications
+                  </h4>
+                  <div class="space-y-2 text-sm">
+                    <p>• Lisinopril 10mg (daily)</p>
+                    <p>• Metformin 500mg (twice daily)</p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">
+                    Medical Conditions
+                  </h4>
+                  <div class="space-y-2 text-sm">
+                    <p>• Hypertension</p>
+                    <p>• Type 2 Diabetes</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-border">
+              <div class="flex gap-4">
+                <button
+                  onclick="downloadMedicalCard()"
+                  class="btn-outline flex-1"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/download.svg?color=%232E86AB"
+                    alt="Download icon"
+                    class="w-5 h-5"
+                  />
+                  Download Card
+                </button>
+                <button
+                  onclick="shareMedicalInfo()"
+                  class="btn-secondary flex-1"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/share.svg?color=%23264547"
+                    alt="Share icon"
+                    class="w-5 h-5"
+                  />
+                  Share Info
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-text-primary text-white">
-        <div class="container-custom py-12">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MediCare Hub footer logo">
-                            <rect width="48" height="48" rx="12" fill="#2E86AB"/>
-                            <path d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z" fill="#A8DADC"/>
-                            <path d="M24 18V30M18 24H30" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-lg font-bold">MediCare Hub</h3>
-                            <p class="text-sm text-gray-400">Health Knowledge Ecosystem</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4">Empowering health through accessible, evidence-based medical information for diverse communities.</p>
-                    <div class="flex gap-4">
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Facebook">
-                            <img src="https://api.iconify.design/mdi/facebook.svg?color=%23A8DADC" alt="Facebook icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Twitter">
-                            <img src="https://api.iconify.design/mdi/twitter.svg?color=%23A8DADC" alt="Twitter icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Instagram">
-                            <img src="https://api.iconify.design/mdi/instagram.svg?color=%23A8DADC" alt="Instagram icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="LinkedIn">
-                            <img src="https://api.iconify.design/mdi/linkedin.svg?color=%23A8DADC" alt="LinkedIn icon" class="w-6 h-6">
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="homepage.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="dashboard.html" class="text-gray-400 hover:text-white transition-colors">Dashboard</a></li>
-                        <li><a href="healthopedia.html" class="text-gray-400 hover:text-white transition-colors">Healthopedia</a></li>
-                        <li><a href="chatbot.html" class="text-gray-400 hover:text-white transition-colors">AI Assistant</a></li>
-                        <li><a href="symptom_checker.html" class="text-gray-400 hover:text-white transition-colors">Symptom Checker</a></li>
-                    </ul>
-                </div>
-
-                <!-- Emergency Resources -->
-                <div>
-                    <h4 class="font-semibold mb-4">Emergency Resources</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="emergency_resources.html" class="text-gray-400 hover:text-white transition-colors">Emergency Center</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">First Aid Guides</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Emergency Contacts</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Crisis Support</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Preparedness</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal -->
-                <div>
-                    <h4 class="font-semibold mb-4">Legal & Support</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
-                    </ul>
-                </div>
+      <div class="container-custom py-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="HEALTH SPHERE footer logo"
+              >
+                <rect width="48" height="48" rx="12" fill="#2E86AB" />
+                <path
+                  d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z"
+                  fill="#A8DADC"
+                />
+                <path
+                  d="M24 18V30M18 24H30"
+                  stroke="white"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <div>
+                <h3 class="text-lg font-bold">HEALTH SPHERE</h3>
+                <p class="text-sm text-gray-400">Health Knowledge Ecosystem</p>
+              </div>
             </div>
-
-            <!-- Bottom Bar -->
-            <div class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-                <p>© 2025 MediCare Hub. All Rights Reserved.</p>
-                <div class="flex gap-6">
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Accessibility</a>
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Sitemap</a>
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Feedback</a>
-                </div>
+            <p class="text-gray-400 text-sm mb-4">
+              Empowering health through accessible, evidence-based medical
+              information for diverse communities.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="Facebook"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/facebook.svg?color=%23A8DADC"
+                  alt="Facebook icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="Twitter"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/twitter.svg?color=%23A8DADC"
+                  alt="Twitter icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="Instagram"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/instagram.svg?color=%23A8DADC"
+                  alt="Instagram icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/linkedin.svg?color=%23A8DADC"
+                  alt="LinkedIn icon"
+                  class="w-6 h-6"
+                />
+              </a>
             </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="homepage.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="dashboard.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="healthopedia.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Healthopedia</a
+                >
+              </li>
+              <li>
+                <a
+                  href="chatbot.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >AI Assistant</a
+                >
+              </li>
+              <li>
+                <a
+                  href="symptom_checker.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Symptom Checker</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Emergency Resources -->
+          <div>
+            <h4 class="font-semibold mb-4">Emergency Resources</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="emergency_resources.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Emergency Center</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >First Aid Guides</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Emergency Contacts</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Crisis Support</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Preparedness</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4 class="font-semibold mb-4">Legal & Support</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Medical Disclaimer</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Help Center</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400"
+        >
+          <p>© 2025 HEALTH SPHERE. All Rights Reserved.</p>
+          <div class="flex gap-6">
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Accessibility</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Sitemap</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Feedback</a
+            >
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary-600 transition-all opacity-0 pointer-events-none z-50" aria-label="Scroll to top">
-        <img src="https://api.iconify.design/mdi/arrow-up.svg?color=white" alt="Arrow up icon" class="w-6 h-6">
+    <button
+      id="scrollToTop"
+      class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary-600 transition-all opacity-0 pointer-events-none z-50"
+      aria-label="Scroll to top"
+    >
+      <img
+        src="https://api.iconify.design/mdi/arrow-up.svg?color=white"
+        alt="Arrow up icon"
+        class="w-6 h-6"
+      />
     </button>
 
     <!-- Emergency Modal -->
-    <div id="emergencyModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
-                <div class="text-center">
-                    <div class="bg-error-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=%23E53E3E" alt="Emergency alert icon" class="w-8 h-8">
-                    </div>
-                    <h3 class="text-2xl font-bold text-text-primary mb-2">Emergency Call</h3>
-                    <p class="text-text-secondary mb-6">Are you sure you want to call emergency services?</p>
-                    <div class="flex gap-4">
-                        <button onclick="closeEmergencyModal()" class="btn-outline flex-1">Cancel</button>
-                        <button onclick="confirmEmergencyCall()" class="btn-emergency flex-1">Call 911</button>
-                    </div>
-                </div>
+    <div
+      id="emergencyModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden"
+    >
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
+          <div class="text-center">
+            <div
+              class="bg-error-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=%23E53E3E"
+                alt="Emergency alert icon"
+                class="w-8 h-8"
+              />
             </div>
+            <h3 class="text-2xl font-bold text-text-primary mb-2">
+              Emergency Call
+            </h3>
+            <p class="text-text-secondary mb-6">
+              Are you sure you want to call emergency services?
+            </p>
+            <div class="flex gap-4">
+              <button
+                onclick="closeEmergencyModal()"
+                class="btn-outline flex-1"
+              >
+                Cancel
+              </button>
+              <button
+                onclick="confirmEmergencyCall()"
+                class="btn-emergency flex-1"
+              >
+                Call 911
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
 
-        // Emergency Alert Toggle
-        function toggleEmergencyAlert() {
-            const alert = document.getElementById('emergencyAlert');
-            alert.classList.toggle('hidden');
-        }
+      // Emergency Alert Toggle
+      function toggleEmergencyAlert() {
+        const alert = document.getElementById("emergencyAlert");
+        alert.classList.toggle("hidden");
+      }
 
-        // Emergency Call Functions
-        function callEmergency() {
-            document.getElementById('emergencyModal').classList.remove('hidden');
-        }
+      // Emergency Call Functions
+      function callEmergency() {
+        document.getElementById("emergencyModal").classList.remove("hidden");
+      }
 
-        function closeEmergencyModal() {
-            document.getElementById('emergencyModal').classList.add('hidden');
-        }
+      function closeEmergencyModal() {
+        document.getElementById("emergencyModal").classList.add("hidden");
+      }
 
-        function confirmEmergencyCall() {
-            // In a real app, this would initiate an actual emergency call
-            alert('Emergency services would be called. This is a demo.');
-            closeEmergencyModal();
-        }
+      function confirmEmergencyCall() {
+        // In a real app, this would initiate an actual emergency call
+        alert("Emergency services would be called. This is a demo.");
+        closeEmergencyModal();
+      }
 
-        function callContact(number) {
-            // In a real app, this would initiate a phone call
-            alert(`Calling ${number}. This is a demo.`);
-        }
+      function callContact(number) {
+        // In a real app, this would initiate a phone call
+        alert(`Calling ${number}. This is a demo.`);
+      }
 
-        // Location Services
-        function findNearbyServices() {
-            // Show loading state
-            const button = event.target;
-            const originalText = button.innerHTML;
-            button.innerHTML = '<img src="https://api.iconify.design/mdi/loading.svg?color=white" alt="Loading icon" class="w-5 h-5 animate-spin"> Finding...';
-            
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                alert('Nearby services found! Check the location section below.');
-            }, 2000);
-        }
+      // Location Services
+      function findNearbyServices() {
+        // Show loading state
+        const button = event.target;
+        const originalText = button.innerHTML;
+        button.innerHTML =
+          '<img src="https://api.iconify.design/mdi/loading.svg?color=white" alt="Loading icon" class="w-5 h-5 animate-spin"> Finding...';
 
-        function getCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        alert(`Location updated: ${position.coords.latitude}, ${position.coords.longitude}`);
-                    },
-                    (error) => {
-                        alert('Unable to get location. Please enable location services.');
-                    }
-                );
-            } else {
-                alert('Geolocation is not supported by this browser.');
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          alert("Nearby services found! Check the location section below.");
+        }, 2000);
+      }
+
+      function getCurrentLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              alert(
+                `Location updated: ${position.coords.latitude}, ${position.coords.longitude}`
+              );
+            },
+            (error) => {
+              alert("Unable to get location. Please enable location services.");
             }
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
         }
+      }
 
-        function getDirections(location) {
-            alert(`Getting directions to ${location}. This would open maps app.`);
+      function getDirections(location) {
+        alert(`Getting directions to ${location}. This would open maps app.`);
+      }
+
+      function openMap() {
+        alert(
+          "Interactive map would open here showing nearby emergency services."
+        );
+      }
+
+      // Emergency Contacts Management
+      function showEmergencyContacts() {
+        alert("Emergency contacts panel opened.");
+      }
+
+      function addEmergencyContact() {
+        const name = prompt("Enter contact name:");
+        const phone = prompt("Enter phone number:");
+        const relationship = prompt("Enter relationship:");
+
+        if (name && phone && relationship) {
+          alert(`Contact added: ${name} (${relationship}) - ${phone}`);
         }
+      }
 
-        function openMap() {
-            alert('Interactive map would open here showing nearby emergency services.');
+      function editContact(contactId) {
+        alert(`Editing contact: ${contactId}`);
+      }
+
+      // Medical Information
+      function showMedicalInfo() {
+        alert("Medical information panel opened.");
+      }
+
+      function editMedicalInfo() {
+        alert("Medical information editor opened.");
+      }
+
+      function downloadMedicalCard() {
+        alert("Medical card downloaded for offline access.");
+      }
+
+      function shareMedicalInfo() {
+        if (navigator.share) {
+          navigator.share({
+            title: "Emergency Medical Information",
+            text: "My emergency medical information card",
+            url: window.location.href,
+          });
+        } else {
+          alert("Medical information sharing link copied to clipboard.");
         }
+      }
 
-        // Emergency Contacts Management
-        function showEmergencyContacts() {
-            alert('Emergency contacts panel opened.');
-        }
+      // First Aid Guides
+      function openFirstAidGuide(type) {
+        alert(
+          `Opening ${type} first aid guide with step-by-step instructions.`
+        );
+      }
 
-        function addEmergencyContact() {
-            const name = prompt('Enter contact name:');
-            const phone = prompt('Enter phone number:');
-            const relationship = prompt('Enter relationship:');
-            
-            if (name && phone && relationship) {
-                alert(`Contact added: ${name} (${relationship}) - ${phone}`);
-            }
-        }
+      function downloadGuide(type) {
+        alert(`Downloading ${type} guide for offline access.`);
+      }
 
-        function editContact(contactId) {
-            alert(`Editing contact: ${contactId}`);
-        }
+      function downloadAllGuides() {
+        alert("Downloading all first aid guides for offline access...");
+      }
 
-        // Medical Information
-        function showMedicalInfo() {
-            alert('Medical information panel opened.');
-        }
+      // Emergency Preparedness
+      function openEmergencyKit() {
+        alert("Emergency kit checklist opened.");
+      }
 
-        function editMedicalInfo() {
-            alert('Medical information editor opened.');
-        }
+      function startPracticeScenario() {
+        alert("Starting interactive emergency response practice scenario.");
+      }
 
-        function downloadMedicalCard() {
-            alert('Medical card downloaded for offline access.');
-        }
+      function createFamilyPlan() {
+        alert("Family emergency plan creator opened.");
+      }
 
-        function shareMedicalInfo() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Emergency Medical Information',
-                    text: 'My emergency medical information card',
-                    url: window.location.href
-                });
-            } else {
-                alert('Medical information sharing link copied to clipboard.');
-            }
-        }
+      // Scroll Reveal Animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
 
-        // First Aid Guides
-        function openFirstAidGuide(type) {
-            alert(`Opening ${type} first aid guide with step-by-step instructions.`);
-        }
-
-        function downloadGuide(type) {
-            alert(`Downloading ${type} guide for offline access.`);
-        }
-
-        function downloadAllGuides() {
-            alert('Downloading all first aid guides for offline access...');
-        }
-
-        // Emergency Preparedness
-        function openEmergencyKit() {
-            alert('Emergency kit checklist opened.');
-        }
-
-        function startPracticeScenario() {
-            alert('Starting interactive emergency response practice scenario.');
-        }
-
-        function createFamilyPlan() {
-            alert('Family emergency plan creator opened.');
-        }
-
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+          }
         });
+      }, observerOptions);
 
-        // Scroll to Top Button
-        const scrollToTopBtn = document.getElementById('scrollToTop');
+      document.querySelectorAll(".scroll-reveal").forEach((el) => {
+        observer.observe(el);
+      });
 
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-                scrollToTopBtn.classList.add('opacity-100');
-            } else {
-                scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-                scrollToTopBtn.classList.remove('opacity-100');
-            }
+      // Scroll to Top Button
+      const scrollToTopBtn = document.getElementById("scrollToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+          scrollToTopBtn.classList.add("opacity-100");
+        } else {
+          scrollToTopBtn.classList.add("opacity-0", "pointer-events-none");
+          scrollToTopBtn.classList.remove("opacity-100");
+        }
+      });
+
+      scrollToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
         });
+      });
 
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+      // Language Selector
+      const languageSelector = document.getElementById("languageSelector");
 
-        // Language Selector
-        const languageSelector = document.getElementById('languageSelector');
-        
-        languageSelector.addEventListener('change', (e) => {
-            const selectedLang = e.target.value;
-            localStorage.setItem('preferredLanguage', selectedLang);
-            
-            // Show notification
-            const notification = document.createElement('div');
-            notification.className = 'fixed top-20 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-            notification.innerHTML = `
+      languageSelector.addEventListener("change", (e) => {
+        const selectedLang = e.target.value;
+        localStorage.setItem("preferredLanguage", selectedLang);
+
+        // Show notification
+        const notification = document.createElement("div");
+        notification.className =
+          "fixed top-20 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in";
+        notification.innerHTML = `
                 <div class="flex items-center gap-2">
                     <img src="https://api.iconify.design/mdi/check-circle.svg?color=white" alt="Success icon" class="w-5 h-5">
                     <span>Language preference saved</span>
                 </div>
             `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        });
+        document.body.appendChild(notification);
 
-        // Load saved language preference
-        const savedLanguage = localStorage.getItem('preferredLanguage');
-        if (savedLanguage) {
-            languageSelector.value = savedLanguage;
-        }
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      });
 
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', () => {
-            // Show emergency alert after 3 seconds
-            setTimeout(() => {
-                document.getElementById('emergencyAlert').classList.remove('hidden');
-            }, 3000);
-        });
+      // Load saved language preference
+      const savedLanguage = localStorage.getItem("preferredLanguage");
+      if (savedLanguage) {
+        languageSelector.value = savedLanguage;
+      }
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", () => {
+        // Show emergency alert after 3 seconds
+        setTimeout(() => {
+          document.getElementById("emergencyAlert").classList.remove("hidden");
+        }, 3000);
+      });
     </script>
-<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
-</body>
+    <script></script>
+    <script
+      id="dhws-dataInjector"
+      src="../public/dhws-data-injector.js"
+    ></script>
+  </body>
 </html>

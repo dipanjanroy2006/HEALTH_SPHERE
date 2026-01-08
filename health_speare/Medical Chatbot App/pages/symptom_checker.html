@@ -1,833 +1,1504 @@
 <!DOCTYPE html>
 <html lang="en" class="smooth-scroll">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MediCare Hub Symptom Checker - Assess your symptoms with our structured evaluation tool. Get personalized health recommendations and care guidance based on your symptoms.">
-    <meta name="keywords" content="symptom checker, health assessment, medical symptoms, symptom evaluation, health guidance">
-    <title>Symptom Checker - MediCare Hub</title>
-    <link rel="stylesheet" href="../css/main.css">
-  
-  <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"></script>
-  <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HEALTH SPHERE Symptom Checker - Assess your symptoms with our structured evaluation tool. Get personalized health recommendations and care guidance based on your symptoms."
+    />
+    <meta
+      name="keywords"
+      content="symptom checker, health assessment, medical symptoms, symptom evaluation, health guidance"
+    />
+    <title>Symptom Checker - HEALTH SPHERE</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script>
+      // Initialize theme immediately before page renders to prevent flashing
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const isDark =
+          savedTheme === "dark" || (savedTheme === null && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    <script
+      type="module"
+      async
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"
+    ></script>
+    <script
+      type="module"
+      defer
+      src="https://static.rocket.new/rocket-shot.js?v=0.0.2"
+    ></script>
   </head>
-<body class="bg-background">
+  <body class="bg-background">
     <!-- Emergency Banner -->
     <div id="emergencyBanner" class="emergency-banner hidden">
-        <div class="container-custom flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="https://api.iconify.design/mdi/alert-circle.svg?color=white" alt="Emergency alert icon" class="w-6 h-6">
-                <p class="font-semibold">If you're experiencing a medical emergency, call emergency services immediately</p>
-            </div>
-            <button onclick="toggleEmergencyBanner()" class="text-white hover:text-error-100 transition-colors" aria-label="Close emergency banner">
-                <img src="https://api.iconify.design/mdi/close.svg?color=white" alt="Close icon" class="w-6 h-6">
-            </button>
+      <div class="container-custom flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://api.iconify.design/mdi/alert-circle.svg?color=white"
+            alt="Emergency alert icon"
+            class="w-6 h-6"
+          />
+          <p class="font-semibold">
+            If you're experiencing a medical emergency, call emergency services
+            immediately
+          </p>
         </div>
+        <button
+          onclick="toggleEmergencyBanner()"
+          class="text-white hover:text-error-100 transition-colors"
+          aria-label="Close emergency banner"
+        >
+          <img
+            src="https://api.iconify.design/mdi/close.svg?color=white"
+            alt="Close icon"
+            class="w-6 h-6"
+          />
+        </button>
+      </div>
     </div>
 
     <!-- Navigation Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container-custom py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <a href="homepage.html" class="flex items-center gap-3 group">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MediCare Hub logo">
-                        <rect width="48" height="48" rx="12" fill="#2E86AB"/>
-                        <path d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z" fill="#A8DADC"/>
-                        <path d="M24 18V30M18 24H30" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                    </svg>
-                    <div>
-                        <h1 class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors">MediCare Hub</h1>
-                        <p class="text-xs text-text-tertiary">Health Knowledge Ecosystem</p>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
-                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
-                    <a href="healthopedia.html" class="text-text-secondary hover:text-primary transition-colors">Healthopedia</a>
-                    <a href="chatbot.html" class="text-text-secondary hover:text-primary transition-colors">AI Assistant</a>
-                    <a href="symptom_checker.html" class="text-primary font-semibold border-b-2 border-primary pb-1">Symptom Checker</a>
-                    <a href="emergency_resources.html" class="btn-emergency text-sm py-2 px-4">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Emergency icon" class="w-5 h-5">
-                        Emergency
-                    </a>
-                </div>
-
-                <!-- Language Selector & Mobile Menu -->
-                <div class="flex items-center gap-4">
-                    <select id="languageSelector" class="hidden lg:block px-4 py-2 border border-border rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Select language">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="bn">বাংলা</option>
-                    </select>
-                    
-                    <button id="mobileMenuBtn" class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors" aria-label="Toggle mobile menu">
-                        <img src="https://api.iconify.design/mdi/menu.svg?color=%232E86AB" alt="Menu icon" class="w-6 h-6">
-                    </button>
-                </div>
+      <nav class="container-custom py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="homepage.html" class="flex items-center gap-3 group">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="HEALTH SPHERE logo"
+            >
+              <rect width="48" height="48" rx="12" fill="#2E86AB" />
+              <path
+                d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z"
+                fill="#A8DADC"
+              />
+              <path
+                d="M24 18V30M18 24H30"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div>
+              <h1
+                class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors"
+              >
+                HEALTH SPHERE
+              </h1>
+              <p class="text-xs text-text-tertiary">
+                Health Knowledge Ecosystem
+              </p>
             </div>
+          </a>
 
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden lg:hidden mt-4 pb-4 border-t border-border pt-4">
-                <div class="flex flex-col gap-4">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
-                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
-                    <a href="healthopedia.html" class="text-text-secondary hover:text-primary transition-colors">Healthopedia</a>
-                    <a href="chatbot.html" class="text-text-secondary hover:text-primary transition-colors">AI Assistant</a>
-                    <a href="symptom_checker.html" class="text-primary font-semibold">Symptom Checker</a>
-                    <select class="px-4 py-2 border border-border rounded-lg bg-white text-text-primary" aria-label="Select language mobile">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="bn">বাংলা</option>
-                    </select>
-                    <a href="emergency_resources.html" class="btn-emergency justify-center">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Emergency icon" class="w-5 h-5">
-                        Emergency Resources
-                    </a>
-                </div>
-            </div>
-        </nav>
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center gap-8">
+            <a
+              href="homepage.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Home</a
+            >
+            <a
+              href="dashboard.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Dashboard</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-primary font-semibold border-b-2 border-primary pb-1"
+              >Symptom Checker</a
+            >
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency text-sm py-2 px-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency
+            </a>
+          </div>
+
+          <!-- Language Selector & Mobile Menu -->
+          <div class="flex items-center gap-4">
+            <select
+              id="languageSelector"
+              class="hidden lg:block px-4 py-2 border border-border rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+              aria-label="Select language"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+
+            <button
+              id="mobileMenuBtn"
+              class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              <img
+                src="https://api.iconify.design/mdi/menu.svg?color=%232E86AB"
+                alt="Menu icon"
+                class="w-6 h-6"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="hidden lg:hidden mt-4 pb-4 border-t border-border pt-4"
+        >
+          <div class="flex flex-col gap-4">
+            <a
+              href="homepage.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Home</a
+            >
+            <a
+              href="dashboard.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Dashboard</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >AI Assistant</a
+            >
+            <a href="symptom_checker.html" class="text-primary font-semibold"
+              >Symptom Checker</a
+            >
+            <select
+              class="px-4 py-2 border border-border rounded-lg bg-white text-text-primary"
+              aria-label="Select language mobile"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency justify-center"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency Resources
+            </a>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-12">
-        <div class="container-custom">
-            <div class="max-w-4xl mx-auto text-center scroll-reveal">
-                <div class="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-6">
-                    <img src="https://api.iconify.design/mdi/stethoscope.svg?color=%232E86AB" alt="Stethoscope icon" class="w-5 h-5">
-                    <span class="text-sm font-semibold">AI-Powered Symptom Assessment</span>
-                </div>
-                
-                <h1 class="text-4xl lg:text-5xl font-headline font-bold text-text-primary mb-6">
-                    Check Your Symptoms
-                </h1>
-                
-                <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-                    Get personalized health insights based on your symptoms. Our structured assessment tool helps you understand your condition and provides appropriate care recommendations.
-                </p>
+    <section
+      class="bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-12"
+    >
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto text-center scroll-reveal">
+          <div
+            class="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-6"
+          >
+            <img
+              src="https://api.iconify.design/mdi/stethoscope.svg?color=%232E86AB"
+              alt="Stethoscope icon"
+              class="w-5 h-5"
+            />
+            <span class="text-sm font-semibold"
+              >AI-Powered Symptom Assessment</span
+            >
+          </div>
 
-                <!-- Medical Disclaimer -->
-                <div class="alert-warning max-w-3xl mx-auto">
-                    <img src="https://api.iconify.design/mdi/alert.svg?color=%23D69E2E" alt="Warning icon" class="w-6 h-6 flex-shrink-0">
-                    <div class="text-left">
-                        <h4 class="font-semibold mb-1">Important Medical Disclaimer</h4>
-                        <p class="text-sm">This tool is for informational purposes only and does not replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for medical concerns.</p>
-                    </div>
-                </div>
+          <h1
+            class="text-4xl lg:text-5xl font-headline font-bold text-text-primary mb-6"
+          >
+            Check Your Symptoms
+          </h1>
+
+          <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
+            Get personalized health insights based on your symptoms. Our
+            structured assessment tool helps you understand your condition and
+            provides appropriate care recommendations.
+          </p>
+
+          <!-- Medical Disclaimer -->
+          <div class="alert-warning max-w-3xl mx-auto">
+            <img
+              src="https://api.iconify.design/mdi/alert.svg?color=%23D69E2E"
+              alt="Warning icon"
+              class="w-6 h-6 flex-shrink-0"
+            />
+            <div class="text-left">
+              <h4 class="font-semibold mb-1">Important Medical Disclaimer</h4>
+              <p class="text-sm">
+                This tool is for informational purposes only and does not
+                replace professional medical advice, diagnosis, or treatment.
+                Always consult with a qualified healthcare provider for medical
+                concerns.
+              </p>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Symptom Checker Main Content -->
     <section class="section-compact">
-        <div class="container-custom">
-            <div class="max-w-6xl mx-auto">
-                <!-- Progress Indicator -->
-                <div id="progressSection" class="mb-12 scroll-reveal">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm font-semibold text-text-primary">Step <span id="currentStep">1</span> of 4</span>
-                        </div>
-                        <button id="resetBtn" class="text-sm text-text-tertiary hover:text-primary transition-colors flex items-center gap-1">
-                            <img src="https://api.iconify.design/mdi/refresh.svg?color=%23718096" alt="Reset icon" class="w-4 h-4">
-                            Start Over
-                        </button>
-                    </div>
-                    <div class="w-full bg-surface rounded-full h-2 overflow-hidden">
-                        <div id="progressBar" class="bg-primary h-full transition-all duration-500 ease-out" style="width: 25%"></div>
-                    </div>
-                </div>
-
-                <!-- Step 1: Body Area Selection -->
-                <div id="step1" class="step-container scroll-reveal">
-                    <div class="bg-white rounded-xl shadow-md p-8">
-                        <h2 class="text-3xl font-headline font-bold text-text-primary mb-4">Where are you experiencing symptoms?</h2>
-                        <p class="text-text-secondary mb-8">Select the body area where you're feeling discomfort or experiencing symptoms.</p>
-
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <!-- Body Diagram -->
-                            <div class="relative">
-                                <div class="bg-surface rounded-xl p-6 border-2 border-border">
-                                    <h3 class="text-lg font-semibold text-text-primary mb-4 text-center">Select Body Area</h3>
-                                    <div class="relative mx-auto" style="max-width: 300px;">
-                                        <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=800&auto=format&fit=crop" 
-                                             alt="Human body diagram showing different body areas for symptom selection" 
-                                             class="w-full h-auto rounded-lg"
-                                             onerror="this.src='https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=800'; this.onerror=null;">
-                                        
-                                        <!-- Interactive Body Areas (Overlay) -->
-                                        <div class="absolute inset-0 grid grid-cols-3 gap-1 p-4">
-                                            <button class="body-area-btn" data-area="head" aria-label="Select head area">
-                                                <span class="sr-only">Head</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="head" aria-label="Select head area">
-                                                <span class="sr-only">Head</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="head" aria-label="Select head area">
-                                                <span class="sr-only">Head</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="chest" aria-label="Select chest area">
-                                                <span class="sr-only">Chest</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="chest" aria-label="Select chest area">
-                                                <span class="sr-only">Chest</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="chest" aria-label="Select chest area">
-                                                <span class="sr-only">Chest</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="abdomen" aria-label="Select abdomen area">
-                                                <span class="sr-only">Abdomen</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="abdomen" aria-label="Select abdomen area">
-                                                <span class="sr-only">Abdomen</span>
-                                            </button>
-                                            <button class="body-area-btn" data-area="abdomen" aria-label="Select abdomen area">
-                                                <span class="sr-only">Abdomen</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Body Area List -->
-                            <div>
-                                <h3 class="text-lg font-semibold text-text-primary mb-4">Or choose from list:</h3>
-                                <div class="grid gap-3">
-                                    <button class="body-area-card" data-area="head">
-                                        <img src="https://api.iconify.design/mdi/head.svg?color=%232E86AB" alt="Head icon" class="w-8 h-8">
-                                        <div class="text-left">
-                                            <h4 class="font-semibold text-text-primary">Head & Face</h4>
-                                            <p class="text-sm text-text-tertiary">Headache, dizziness, facial pain</p>
-                                        </div>
-                                        <img src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096" alt="Arrow icon" class="w-6 h-6 ml-auto">
-                                    </button>
-
-                                    <button class="body-area-card" data-area="chest">
-                                        <img src="https://api.iconify.design/mdi/heart-pulse.svg?color=%232E86AB" alt="Chest icon" class="w-8 h-8">
-                                        <div class="text-left">
-                                            <h4 class="font-semibold text-text-primary">Chest & Heart</h4>
-                                            <p class="text-sm text-text-tertiary">Chest pain, breathing issues, palpitations</p>
-                                        </div>
-                                        <img src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096" alt="Arrow icon" class="w-6 h-6 ml-auto">
-                                    </button>
-
-                                    <button class="body-area-card" data-area="abdomen">
-                                        <img src="https://api.iconify.design/mdi/stomach.svg?color=%232E86AB" alt="Abdomen icon" class="w-8 h-8">
-                                        <div class="text-left">
-                                            <h4 class="font-semibold text-text-primary">Abdomen & Stomach</h4>
-                                            <p class="text-sm text-text-tertiary">Stomach pain, nausea, digestive issues</p>
-                                        </div>
-                                        <img src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096" alt="Arrow icon" class="w-6 h-6 ml-auto">
-                                    </button>
-
-                                    <button class="body-area-card" data-area="limbs">
-                                        <img src="https://api.iconify.design/mdi/arm-flex.svg?color=%232E86AB" alt="Limbs icon" class="w-8 h-8">
-                                        <div class="text-left">
-                                            <h4 class="font-semibold text-text-primary">Arms & Legs</h4>
-                                            <p class="text-sm text-text-tertiary">Joint pain, muscle aches, swelling</p>
-                                        </div>
-                                        <img src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096" alt="Arrow icon" class="w-6 h-6 ml-auto">
-                                    </button>
-
-                                    <button class="body-area-card" data-area="back">
-                                        <img src="https://api.iconify.design/mdi/human-handsup.svg?color=%232E86AB" alt="Back icon" class="w-8 h-8">
-                                        <div class="text-left">
-                                            <h4 class="font-semibold text-text-primary">Back & Spine</h4>
-                                            <p class="text-sm text-text-tertiary">Back pain, neck pain, stiffness</p>
-                                        </div>
-                                        <img src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096" alt="Arrow icon" class="w-6 h-6 ml-auto">
-                                    </button>
-
-                                    <button class="body-area-card" data-area="general">
-                                        <img src="https://api.iconify.design/mdi/human.svg?color=%232E86AB" alt="General icon" class="w-8 h-8">
-                                        <div class="text-left">
-                                            <h4 class="font-semibold text-text-primary">General Symptoms</h4>
-                                            <p class="text-sm text-text-tertiary">Fever, fatigue, weight changes</p>
-                                        </div>
-                                        <img src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096" alt="Arrow icon" class="w-6 h-6 ml-auto">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 2: Specific Symptoms -->
-                <div id="step2" class="step-container hidden">
-                    <div class="bg-white rounded-xl shadow-md p-8 scroll-reveal">
-                        <button onclick="goToStep(1)" class="flex items-center gap-2 text-text-tertiary hover:text-primary transition-colors mb-6">
-                            <img src="https://api.iconify.design/mdi/arrow-left.svg?color=%23718096" alt="Back icon" class="w-5 h-5">
-                            <span>Back</span>
-                        </button>
-
-                        <h2 class="text-3xl font-headline font-bold text-text-primary mb-4">What symptoms are you experiencing?</h2>
-                        <p class="text-text-secondary mb-8">Select all symptoms that apply to you in the <span id="selectedArea" class="font-semibold text-primary"></span> area.</p>
-
-                        <div class="mb-6">
-                            <div class="relative">
-                                <img src="https://api.iconify.design/mdi/magnify.svg?color=%234A5568" alt="Search icon" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5">
-                                <input type="text" 
-                                       id="symptomSearch"
-                                       placeholder="Search symptoms..." 
-                                       class="input pl-12"
-                                       aria-label="Search symptoms">
-                            </div>
-                        </div>
-
-                        <div id="symptomsList" class="grid md:grid-cols-2 gap-4 mb-8">
-                            <!-- Symptoms will be populated dynamically -->
-                        </div>
-
-                        <div class="flex justify-between items-center pt-6 border-t border-border">
-                            <p class="text-sm text-text-tertiary">
-                                <span id="selectedCount">0</span> symptom(s) selected
-                            </p>
-                            <button onclick="goToStep(3)" class="btn-primary" id="continueStep2" disabled>
-                                Continue
-                                <img src="https://api.iconify.design/mdi/arrow-right.svg?color=white" alt="Arrow icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 3: Severity & Duration -->
-                <div id="step3" class="step-container hidden">
-                    <div class="bg-white rounded-xl shadow-md p-8 scroll-reveal">
-                        <button onclick="goToStep(2)" class="flex items-center gap-2 text-text-tertiary hover:text-primary transition-colors mb-6">
-                            <img src="https://api.iconify.design/mdi/arrow-left.svg?color=%23718096" alt="Back icon" class="w-5 h-5">
-                            <span>Back</span>
-                        </button>
-
-                        <h2 class="text-3xl font-headline font-bold text-text-primary mb-4">Tell us more about your symptoms</h2>
-                        <p class="text-text-secondary mb-8">This information helps us provide more accurate recommendations.</p>
-
-                        <!-- Severity Scale -->
-                        <div class="mb-8">
-                            <label class="block text-lg font-semibold text-text-primary mb-4">How severe are your symptoms?</label>
-                            <div class="grid grid-cols-5 gap-3">
-                                <button class="severity-btn" data-severity="1">
-                                    <div class="w-12 h-12 rounded-full bg-success-100 flex items-center justify-center mx-auto mb-2">
-                                        <span class="text-2xl">😊</span>
-                                    </div>
-                                    <span class="text-sm font-medium">Mild</span>
-                                    <span class="text-xs text-text-tertiary">Barely noticeable</span>
-                                </button>
-                                <button class="severity-btn" data-severity="2">
-                                    <div class="w-12 h-12 rounded-full bg-success-200 flex items-center justify-center mx-auto mb-2">
-                                        <span class="text-2xl">🙂</span>
-                                    </div>
-                                    <span class="text-sm font-medium">Slight</span>
-                                    <span class="text-xs text-text-tertiary">Noticeable</span>
-                                </button>
-                                <button class="severity-btn" data-severity="3">
-                                    <div class="w-12 h-12 rounded-full bg-warning-200 flex items-center justify-center mx-auto mb-2">
-                                        <span class="text-2xl">😐</span>
-                                    </div>
-                                    <span class="text-sm font-medium">Moderate</span>
-                                    <span class="text-xs text-text-tertiary">Uncomfortable</span>
-                                </button>
-                                <button class="severity-btn" data-severity="4">
-                                    <div class="w-12 h-12 rounded-full bg-warning-400 flex items-center justify-center mx-auto mb-2">
-                                        <span class="text-2xl">😟</span>
-                                    </div>
-                                    <span class="text-sm font-medium">Severe</span>
-                                    <span class="text-xs text-text-tertiary">Very bothersome</span>
-                                </button>
-                                <button class="severity-btn" data-severity="5">
-                                    <div class="w-12 h-12 rounded-full bg-error-400 flex items-center justify-center mx-auto mb-2">
-                                        <span class="text-2xl">😣</span>
-                                    </div>
-                                    <span class="text-sm font-medium">Critical</span>
-                                    <span class="text-xs text-text-tertiary">Unbearable</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Duration -->
-                        <div class="mb-8">
-                            <label class="block text-lg font-semibold text-text-primary mb-4">How long have you had these symptoms?</label>
-                            <div class="grid md:grid-cols-3 gap-4">
-                                <button class="duration-btn" data-duration="hours">
-                                    <img src="https://api.iconify.design/mdi/clock-fast.svg?color=%232E86AB" alt="Clock icon" class="w-8 h-8 mx-auto mb-2">
-                                    <span class="font-medium">Less than 24 hours</span>
-                                </button>
-                                <button class="duration-btn" data-duration="days">
-                                    <img src="https://api.iconify.design/mdi/calendar-today.svg?color=%232E86AB" alt="Calendar icon" class="w-8 h-8 mx-auto mb-2">
-                                    <span class="font-medium">1-7 days</span>
-                                </button>
-                                <button class="duration-btn" data-duration="weeks">
-                                    <img src="https://api.iconify.design/mdi/calendar-week.svg?color=%232E86AB" alt="Calendar week icon" class="w-8 h-8 mx-auto mb-2">
-                                    <span class="font-medium">1-4 weeks</span>
-                                </button>
-                                <button class="duration-btn" data-duration="months">
-                                    <img src="https://api.iconify.design/mdi/calendar-month.svg?color=%232E86AB" alt="Calendar month icon" class="w-8 h-8 mx-auto mb-2">
-                                    <span class="font-medium">1-3 months</span>
-                                </button>
-                                <button class="duration-btn" data-duration="long">
-                                    <img src="https://api.iconify.design/mdi/calendar-range.svg?color=%232E86AB" alt="Calendar range icon" class="w-8 h-8 mx-auto mb-2">
-                                    <span class="font-medium">More than 3 months</span>
-                                </button>
-                                <button class="duration-btn" data-duration="recurring">
-                                    <img src="https://api.iconify.design/mdi/refresh.svg?color=%232E86AB" alt="Recurring icon" class="w-8 h-8 mx-auto mb-2">
-                                    <span class="font-medium">Recurring/On and off</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Additional Information -->
-                        <div class="mb-8">
-                            <label for="additionalInfo" class="block text-lg font-semibold text-text-primary mb-4">Any additional information? (Optional)</label>
-                            <textarea id="additionalInfo" 
-                                      rows="4" 
-                                      class="input resize-none" 
-                                      placeholder="Describe any other relevant details about your symptoms, when they occur, what makes them better or worse, etc."
-                                      aria-label="Additional symptom information"></textarea>
-                        </div>
-
-                        <div class="flex justify-end pt-6 border-t border-border">
-                            <button onclick="goToStep(4)" class="btn-primary" id="continueStep3" disabled>
-                                View Results
-                                <img src="https://api.iconify.design/mdi/arrow-right.svg?color=white" alt="Arrow icon" class="w-5 h-5">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 4: Results & Recommendations -->
-                <div id="step4" class="step-container hidden">
-                    <div class="scroll-reveal">
-                        <!-- Urgency Alert -->
-                        <div id="urgencyAlert" class="mb-8">
-                            <!-- Will be populated based on assessment -->
-                        </div>
-
-                        <!-- Assessment Summary -->
-                        <div class="bg-white rounded-xl shadow-md p-8 mb-8">
-                            <div class="flex items-start justify-between mb-6">
-                                <div>
-                                    <h2 class="text-3xl font-headline font-bold text-text-primary mb-2">Your Assessment Results</h2>
-                                    <p class="text-text-secondary">Based on the symptoms you've reported</p>
-                                </div>
-                                <button onclick="printResults()" class="btn-ghost text-sm">
-                                    <img src="https://api.iconify.design/mdi/printer.svg?color=%232E86AB" alt="Print icon" class="w-5 h-5">
-                                    Print
-                                </button>
-                            </div>
-
-                            <div class="grid md:grid-cols-3 gap-6 mb-8">
-                                <div class="bg-surface rounded-lg p-6">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <img src="https://api.iconify.design/mdi/map-marker.svg?color=%232E86AB" alt="Location icon" class="w-6 h-6">
-                                        <h3 class="font-semibold text-text-primary">Body Area</h3>
-                                    </div>
-                                    <p id="resultArea" class="text-lg text-text-secondary"></p>
-                                </div>
-                                <div class="bg-surface rounded-lg p-6">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <img src="https://api.iconify.design/mdi/alert-circle.svg?color=%232E86AB" alt="Severity icon" class="w-6 h-6">
-                                        <h3 class="font-semibold text-text-primary">Severity</h3>
-                                    </div>
-                                    <p id="resultSeverity" class="text-lg text-text-secondary"></p>
-                                </div>
-                                <div class="bg-surface rounded-lg p-6">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <img src="https://api.iconify.design/mdi/clock-outline.svg?color=%232E86AB" alt="Duration icon" class="w-6 h-6">
-                                        <h3 class="font-semibold text-text-primary">Duration</h3>
-                                    </div>
-                                    <p id="resultDuration" class="text-lg text-text-secondary"></p>
-                                </div>
-                            </div>
-
-                            <div class="border-t border-border pt-6">
-                                <h3 class="font-semibold text-text-primary mb-3">Reported Symptoms:</h3>
-                                <div id="resultSymptoms" class="flex flex-wrap gap-2">
-                                    <!-- Symptoms badges will be populated -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Possible Conditions -->
-                        <div class="bg-white rounded-xl shadow-md p-8 mb-8">
-                            <h3 class="text-2xl font-headline font-bold text-text-primary mb-6">Possible Related Conditions</h3>
-                            <div id="conditionsList" class="space-y-4">
-                                <!-- Conditions will be populated -->
-                            </div>
-                        </div>
-
-                        <!-- Care Recommendations -->
-                        <div class="bg-white rounded-xl shadow-md p-8 mb-8">
-                            <h3 class="text-2xl font-headline font-bold text-text-primary mb-6">Recommended Next Steps</h3>
-                            <div id="recommendationsList" class="space-y-4">
-                                <!-- Recommendations will be populated -->
-                            </div>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <a href="chatbot.html" class="btn-primary justify-center">
-                                <img src="https://api.iconify.design/mdi/robot.svg?color=white" alt="Chatbot icon" class="w-5 h-5">
-                                Consult AI Assistant
-                            </a>
-                            <a href="healthopedia.html" class="btn-outline justify-center">
-                                <img src="https://api.iconify.design/mdi/book-open-variant.svg?color=%232E86AB" alt="Book icon" class="w-5 h-5">
-                                Learn More
-                            </a>
-                            <button onclick="resetAssessment()" class="btn-ghost justify-center">
-                                <img src="https://api.iconify.design/mdi/refresh.svg?color=%232E86AB" alt="Refresh icon" class="w-5 h-5">
-                                New Assessment
-                            </button>
-                        </div>
-                    </div>
-                </div>
+      <div class="container-custom">
+        <div class="max-w-6xl mx-auto">
+          <!-- Progress Indicator -->
+          <div id="progressSection" class="mb-12 scroll-reveal">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-semibold text-text-primary"
+                  >Step <span id="currentStep">1</span> of 4</span
+                >
+              </div>
+              <button
+                id="resetBtn"
+                class="text-sm text-text-tertiary hover:text-primary transition-colors flex items-center gap-1"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/refresh.svg?color=%23718096"
+                  alt="Reset icon"
+                  class="w-4 h-4"
+                />
+                Start Over
+              </button>
             </div>
+            <div class="w-full bg-surface rounded-full h-2 overflow-hidden">
+              <div
+                id="progressBar"
+                class="bg-primary h-full transition-all duration-500 ease-out"
+                style="width: 25%"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Step 1: Body Area Selection -->
+          <div id="step1" class="step-container scroll-reveal">
+            <div class="bg-white rounded-xl shadow-md p-8">
+              <h2
+                class="text-3xl font-headline font-bold text-text-primary mb-4"
+              >
+                Where are you experiencing symptoms?
+              </h2>
+              <p class="text-text-secondary mb-8">
+                Select the body area where you're feeling discomfort or
+                experiencing symptoms.
+              </p>
+
+              <div class="grid md:grid-cols-2 gap-8">
+                <!-- Body Diagram -->
+                <div class="relative">
+                  <div class="bg-surface rounded-xl p-6 border-2 border-border">
+                    <h3
+                      class="text-lg font-semibold text-text-primary mb-4 text-center"
+                    >
+                      Select Body Area
+                    </h3>
+                    <div class="relative mx-auto" style="max-width: 300px">
+                      <img
+                        src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=800&auto=format&fit=crop"
+                        alt="Human body diagram showing different body areas for symptom selection"
+                        class="w-full h-auto rounded-lg"
+                        onerror="this.src='https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=800'; this.onerror=null;"
+                      />
+
+                      <!-- Interactive Body Areas (Overlay) -->
+                      <div class="absolute inset-0 grid grid-cols-3 gap-1 p-4">
+                        <button
+                          class="body-area-btn"
+                          data-area="head"
+                          aria-label="Select head area"
+                        >
+                          <span class="sr-only">Head</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="head"
+                          aria-label="Select head area"
+                        >
+                          <span class="sr-only">Head</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="head"
+                          aria-label="Select head area"
+                        >
+                          <span class="sr-only">Head</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="chest"
+                          aria-label="Select chest area"
+                        >
+                          <span class="sr-only">Chest</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="chest"
+                          aria-label="Select chest area"
+                        >
+                          <span class="sr-only">Chest</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="chest"
+                          aria-label="Select chest area"
+                        >
+                          <span class="sr-only">Chest</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="abdomen"
+                          aria-label="Select abdomen area"
+                        >
+                          <span class="sr-only">Abdomen</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="abdomen"
+                          aria-label="Select abdomen area"
+                        >
+                          <span class="sr-only">Abdomen</span>
+                        </button>
+                        <button
+                          class="body-area-btn"
+                          data-area="abdomen"
+                          aria-label="Select abdomen area"
+                        >
+                          <span class="sr-only">Abdomen</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Body Area List -->
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-4">
+                    Or choose from list:
+                  </h3>
+                  <div class="grid gap-3">
+                    <button class="body-area-card" data-area="head">
+                      <img
+                        src="https://api.iconify.design/mdi/head.svg?color=%232E86AB"
+                        alt="Head icon"
+                        class="w-8 h-8"
+                      />
+                      <div class="text-left">
+                        <h4 class="font-semibold text-text-primary">
+                          Head & Face
+                        </h4>
+                        <p class="text-sm text-text-tertiary">
+                          Headache, dizziness, facial pain
+                        </p>
+                      </div>
+                      <img
+                        src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096"
+                        alt="Arrow icon"
+                        class="w-6 h-6 ml-auto"
+                      />
+                    </button>
+
+                    <button class="body-area-card" data-area="chest">
+                      <img
+                        src="https://api.iconify.design/mdi/heart-pulse.svg?color=%232E86AB"
+                        alt="Chest icon"
+                        class="w-8 h-8"
+                      />
+                      <div class="text-left">
+                        <h4 class="font-semibold text-text-primary">
+                          Chest & Heart
+                        </h4>
+                        <p class="text-sm text-text-tertiary">
+                          Chest pain, breathing issues, palpitations
+                        </p>
+                      </div>
+                      <img
+                        src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096"
+                        alt="Arrow icon"
+                        class="w-6 h-6 ml-auto"
+                      />
+                    </button>
+
+                    <button class="body-area-card" data-area="abdomen">
+                      <img
+                        src="https://api.iconify.design/mdi/stomach.svg?color=%232E86AB"
+                        alt="Abdomen icon"
+                        class="w-8 h-8"
+                      />
+                      <div class="text-left">
+                        <h4 class="font-semibold text-text-primary">
+                          Abdomen & Stomach
+                        </h4>
+                        <p class="text-sm text-text-tertiary">
+                          Stomach pain, nausea, digestive issues
+                        </p>
+                      </div>
+                      <img
+                        src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096"
+                        alt="Arrow icon"
+                        class="w-6 h-6 ml-auto"
+                      />
+                    </button>
+
+                    <button class="body-area-card" data-area="limbs">
+                      <img
+                        src="https://api.iconify.design/mdi/arm-flex.svg?color=%232E86AB"
+                        alt="Limbs icon"
+                        class="w-8 h-8"
+                      />
+                      <div class="text-left">
+                        <h4 class="font-semibold text-text-primary">
+                          Arms & Legs
+                        </h4>
+                        <p class="text-sm text-text-tertiary">
+                          Joint pain, muscle aches, swelling
+                        </p>
+                      </div>
+                      <img
+                        src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096"
+                        alt="Arrow icon"
+                        class="w-6 h-6 ml-auto"
+                      />
+                    </button>
+
+                    <button class="body-area-card" data-area="back">
+                      <img
+                        src="https://api.iconify.design/mdi/human-handsup.svg?color=%232E86AB"
+                        alt="Back icon"
+                        class="w-8 h-8"
+                      />
+                      <div class="text-left">
+                        <h4 class="font-semibold text-text-primary">
+                          Back & Spine
+                        </h4>
+                        <p class="text-sm text-text-tertiary">
+                          Back pain, neck pain, stiffness
+                        </p>
+                      </div>
+                      <img
+                        src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096"
+                        alt="Arrow icon"
+                        class="w-6 h-6 ml-auto"
+                      />
+                    </button>
+
+                    <button class="body-area-card" data-area="general">
+                      <img
+                        src="https://api.iconify.design/mdi/human.svg?color=%232E86AB"
+                        alt="General icon"
+                        class="w-8 h-8"
+                      />
+                      <div class="text-left">
+                        <h4 class="font-semibold text-text-primary">
+                          General Symptoms
+                        </h4>
+                        <p class="text-sm text-text-tertiary">
+                          Fever, fatigue, weight changes
+                        </p>
+                      </div>
+                      <img
+                        src="https://api.iconify.design/mdi/chevron-right.svg?color=%23718096"
+                        alt="Arrow icon"
+                        class="w-6 h-6 ml-auto"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Specific Symptoms -->
+          <div id="step2" class="step-container hidden">
+            <div class="bg-white rounded-xl shadow-md p-8 scroll-reveal">
+              <button
+                onclick="goToStep(1)"
+                class="flex items-center gap-2 text-text-tertiary hover:text-primary transition-colors mb-6"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/arrow-left.svg?color=%23718096"
+                  alt="Back icon"
+                  class="w-5 h-5"
+                />
+                <span>Back</span>
+              </button>
+
+              <h2
+                class="text-3xl font-headline font-bold text-text-primary mb-4"
+              >
+                What symptoms are you experiencing?
+              </h2>
+              <p class="text-text-secondary mb-8">
+                Select all symptoms that apply to you in the
+                <span
+                  id="selectedArea"
+                  class="font-semibold text-primary"
+                ></span>
+                area.
+              </p>
+
+              <div class="mb-6">
+                <div class="relative">
+                  <img
+                    src="https://api.iconify.design/mdi/magnify.svg?color=%234A5568"
+                    alt="Search icon"
+                    class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5"
+                  />
+                  <input
+                    type="text"
+                    id="symptomSearch"
+                    placeholder="Search symptoms..."
+                    class="input pl-12"
+                    aria-label="Search symptoms"
+                  />
+                </div>
+              </div>
+
+              <div id="symptomsList" class="grid md:grid-cols-2 gap-4 mb-8">
+                <!-- Symptoms will be populated dynamically -->
+              </div>
+
+              <div
+                class="flex justify-between items-center pt-6 border-t border-border"
+              >
+                <p class="text-sm text-text-tertiary">
+                  <span id="selectedCount">0</span> symptom(s) selected
+                </p>
+                <button
+                  onclick="goToStep(3)"
+                  class="btn-primary"
+                  id="continueStep2"
+                  disabled
+                >
+                  Continue
+                  <img
+                    src="https://api.iconify.design/mdi/arrow-right.svg?color=white"
+                    alt="Arrow icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Severity & Duration -->
+          <div id="step3" class="step-container hidden">
+            <div class="bg-white rounded-xl shadow-md p-8 scroll-reveal">
+              <button
+                onclick="goToStep(2)"
+                class="flex items-center gap-2 text-text-tertiary hover:text-primary transition-colors mb-6"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/arrow-left.svg?color=%23718096"
+                  alt="Back icon"
+                  class="w-5 h-5"
+                />
+                <span>Back</span>
+              </button>
+
+              <h2
+                class="text-3xl font-headline font-bold text-text-primary mb-4"
+              >
+                Tell us more about your symptoms
+              </h2>
+              <p class="text-text-secondary mb-8">
+                This information helps us provide more accurate recommendations.
+              </p>
+
+              <!-- Severity Scale -->
+              <div class="mb-8">
+                <label
+                  class="block text-lg font-semibold text-text-primary mb-4"
+                  >How severe are your symptoms?</label
+                >
+                <div class="grid grid-cols-5 gap-3">
+                  <button class="severity-btn" data-severity="1">
+                    <div
+                      class="w-12 h-12 rounded-full bg-success-100 flex items-center justify-center mx-auto mb-2"
+                    >
+                      <span class="text-2xl">😊</span>
+                    </div>
+                    <span class="text-sm font-medium">Mild</span>
+                    <span class="text-xs text-text-tertiary"
+                      >Barely noticeable</span
+                    >
+                  </button>
+                  <button class="severity-btn" data-severity="2">
+                    <div
+                      class="w-12 h-12 rounded-full bg-success-200 flex items-center justify-center mx-auto mb-2"
+                    >
+                      <span class="text-2xl">🙂</span>
+                    </div>
+                    <span class="text-sm font-medium">Slight</span>
+                    <span class="text-xs text-text-tertiary">Noticeable</span>
+                  </button>
+                  <button class="severity-btn" data-severity="3">
+                    <div
+                      class="w-12 h-12 rounded-full bg-warning-200 flex items-center justify-center mx-auto mb-2"
+                    >
+                      <span class="text-2xl">😐</span>
+                    </div>
+                    <span class="text-sm font-medium">Moderate</span>
+                    <span class="text-xs text-text-tertiary"
+                      >Uncomfortable</span
+                    >
+                  </button>
+                  <button class="severity-btn" data-severity="4">
+                    <div
+                      class="w-12 h-12 rounded-full bg-warning-400 flex items-center justify-center mx-auto mb-2"
+                    >
+                      <span class="text-2xl">😟</span>
+                    </div>
+                    <span class="text-sm font-medium">Severe</span>
+                    <span class="text-xs text-text-tertiary"
+                      >Very bothersome</span
+                    >
+                  </button>
+                  <button class="severity-btn" data-severity="5">
+                    <div
+                      class="w-12 h-12 rounded-full bg-error-400 flex items-center justify-center mx-auto mb-2"
+                    >
+                      <span class="text-2xl">😣</span>
+                    </div>
+                    <span class="text-sm font-medium">Critical</span>
+                    <span class="text-xs text-text-tertiary">Unbearable</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Duration -->
+              <div class="mb-8">
+                <label
+                  class="block text-lg font-semibold text-text-primary mb-4"
+                  >How long have you had these symptoms?</label
+                >
+                <div class="grid md:grid-cols-3 gap-4">
+                  <button class="duration-btn" data-duration="hours">
+                    <img
+                      src="https://api.iconify.design/mdi/clock-fast.svg?color=%232E86AB"
+                      alt="Clock icon"
+                      class="w-8 h-8 mx-auto mb-2"
+                    />
+                    <span class="font-medium">Less than 24 hours</span>
+                  </button>
+                  <button class="duration-btn" data-duration="days">
+                    <img
+                      src="https://api.iconify.design/mdi/calendar-today.svg?color=%232E86AB"
+                      alt="Calendar icon"
+                      class="w-8 h-8 mx-auto mb-2"
+                    />
+                    <span class="font-medium">1-7 days</span>
+                  </button>
+                  <button class="duration-btn" data-duration="weeks">
+                    <img
+                      src="https://api.iconify.design/mdi/calendar-week.svg?color=%232E86AB"
+                      alt="Calendar week icon"
+                      class="w-8 h-8 mx-auto mb-2"
+                    />
+                    <span class="font-medium">1-4 weeks</span>
+                  </button>
+                  <button class="duration-btn" data-duration="months">
+                    <img
+                      src="https://api.iconify.design/mdi/calendar-month.svg?color=%232E86AB"
+                      alt="Calendar month icon"
+                      class="w-8 h-8 mx-auto mb-2"
+                    />
+                    <span class="font-medium">1-3 months</span>
+                  </button>
+                  <button class="duration-btn" data-duration="long">
+                    <img
+                      src="https://api.iconify.design/mdi/calendar-range.svg?color=%232E86AB"
+                      alt="Calendar range icon"
+                      class="w-8 h-8 mx-auto mb-2"
+                    />
+                    <span class="font-medium">More than 3 months</span>
+                  </button>
+                  <button class="duration-btn" data-duration="recurring">
+                    <img
+                      src="https://api.iconify.design/mdi/refresh.svg?color=%232E86AB"
+                      alt="Recurring icon"
+                      class="w-8 h-8 mx-auto mb-2"
+                    />
+                    <span class="font-medium">Recurring/On and off</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Additional Information -->
+              <div class="mb-8">
+                <label
+                  for="additionalInfo"
+                  class="block text-lg font-semibold text-text-primary mb-4"
+                  >Any additional information? (Optional)</label
+                >
+                <textarea
+                  id="additionalInfo"
+                  rows="4"
+                  class="input resize-none"
+                  placeholder="Describe any other relevant details about your symptoms, when they occur, what makes them better or worse, etc."
+                  aria-label="Additional symptom information"
+                ></textarea>
+              </div>
+
+              <div class="flex justify-end pt-6 border-t border-border">
+                <button
+                  onclick="goToStep(4)"
+                  class="btn-primary"
+                  id="continueStep3"
+                  disabled
+                >
+                  View Results
+                  <img
+                    src="https://api.iconify.design/mdi/arrow-right.svg?color=white"
+                    alt="Arrow icon"
+                    class="w-5 h-5"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Results & Recommendations -->
+          <div id="step4" class="step-container hidden">
+            <div class="scroll-reveal">
+              <!-- Urgency Alert -->
+              <div id="urgencyAlert" class="mb-8">
+                <!-- Will be populated based on assessment -->
+              </div>
+
+              <!-- Assessment Summary -->
+              <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+                <div class="flex items-start justify-between mb-6">
+                  <div>
+                    <h2
+                      class="text-3xl font-headline font-bold text-text-primary mb-2"
+                    >
+                      Your Assessment Results
+                    </h2>
+                    <p class="text-text-secondary">
+                      Based on the symptoms you've reported
+                    </p>
+                  </div>
+                  <button onclick="printResults()" class="btn-ghost text-sm">
+                    <img
+                      src="https://api.iconify.design/mdi/printer.svg?color=%232E86AB"
+                      alt="Print icon"
+                      class="w-5 h-5"
+                    />
+                    Print
+                  </button>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                  <div class="bg-surface rounded-lg p-6">
+                    <div class="flex items-center gap-3 mb-2">
+                      <img
+                        src="https://api.iconify.design/mdi/map-marker.svg?color=%232E86AB"
+                        alt="Location icon"
+                        class="w-6 h-6"
+                      />
+                      <h3 class="font-semibold text-text-primary">Body Area</h3>
+                    </div>
+                    <p id="resultArea" class="text-lg text-text-secondary"></p>
+                  </div>
+                  <div class="bg-surface rounded-lg p-6">
+                    <div class="flex items-center gap-3 mb-2">
+                      <img
+                        src="https://api.iconify.design/mdi/alert-circle.svg?color=%232E86AB"
+                        alt="Severity icon"
+                        class="w-6 h-6"
+                      />
+                      <h3 class="font-semibold text-text-primary">Severity</h3>
+                    </div>
+                    <p
+                      id="resultSeverity"
+                      class="text-lg text-text-secondary"
+                    ></p>
+                  </div>
+                  <div class="bg-surface rounded-lg p-6">
+                    <div class="flex items-center gap-3 mb-2">
+                      <img
+                        src="https://api.iconify.design/mdi/clock-outline.svg?color=%232E86AB"
+                        alt="Duration icon"
+                        class="w-6 h-6"
+                      />
+                      <h3 class="font-semibold text-text-primary">Duration</h3>
+                    </div>
+                    <p
+                      id="resultDuration"
+                      class="text-lg text-text-secondary"
+                    ></p>
+                  </div>
+                </div>
+
+                <div class="border-t border-border pt-6">
+                  <h3 class="font-semibold text-text-primary mb-3">
+                    Reported Symptoms:
+                  </h3>
+                  <div id="resultSymptoms" class="flex flex-wrap gap-2">
+                    <!-- Symptoms badges will be populated -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Possible Conditions -->
+              <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+                <h3
+                  class="text-2xl font-headline font-bold text-text-primary mb-6"
+                >
+                  Possible Related Conditions
+                </h3>
+                <div id="conditionsList" class="space-y-4">
+                  <!-- Conditions will be populated -->
+                </div>
+              </div>
+
+              <!-- Care Recommendations -->
+              <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+                <h3
+                  class="text-2xl font-headline font-bold text-text-primary mb-6"
+                >
+                  Recommended Next Steps
+                </h3>
+                <div id="recommendationsList" class="space-y-4">
+                  <!-- Recommendations will be populated -->
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="grid md:grid-cols-3 gap-4">
+                <a href="chatbot.html" class="btn-primary justify-center">
+                  <img
+                    src="https://api.iconify.design/mdi/robot.svg?color=white"
+                    alt="Chatbot icon"
+                    class="w-5 h-5"
+                  />
+                  Consult AI Assistant
+                </a>
+                <a href="healthopedia.html" class="btn-outline justify-center">
+                  <img
+                    src="https://api.iconify.design/mdi/book-open-variant.svg?color=%232E86AB"
+                    alt="Book icon"
+                    class="w-5 h-5"
+                  />
+                  Learn More
+                </a>
+                <button
+                  onclick="resetAssessment()"
+                  class="btn-ghost justify-center"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/refresh.svg?color=%232E86AB"
+                    alt="Refresh icon"
+                    class="w-5 h-5"
+                  />
+                  New Assessment
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Quick Tips Section -->
-    <section class="section-compact bg-gradient-to-br from-primary-50 to-secondary-50">
-        <div class="container-custom">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-headline font-bold text-text-primary mb-8 text-center scroll-reveal">When to Seek Immediate Medical Attention</h2>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="emergency-card scroll-reveal">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-error-100 p-3 rounded-lg flex-shrink-0">
-                                <img src="https://api.iconify.design/mdi/alert-octagon.svg?color=%23E53E3E" alt="Emergency icon" class="w-8 h-8">
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-text-primary mb-2">Call Emergency Services If:</h3>
-                                <ul class="space-y-2 text-text-secondary text-sm">
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-error mt-1">•</span>
-                                        <span>Severe chest pain or pressure</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-error mt-1">•</span>
-                                        <span>Difficulty breathing or shortness of breath</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-error mt-1">•</span>
-                                        <span>Sudden severe headache or confusion</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-error mt-1">•</span>
-                                        <span>Loss of consciousness or seizures</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-error mt-1">•</span>
-                                        <span>Severe bleeding or trauma</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+    <section
+      class="section-compact bg-gradient-to-br from-primary-50 to-secondary-50"
+    >
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <h2
+            class="text-3xl font-headline font-bold text-text-primary mb-8 text-center scroll-reveal"
+          >
+            When to Seek Immediate Medical Attention
+          </h2>
 
-                    <div class="card border-2 border-warning scroll-reveal">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-warning-100 p-3 rounded-lg flex-shrink-0">
-                                <img src="https://api.iconify.design/mdi/hospital-building.svg?color=%23D69E2E" alt="Hospital icon" class="w-8 h-8">
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-text-primary mb-2">See a Doctor Soon If:</h3>
-                                <ul class="space-y-2 text-text-secondary text-sm">
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-warning mt-1">•</span>
-                                        <span>Symptoms persist for more than a week</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-warning mt-1">•</span>
-                                        <span>Symptoms are getting progressively worse</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-warning mt-1">•</span>
-                                        <span>High fever that doesn't respond to medication</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-warning mt-1">•</span>
-                                        <span>Unexplained weight loss or fatigue</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-warning mt-1">•</span>
-                                        <span>Symptoms interfere with daily activities</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="emergency-card scroll-reveal">
+              <div class="flex items-start gap-4">
+                <div class="bg-error-100 p-3 rounded-lg flex-shrink-0">
+                  <img
+                    src="https://api.iconify.design/mdi/alert-octagon.svg?color=%23E53E3E"
+                    alt="Emergency icon"
+                    class="w-8 h-8"
+                  />
                 </div>
-
-                <div class="mt-8 text-center">
-                    <a href="emergency_resources.html" class="btn-emergency">
-                        <img src="https://api.iconify.design/mdi/phone-alert.svg?color=white" alt="Emergency icon" class="w-5 h-5">
-                        View Emergency Resources
-                    </a>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">
+                    Call Emergency Services If:
+                  </h3>
+                  <ul class="space-y-2 text-text-secondary text-sm">
+                    <li class="flex items-start gap-2">
+                      <span class="text-error mt-1">•</span>
+                      <span>Severe chest pain or pressure</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-error mt-1">•</span>
+                      <span>Difficulty breathing or shortness of breath</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-error mt-1">•</span>
+                      <span>Sudden severe headache or confusion</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-error mt-1">•</span>
+                      <span>Loss of consciousness or seizures</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-error mt-1">•</span>
+                      <span>Severe bleeding or trauma</span>
+                    </li>
+                  </ul>
                 </div>
+              </div>
             </div>
+
+            <div class="card border-2 border-warning scroll-reveal">
+              <div class="flex items-start gap-4">
+                <div class="bg-warning-100 p-3 rounded-lg flex-shrink-0">
+                  <img
+                    src="https://api.iconify.design/mdi/hospital-building.svg?color=%23D69E2E"
+                    alt="Hospital icon"
+                    class="w-8 h-8"
+                  />
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">
+                    See a Doctor Soon If:
+                  </h3>
+                  <ul class="space-y-2 text-text-secondary text-sm">
+                    <li class="flex items-start gap-2">
+                      <span class="text-warning mt-1">•</span>
+                      <span>Symptoms persist for more than a week</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-warning mt-1">•</span>
+                      <span>Symptoms are getting progressively worse</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-warning mt-1">•</span>
+                      <span>High fever that doesn't respond to medication</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-warning mt-1">•</span>
+                      <span>Unexplained weight loss or fatigue</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-warning mt-1">•</span>
+                      <span>Symptoms interfere with daily activities</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <a href="emergency_resources.html" class="btn-emergency">
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              View Emergency Resources
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-text-primary text-white">
-        <div class="container-custom py-12">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MediCare Hub footer logo">
-                            <rect width="48" height="48" rx="12" fill="#2E86AB"/>
-                            <path d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z" fill="#A8DADC"/>
-                            <path d="M24 18V30M18 24H30" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-lg font-bold">MediCare Hub</h3>
-                            <p class="text-sm text-gray-400">Health Knowledge Ecosystem</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4">Empowering health through accessible, evidence-based medical information for diverse communities.</p>
-                    <div class="flex gap-4">
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Facebook">
-                            <img src="https://api.iconify.design/mdi/facebook.svg?color=%23A8DADC" alt="Facebook icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Twitter">
-                            <img src="https://api.iconify.design/mdi/twitter.svg?color=%23A8DADC" alt="Twitter icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="Instagram">
-                            <img src="https://api.iconify.design/mdi/instagram.svg?color=%23A8DADC" alt="Instagram icon" class="w-6 h-6">
-                        </a>
-                        <a href="javascript:void(0)" class="hover:text-secondary transition-colors" aria-label="LinkedIn">
-                            <img src="https://api.iconify.design/mdi/linkedin.svg?color=%23A8DADC" alt="LinkedIn icon" class="w-6 h-6">
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="homepage.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="dashboard.html" class="text-gray-400 hover:text-white transition-colors">Dashboard</a></li>
-                        <li><a href="healthopedia.html" class="text-gray-400 hover:text-white transition-colors">Healthopedia</a></li>
-                        <li><a href="chatbot.html" class="text-gray-400 hover:text-white transition-colors">AI Assistant</a></li>
-                        <li><a href="symptom_checker.html" class="text-gray-400 hover:text-white transition-colors">Symptom Checker</a></li>
-                    </ul>
-                </div>
-
-                <!-- Resources -->
-                <div>
-                    <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="emergency_resources.html" class="text-gray-400 hover:text-white transition-colors">Emergency Resources</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Health Guidelines</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Medical Glossary</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">First Aid Guide</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Community Forum</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal -->
-                <div>
-                    <h4 class="font-semibold mb-4">Legal & Support</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
-                    </ul>
-                </div>
+      <div class="container-custom py-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="HEALTH SPHERE footer logo"
+              >
+                <rect width="48" height="48" rx="12" fill="#2E86AB" />
+                <path
+                  d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z"
+                  fill="#A8DADC"
+                />
+                <path
+                  d="M24 18V30M18 24H30"
+                  stroke="white"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <div>
+                <h3 class="text-lg font-bold">HEALTH SPHERE</h3>
+                <p class="text-sm text-gray-400">Health Knowledge Ecosystem</p>
+              </div>
             </div>
-
-            <!-- Bottom Bar -->
-            <div class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-                <p>© 2025 MediCare Hub. All Rights Reserved.</p>
-                <div class="flex gap-6">
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Accessibility</a>
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Sitemap</a>
-                    <a href="javascript:void(0)" class="hover:text-white transition-colors">Feedback</a>
-                </div>
+            <p class="text-gray-400 text-sm mb-4">
+              Empowering health through accessible, evidence-based medical
+              information for diverse communities.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="Facebook"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/facebook.svg?color=%23A8DADC"
+                  alt="Facebook icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="Twitter"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/twitter.svg?color=%23A8DADC"
+                  alt="Twitter icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="Instagram"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/instagram.svg?color=%23A8DADC"
+                  alt="Instagram icon"
+                  class="w-6 h-6"
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="hover:text-secondary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/linkedin.svg?color=%23A8DADC"
+                  alt="LinkedIn icon"
+                  class="w-6 h-6"
+                />
+              </a>
             </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="homepage.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="dashboard.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="healthopedia.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Healthopedia</a
+                >
+              </li>
+              <li>
+                <a
+                  href="chatbot.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >AI Assistant</a
+                >
+              </li>
+              <li>
+                <a
+                  href="symptom_checker.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Symptom Checker</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h4 class="font-semibold mb-4">Resources</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="emergency_resources.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Emergency Resources</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Health Guidelines</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Medical Glossary</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >First Aid Guide</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Community Forum</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4 class="font-semibold mb-4">Legal & Support</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Medical Disclaimer</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Help Center</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400"
+        >
+          <p>© 2025 HEALTH SPHERE. All Rights Reserved.</p>
+          <div class="flex gap-6">
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Accessibility</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Sitemap</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors"
+              >Feedback</a
+            >
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary-600 transition-all opacity-0 pointer-events-none z-50" aria-label="Scroll to top">
-        <img src="https://api.iconify.design/mdi/arrow-up.svg?color=white" alt="Arrow up icon" class="w-6 h-6">
+    <button
+      id="scrollToTop"
+      class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary-600 transition-all opacity-0 pointer-events-none z-50"
+      aria-label="Scroll to top"
+    >
+      <img
+        src="https://api.iconify.design/mdi/arrow-up.svg?color=white"
+        alt="Arrow up icon"
+        class="w-6 h-6"
+      />
     </button>
 
     <style>
-        .body-area-btn {
-            @apply opacity-0 hover:opacity-20 hover:bg-primary transition-all rounded-lg cursor-pointer;
-        }
+      .body-area-btn {
+        @apply opacity-0 hover:opacity-20 hover:bg-primary transition-all rounded-lg cursor-pointer;
+      }
 
-        .body-area-card {
-            @apply flex items-center gap-4 p-4 bg-surface border-2 border-border rounded-lg hover:border-primary hover:shadow-md transition-all cursor-pointer text-left;
-        }
+      .body-area-card {
+        @apply flex items-center gap-4 p-4 bg-surface border-2 border-border rounded-lg hover:border-primary hover:shadow-md transition-all cursor-pointer text-left;
+      }
 
-        .body-area-card.selected {
-            @apply border-primary bg-primary-50;
-        }
+      .body-area-card.selected {
+        @apply border-primary bg-primary-50;
+      }
 
-        .symptom-checkbox {
-            @apply flex items-center gap-3 p-4 bg-surface border-2 border-border rounded-lg hover:border-primary transition-all cursor-pointer;
-        }
+      .symptom-checkbox {
+        @apply flex items-center gap-3 p-4 bg-surface border-2 border-border rounded-lg hover:border-primary transition-all cursor-pointer;
+      }
 
-        .symptom-checkbox.selected {
-            @apply border-primary bg-primary-50;
-        }
+      .symptom-checkbox.selected {
+        @apply border-primary bg-primary-50;
+      }
 
-        .severity-btn, .duration-btn {
-            @apply flex flex-col items-center p-4 bg-surface border-2 border-border rounded-lg hover:border-primary hover:shadow-md transition-all cursor-pointer text-center;
-        }
+      .severity-btn,
+      .duration-btn {
+        @apply flex flex-col items-center p-4 bg-surface border-2 border-border rounded-lg hover:border-primary hover:shadow-md transition-all cursor-pointer text-center;
+      }
 
-        .severity-btn.selected, .duration-btn.selected {
-            @apply border-primary bg-primary-50;
-        }
+      .severity-btn.selected,
+      .duration-btn.selected {
+        @apply border-primary bg-primary-50;
+      }
 
-        .condition-card {
-            @apply flex items-start gap-4 p-6 bg-surface border-2 border-border rounded-lg hover:border-primary hover:shadow-md transition-all;
-        }
+      .condition-card {
+        @apply flex items-start gap-4 p-6 bg-surface border-2 border-border rounded-lg hover:border-primary hover:shadow-md transition-all;
+      }
     </style>
 
     <script>
-        // Symptom Checker Data
-        const symptomData = {
-            head: [
-                { id: 'headache', name: 'Headache', icon: 'mdi/head' },
-                { id: 'dizziness', name: 'Dizziness', icon: 'mdi/head-sync' },
-                { id: 'nausea', name: 'Nausea', icon: 'mdi/emoticon-sick' },
-                { id: 'vision', name: 'Vision problems', icon: 'mdi/eye' },
-                { id: 'earache', name: 'Ear pain', icon: 'mdi/ear-hearing' },
-                { id: 'sore-throat', name: 'Sore throat', icon: 'mdi/mouth' }
-            ],
-            chest: [
-                { id: 'chest-pain', name: 'Chest pain', icon: 'mdi/heart-pulse' },
-                { id: 'breathing', name: 'Difficulty breathing', icon: 'mdi/lungs' },
-                { id: 'cough', name: 'Persistent cough', icon: 'mdi/cough' },
-                { id: 'palpitations', name: 'Heart palpitations', icon: 'mdi/heart-flash' },
-                { id: 'wheezing', name: 'Wheezing', icon: 'mdi/air-filter' },
-                { id: 'tightness', name: 'Chest tightness', icon: 'mdi/chest' }
-            ],
-            abdomen: [
-                { id: 'stomach-pain', name: 'Stomach pain', icon: 'mdi/stomach' },
-                { id: 'bloating', name: 'Bloating', icon: 'mdi/balloon' },
-                { id: 'diarrhea', name: 'Diarrhea', icon: 'mdi/water' },
-                { id: 'constipation', name: 'Constipation', icon: 'mdi/clock-alert' },
-                { id: 'vomiting', name: 'Vomiting', icon: 'mdi/emoticon-sick-outline' },
-                { id: 'appetite', name: 'Loss of appetite', icon: 'mdi/food-off' }
-            ],
-            limbs: [
-                { id: 'joint-pain', name: 'Joint pain', icon: 'mdi/bone' },
-                { id: 'muscle-ache', name: 'Muscle aches', icon: 'mdi/arm-flex' },
-                { id: 'swelling', name: 'Swelling', icon: 'mdi/water-plus' },
-                { id: 'numbness', name: 'Numbness or tingling', icon: 'mdi/hand-back-right' },
-                { id: 'weakness', name: 'Weakness', icon: 'mdi/arm-flex-outline' },
-                { id: 'stiffness', name: 'Stiffness', icon: 'mdi/lock' }
-            ],
-            back: [
-                { id: 'back-pain', name: 'Back pain', icon: 'mdi/human-handsup' },
-                { id: 'neck-pain', name: 'Neck pain', icon: 'mdi/neck' },
-                { id: 'spine-pain', name: 'Spine pain', icon: 'mdi/spine' },
-                { id: 'sciatica', name: 'Leg pain (sciatica)', icon: 'mdi/leg' },
-                { id: 'posture', name: 'Posture problems', icon: 'mdi/human' },
-                { id: 'mobility', name: 'Limited mobility', icon: 'mdi/walk' }
-            ],
-            general: [
-                { id: 'fever', name: 'Fever', icon: 'mdi/thermometer' },
-                { id: 'fatigue', name: 'Fatigue', icon: 'mdi/sleep' },
-                { id: 'weight-loss', name: 'Weight loss', icon: 'mdi/scale-bathroom' },
-                { id: 'weight-gain', name: 'Weight gain', icon: 'mdi/scale' },
-                { id: 'chills', name: 'Chills', icon: 'mdi/snowflake' },
-                { id: 'sweating', name: 'Night sweats', icon: 'mdi/water-percent' }
-            ]
-        };
+      // Symptom Checker Data
+      const symptomData = {
+        head: [
+          { id: "headache", name: "Headache", icon: "mdi/head" },
+          { id: "dizziness", name: "Dizziness", icon: "mdi/head-sync" },
+          { id: "nausea", name: "Nausea", icon: "mdi/emoticon-sick" },
+          { id: "vision", name: "Vision problems", icon: "mdi/eye" },
+          { id: "earache", name: "Ear pain", icon: "mdi/ear-hearing" },
+          { id: "sore-throat", name: "Sore throat", icon: "mdi/mouth" },
+        ],
+        chest: [
+          { id: "chest-pain", name: "Chest pain", icon: "mdi/heart-pulse" },
+          { id: "breathing", name: "Difficulty breathing", icon: "mdi/lungs" },
+          { id: "cough", name: "Persistent cough", icon: "mdi/cough" },
+          {
+            id: "palpitations",
+            name: "Heart palpitations",
+            icon: "mdi/heart-flash",
+          },
+          { id: "wheezing", name: "Wheezing", icon: "mdi/air-filter" },
+          { id: "tightness", name: "Chest tightness", icon: "mdi/chest" },
+        ],
+        abdomen: [
+          { id: "stomach-pain", name: "Stomach pain", icon: "mdi/stomach" },
+          { id: "bloating", name: "Bloating", icon: "mdi/balloon" },
+          { id: "diarrhea", name: "Diarrhea", icon: "mdi/water" },
+          { id: "constipation", name: "Constipation", icon: "mdi/clock-alert" },
+          {
+            id: "vomiting",
+            name: "Vomiting",
+            icon: "mdi/emoticon-sick-outline",
+          },
+          { id: "appetite", name: "Loss of appetite", icon: "mdi/food-off" },
+        ],
+        limbs: [
+          { id: "joint-pain", name: "Joint pain", icon: "mdi/bone" },
+          { id: "muscle-ache", name: "Muscle aches", icon: "mdi/arm-flex" },
+          { id: "swelling", name: "Swelling", icon: "mdi/water-plus" },
+          {
+            id: "numbness",
+            name: "Numbness or tingling",
+            icon: "mdi/hand-back-right",
+          },
+          { id: "weakness", name: "Weakness", icon: "mdi/arm-flex-outline" },
+          { id: "stiffness", name: "Stiffness", icon: "mdi/lock" },
+        ],
+        back: [
+          { id: "back-pain", name: "Back pain", icon: "mdi/human-handsup" },
+          { id: "neck-pain", name: "Neck pain", icon: "mdi/neck" },
+          { id: "spine-pain", name: "Spine pain", icon: "mdi/spine" },
+          { id: "sciatica", name: "Leg pain (sciatica)", icon: "mdi/leg" },
+          { id: "posture", name: "Posture problems", icon: "mdi/human" },
+          { id: "mobility", name: "Limited mobility", icon: "mdi/walk" },
+        ],
+        general: [
+          { id: "fever", name: "Fever", icon: "mdi/thermometer" },
+          { id: "fatigue", name: "Fatigue", icon: "mdi/sleep" },
+          {
+            id: "weight-loss",
+            name: "Weight loss",
+            icon: "mdi/scale-bathroom",
+          },
+          { id: "weight-gain", name: "Weight gain", icon: "mdi/scale" },
+          { id: "chills", name: "Chills", icon: "mdi/snowflake" },
+          { id: "sweating", name: "Night sweats", icon: "mdi/water-percent" },
+        ],
+      };
 
-        // State Management
-        let assessmentState = {
-            currentStep: 1,
-            selectedArea: '',
-            selectedSymptoms: [],
-            severity: 0,
-            duration: '',
-            additionalInfo: ''
-        };
+      // State Management
+      let assessmentState = {
+        currentStep: 1,
+        selectedArea: "",
+        selectedSymptoms: [],
+        severity: 0,
+        duration: "",
+        additionalInfo: "",
+      };
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeEventListeners();
-            showEmergencyBanner();
-            initScrollReveal();
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeEventListeners();
+        showEmergencyBanner();
+        initScrollReveal();
+      });
+
+      // Event Listeners
+      function initializeEventListeners() {
+        // Mobile menu
+        document
+          .getElementById("mobileMenuBtn")
+          .addEventListener("click", toggleMobileMenu);
+
+        // Body area selection
+        document.querySelectorAll(".body-area-card").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            selectBodyArea(this.dataset.area);
+          });
         });
 
-        // Event Listeners
-        function initializeEventListeners() {
-            // Mobile menu
-            document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+        // Reset button
+        document
+          .getElementById("resetBtn")
+          .addEventListener("click", resetAssessment);
 
-            // Body area selection
-            document.querySelectorAll('.body-area-card').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectBodyArea(this.dataset.area);
-                });
-            });
+        // Symptom search
+        document
+          .getElementById("symptomSearch")
+          ?.addEventListener("input", filterSymptoms);
 
-            // Reset button
-            document.getElementById('resetBtn').addEventListener('click', resetAssessment);
+        // Severity buttons
+        document.querySelectorAll(".severity-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            selectSeverity(this.dataset.severity);
+          });
+        });
 
-            // Symptom search
-            document.getElementById('symptomSearch')?.addEventListener('input', filterSymptoms);
+        // Duration buttons
+        document.querySelectorAll(".duration-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            selectDuration(this.dataset.duration);
+          });
+        });
 
-            // Severity buttons
-            document.querySelectorAll('.severity-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectSeverity(this.dataset.severity);
-                });
-            });
+        // Language selector
+        document
+          .getElementById("languageSelector")
+          .addEventListener("change", handleLanguageChange);
 
-            // Duration buttons
-            document.querySelectorAll('.duration-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectDuration(this.dataset.duration);
-                });
-            });
+        // Scroll to top
+        window.addEventListener("scroll", handleScroll);
+        document
+          .getElementById("scrollToTop")
+          .addEventListener("click", scrollToTop);
+      }
 
-            // Language selector
-            document.getElementById('languageSelector').addEventListener('change', handleLanguageChange);
+      // Body Area Selection
+      function selectBodyArea(area) {
+        assessmentState.selectedArea = area;
+        assessmentState.selectedSymptoms = [];
 
-            // Scroll to top
-            window.addEventListener('scroll', handleScroll);
-            document.getElementById('scrollToTop').addEventListener('click', scrollToTop);
-        }
+        // Update UI
+        document.querySelectorAll(".body-area-card").forEach((btn) => {
+          btn.classList.remove("selected");
+        });
+        document
+          .querySelector(`[data-area="${area}"]`)
+          .classList.add("selected");
 
-        // Body Area Selection
-        function selectBodyArea(area) {
-            assessmentState.selectedArea = area;
-            assessmentState.selectedSymptoms = [];
-            
-            // Update UI
-            document.querySelectorAll('.body-area-card').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            document.querySelector(`[data-area="${area}"]`).classList.add('selected');
+        // Load symptoms for selected area
+        loadSymptoms(area);
 
-            // Load symptoms for selected area
-            loadSymptoms(area);
-            
-            // Move to next step
-            setTimeout(() => goToStep(2), 300);
-        }
+        // Move to next step
+        setTimeout(() => goToStep(2), 300);
+      }
 
-        // Load Symptoms
-        function loadSymptoms(area) {
-            const symptoms = symptomData[area] || [];
-            const container = document.getElementById('symptomsList');
-            const areaName = area.charAt(0).toUpperCase() + area.slice(1);
-            
-            document.getElementById('selectedArea').textContent = areaName;
-            
-            container.innerHTML = symptoms.map(symptom => `
+      // Load Symptoms
+      function loadSymptoms(area) {
+        const symptoms = symptomData[area] || [];
+        const container = document.getElementById("symptomsList");
+        const areaName = area.charAt(0).toUpperCase() + area.slice(1);
+
+        document.getElementById("selectedArea").textContent = areaName;
+
+        container.innerHTML = symptoms
+          .map(
+            (symptom) => `
                 <div class="symptom-checkbox" data-symptom="${symptom.id}">
                     <input type="checkbox" 
                            id="symptom-${symptom.id}" 
@@ -840,138 +1511,154 @@
                         <span class="font-medium text-text-primary">${symptom.name}</span>
                     </label>
                 </div>
-            `).join('');
+            `
+          )
+          .join("");
+      }
+
+      // Toggle Symptom
+      function toggleSymptom(symptomId) {
+        const checkbox = document.getElementById(`symptom-${symptomId}`);
+        const card = checkbox.closest(".symptom-checkbox");
+
+        if (checkbox.checked) {
+          assessmentState.selectedSymptoms.push(symptomId);
+          card.classList.add("selected");
+        } else {
+          assessmentState.selectedSymptoms =
+            assessmentState.selectedSymptoms.filter((s) => s !== symptomId);
+          card.classList.remove("selected");
         }
 
-        // Toggle Symptom
-        function toggleSymptom(symptomId) {
-            const checkbox = document.getElementById(`symptom-${symptomId}`);
-            const card = checkbox.closest('.symptom-checkbox');
-            
-            if (checkbox.checked) {
-                assessmentState.selectedSymptoms.push(symptomId);
-                card.classList.add('selected');
-            } else {
-                assessmentState.selectedSymptoms = assessmentState.selectedSymptoms.filter(s => s !== symptomId);
-                card.classList.remove('selected');
-            }
-            
-            updateSymptomCount();
-            updateContinueButton();
-        }
+        updateSymptomCount();
+        updateContinueButton();
+      }
 
-        // Update Symptom Count
-        function updateSymptomCount() {
-            document.getElementById('selectedCount').textContent = assessmentState.selectedSymptoms.length;
-        }
+      // Update Symptom Count
+      function updateSymptomCount() {
+        document.getElementById("selectedCount").textContent =
+          assessmentState.selectedSymptoms.length;
+      }
 
-        // Update Continue Button
-        function updateContinueButton() {
-            const btn = document.getElementById('continueStep2');
-            btn.disabled = assessmentState.selectedSymptoms.length === 0;
-        }
+      // Update Continue Button
+      function updateContinueButton() {
+        const btn = document.getElementById("continueStep2");
+        btn.disabled = assessmentState.selectedSymptoms.length === 0;
+      }
 
-        // Filter Symptoms
-        function filterSymptoms(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            document.querySelectorAll('.symptom-checkbox').forEach(card => {
-                const text = card.textContent.toLowerCase();
-                card.style.display = text.includes(searchTerm) ? 'flex' : 'none';
-            });
-        }
+      // Filter Symptoms
+      function filterSymptoms(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        document.querySelectorAll(".symptom-checkbox").forEach((card) => {
+          const text = card.textContent.toLowerCase();
+          card.style.display = text.includes(searchTerm) ? "flex" : "none";
+        });
+      }
 
-        // Select Severity
-        function selectSeverity(severity) {
-            assessmentState.severity = parseInt(severity);
-            
-            document.querySelectorAll('.severity-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            document.querySelector(`[data-severity="${severity}"]`).classList.add('selected');
-            
-            checkStep3Complete();
-        }
+      // Select Severity
+      function selectSeverity(severity) {
+        assessmentState.severity = parseInt(severity);
 
-        // Select Duration
-        function selectDuration(duration) {
-            assessmentState.duration = duration;
-            
-            document.querySelectorAll('.duration-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            document.querySelector(`[data-duration="${duration}"]`).classList.add('selected');
-            
-            checkStep3Complete();
-        }
+        document.querySelectorAll(".severity-btn").forEach((btn) => {
+          btn.classList.remove("selected");
+        });
+        document
+          .querySelector(`[data-severity="${severity}"]`)
+          .classList.add("selected");
 
-        // Check Step 3 Complete
-        function checkStep3Complete() {
-            const btn = document.getElementById('continueStep3');
-            btn.disabled = !(assessmentState.severity > 0 && assessmentState.duration);
-        }
+        checkStep3Complete();
+      }
 
-        // Navigation Functions
-        function goToStep(step) {
-            // Hide all steps
-            document.querySelectorAll('.step-container').forEach(container => {
-                container.classList.add('hidden');
-            });
-            
-            // Show target step
-            document.getElementById(`step${step}`).classList.remove('hidden');
-            
-            // Update progress
-            assessmentState.currentStep = step;
-            updateProgress(step);
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Generate results if on step 4
-            if (step === 4) {
-                generateResults();
-            }
-        }
+      // Select Duration
+      function selectDuration(duration) {
+        assessmentState.duration = duration;
 
-        // Update Progress
-        function updateProgress(step) {
-            document.getElementById('currentStep').textContent = step;
-            const progress = (step / 4) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-        }
+        document.querySelectorAll(".duration-btn").forEach((btn) => {
+          btn.classList.remove("selected");
+        });
+        document
+          .querySelector(`[data-duration="${duration}"]`)
+          .classList.add("selected");
 
-        // Generate Results
-        function generateResults() {
-            const { selectedArea, selectedSymptoms, severity, duration } = assessmentState;
-            
-            // Populate summary
-            document.getElementById('resultArea').textContent = selectedArea.charAt(0).toUpperCase() + selectedArea.slice(1);
-            document.getElementById('resultSeverity').textContent = getSeverityText(severity);
-            document.getElementById('resultDuration').textContent = getDurationText(duration);
-            
-            // Populate symptoms
-            const symptomsContainer = document.getElementById('resultSymptoms');
-            const symptoms = symptomData[selectedArea].filter(s => selectedSymptoms.includes(s.id));
-            symptomsContainer.innerHTML = symptoms.map(s => 
-                `<span class="badge-primary">${s.name}</span>`
-            ).join('');
-            
-            // Generate urgency alert
-            generateUrgencyAlert(severity);
-            
-            // Generate conditions
-            generateConditions(selectedArea, selectedSymptoms, severity);
-            
-            // Generate recommendations
-            generateRecommendations(severity, duration);
-        }
+        checkStep3Complete();
+      }
 
-        // Generate Urgency Alert
-        function generateUrgencyAlert(severity) {
-            const container = document.getElementById('urgencyAlert');
-            
-            if (severity >= 4) {
-                container.innerHTML = `
+      // Check Step 3 Complete
+      function checkStep3Complete() {
+        const btn = document.getElementById("continueStep3");
+        btn.disabled = !(
+          assessmentState.severity > 0 && assessmentState.duration
+        );
+      }
+
+      // Navigation Functions
+      function goToStep(step) {
+        // Hide all steps
+        document.querySelectorAll(".step-container").forEach((container) => {
+          container.classList.add("hidden");
+        });
+
+        // Show target step
+        document.getElementById(`step${step}`).classList.remove("hidden");
+
+        // Update progress
+        assessmentState.currentStep = step;
+        updateProgress(step);
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Generate results if on step 4
+        if (step === 4) {
+          generateResults();
+        }
+      }
+
+      // Update Progress
+      function updateProgress(step) {
+        document.getElementById("currentStep").textContent = step;
+        const progress = (step / 4) * 100;
+        document.getElementById("progressBar").style.width = `${progress}%`;
+      }
+
+      // Generate Results
+      function generateResults() {
+        const { selectedArea, selectedSymptoms, severity, duration } =
+          assessmentState;
+
+        // Populate summary
+        document.getElementById("resultArea").textContent =
+          selectedArea.charAt(0).toUpperCase() + selectedArea.slice(1);
+        document.getElementById("resultSeverity").textContent =
+          getSeverityText(severity);
+        document.getElementById("resultDuration").textContent =
+          getDurationText(duration);
+
+        // Populate symptoms
+        const symptomsContainer = document.getElementById("resultSymptoms");
+        const symptoms = symptomData[selectedArea].filter((s) =>
+          selectedSymptoms.includes(s.id)
+        );
+        symptomsContainer.innerHTML = symptoms
+          .map((s) => `<span class="badge-primary">${s.name}</span>`)
+          .join("");
+
+        // Generate urgency alert
+        generateUrgencyAlert(severity);
+
+        // Generate conditions
+        generateConditions(selectedArea, selectedSymptoms, severity);
+
+        // Generate recommendations
+        generateRecommendations(severity, duration);
+      }
+
+      // Generate Urgency Alert
+      function generateUrgencyAlert(severity) {
+        const container = document.getElementById("urgencyAlert");
+
+        if (severity >= 4) {
+          container.innerHTML = `
                     <div class="alert-error">
                         <img src="https://api.iconify.design/mdi/alert-octagon.svg?color=%23E53E3E" alt="Alert icon" class="w-6 h-6 flex-shrink-0">
                         <div>
@@ -980,8 +1667,8 @@
                         </div>
                     </div>
                 `;
-            } else if (severity === 5) {
-                container.innerHTML = `
+        } else if (severity === 5) {
+          container.innerHTML = `
                     <div class="emergency-card">
                         <img src="https://api.iconify.design/mdi/ambulance.svg?color=%23E53E3E" alt="Emergency icon" class="w-8 h-8 flex-shrink-0">
                         <div>
@@ -994,8 +1681,8 @@
                         </div>
                     </div>
                 `;
-            } else {
-                container.innerHTML = `
+        } else {
+          container.innerHTML = `
                     <div class="alert-info">
                         <img src="https://api.iconify.design/mdi/information.svg?color=%232E86AB" alt="Info icon" class="w-6 h-6 flex-shrink-0">
                         <div>
@@ -1004,219 +1691,273 @@
                         </div>
                     </div>
                 `;
-            }
         }
+      }
 
-        // Generate Conditions
-        function generateConditions(area, symptoms, severity) {
-            const conditions = [
-                {
-                    name: 'Common Cold',
-                    probability: 'High',
-                    description: 'A viral infection of the upper respiratory tract, typically causing mild symptoms.',
-                    icon: 'mdi/virus'
-                },
-                {
-                    name: 'Tension Headache',
-                    probability: 'Medium',
-                    description: 'The most common type of headache, often caused by stress or muscle tension.',
-                    icon: 'mdi/head'
-                },
-                {
-                    name: 'Gastritis',
-                    probability: 'Medium',
-                    description: 'Inflammation of the stomach lining that can cause pain and discomfort.',
-                    icon: 'mdi/stomach'
-                }
-            ];
-            
-            const container = document.getElementById('conditionsList');
-            container.innerHTML = conditions.map(condition => `
+      // Generate Conditions
+      function generateConditions(area, symptoms, severity) {
+        const conditions = [
+          {
+            name: "Common Cold",
+            probability: "High",
+            description:
+              "A viral infection of the upper respiratory tract, typically causing mild symptoms.",
+            icon: "mdi/virus",
+          },
+          {
+            name: "Tension Headache",
+            probability: "Medium",
+            description:
+              "The most common type of headache, often caused by stress or muscle tension.",
+            icon: "mdi/head",
+          },
+          {
+            name: "Gastritis",
+            probability: "Medium",
+            description:
+              "Inflammation of the stomach lining that can cause pain and discomfort.",
+            icon: "mdi/stomach",
+          },
+        ];
+
+        const container = document.getElementById("conditionsList");
+        container.innerHTML = conditions
+          .map(
+            (condition) => `
                 <div class="condition-card">
                     <div class="bg-primary-100 p-3 rounded-lg flex-shrink-0">
-                        <img src="https://api.iconify.design/${condition.icon}.svg?color=%232E86AB" 
+                        <img src="https://api.iconify.design/${
+                          condition.icon
+                        }.svg?color=%232E86AB" 
                              alt="${condition.name} icon" 
                              class="w-8 h-8">
                     </div>
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-2">
-                            <h4 class="text-lg font-semibold text-text-primary">${condition.name}</h4>
-                            <span class="badge-${condition.probability === 'High' ? 'warning' : 'secondary'}">${condition.probability} Match</span>
+                            <h4 class="text-lg font-semibold text-text-primary">${
+                              condition.name
+                            }</h4>
+                            <span class="badge-${
+                              condition.probability === "High"
+                                ? "warning"
+                                : "secondary"
+                            }">${condition.probability} Match</span>
                         </div>
-                        <p class="text-text-secondary text-sm mb-3">${condition.description}</p>
+                        <p class="text-text-secondary text-sm mb-3">${
+                          condition.description
+                        }</p>
                         <a href="healthopedia.html" class="text-primary text-sm font-semibold hover:text-primary-600 transition-colors inline-flex items-center gap-1">
                             Learn more
                             <img src="https://api.iconify.design/mdi/arrow-right.svg?color=%232E86AB" alt="Arrow icon" class="w-4 h-4">
                         </a>
                     </div>
                 </div>
-            `).join('');
-        }
+            `
+          )
+          .join("");
+      }
 
-        // Generate Recommendations
-        function generateRecommendations(severity, duration) {
-            const recommendations = [
-                {
-                    title: 'Rest and Hydration',
-                    description: 'Get adequate rest and drink plenty of fluids to help your body recover.',
-                    icon: 'mdi/water',
-                    priority: 'high'
-                },
-                {
-                    title: 'Monitor Symptoms',
-                    description: 'Keep track of your symptoms and note any changes or worsening conditions.',
-                    icon: 'mdi/clipboard-check',
-                    priority: 'high'
-                },
-                {
-                    title: 'Over-the-Counter Relief',
-                    description: 'Consider appropriate OTC medications for symptom relief. Consult a pharmacist if unsure.',
-                    icon: 'mdi/pill',
-                    priority: 'medium'
-                },
-                {
-                    title: 'Avoid Triggers',
-                    description: 'Identify and avoid potential triggers that may worsen your symptoms.',
-                    icon: 'mdi/alert-circle-outline',
-                    priority: 'medium'
-                }
-            ];
-            
-            const container = document.getElementById('recommendationsList');
-            container.innerHTML = recommendations.map(rec => `
-                <div class="flex items-start gap-4 p-4 bg-surface rounded-lg border-l-4 ${rec.priority === 'high' ? 'border-primary' : 'border-secondary'}">
-                    <div class="bg-${rec.priority === 'high' ? 'primary' : 'secondary'}-100 p-3 rounded-lg flex-shrink-0">
-                        <img src="https://api.iconify.design/${rec.icon}.svg?color=%23${rec.priority === 'high' ? '2E86AB' : '64B0B4'}" 
+      // Generate Recommendations
+      function generateRecommendations(severity, duration) {
+        const recommendations = [
+          {
+            title: "Rest and Hydration",
+            description:
+              "Get adequate rest and drink plenty of fluids to help your body recover.",
+            icon: "mdi/water",
+            priority: "high",
+          },
+          {
+            title: "Monitor Symptoms",
+            description:
+              "Keep track of your symptoms and note any changes or worsening conditions.",
+            icon: "mdi/clipboard-check",
+            priority: "high",
+          },
+          {
+            title: "Over-the-Counter Relief",
+            description:
+              "Consider appropriate OTC medications for symptom relief. Consult a pharmacist if unsure.",
+            icon: "mdi/pill",
+            priority: "medium",
+          },
+          {
+            title: "Avoid Triggers",
+            description:
+              "Identify and avoid potential triggers that may worsen your symptoms.",
+            icon: "mdi/alert-circle-outline",
+            priority: "medium",
+          },
+        ];
+
+        const container = document.getElementById("recommendationsList");
+        container.innerHTML = recommendations
+          .map(
+            (rec) => `
+                <div class="flex items-start gap-4 p-4 bg-surface rounded-lg border-l-4 ${
+                  rec.priority === "high"
+                    ? "border-primary"
+                    : "border-secondary"
+                }">
+                    <div class="bg-${
+                      rec.priority === "high" ? "primary" : "secondary"
+                    }-100 p-3 rounded-lg flex-shrink-0">
+                        <img src="https://api.iconify.design/${
+                          rec.icon
+                        }.svg?color=%23${
+              rec.priority === "high" ? "2E86AB" : "64B0B4"
+            }" 
                              alt="${rec.title} icon" 
                              class="w-6 h-6">
                     </div>
                     <div>
-                        <h4 class="font-semibold text-text-primary mb-1">${rec.title}</h4>
-                        <p class="text-text-secondary text-sm">${rec.description}</p>
+                        <h4 class="font-semibold text-text-primary mb-1">${
+                          rec.title
+                        }</h4>
+                        <p class="text-text-secondary text-sm">${
+                          rec.description
+                        }</p>
                     </div>
                 </div>
-            `).join('');
-        }
+            `
+          )
+          .join("");
+      }
 
-        // Helper Functions
-        function getSeverityText(severity) {
-            const texts = ['', 'Mild', 'Slight', 'Moderate', 'Severe', 'Critical'];
-            return texts[severity] || 'Unknown';
-        }
+      // Helper Functions
+      function getSeverityText(severity) {
+        const texts = ["", "Mild", "Slight", "Moderate", "Severe", "Critical"];
+        return texts[severity] || "Unknown";
+      }
 
-        function getDurationText(duration) {
-            const texts = {
-                'hours': 'Less than 24 hours',
-                'days': '1-7 days',
-                'weeks': '1-4 weeks',
-                'months': '1-3 months',
-                'long': 'More than 3 months',
-                'recurring': 'Recurring/On and off'
-            };
-            return texts[duration] || 'Unknown';
-        }
+      function getDurationText(duration) {
+        const texts = {
+          hours: "Less than 24 hours",
+          days: "1-7 days",
+          weeks: "1-4 weeks",
+          months: "1-3 months",
+          long: "More than 3 months",
+          recurring: "Recurring/On and off",
+        };
+        return texts[duration] || "Unknown";
+      }
 
-        // Reset Assessment
-        function resetAssessment() {
-            assessmentState = {
-                currentStep: 1,
-                selectedArea: '',
-                selectedSymptoms: [],
-                severity: 0,
-                duration: '',
-                additionalInfo: ''
-            };
-            
-            goToStep(1);
-            
-            // Reset all selections
-            document.querySelectorAll('.body-area-card').forEach(btn => btn.classList.remove('selected'));
-            document.querySelectorAll('.severity-btn').forEach(btn => btn.classList.remove('selected'));
-            document.querySelectorAll('.duration-btn').forEach(btn => btn.classList.remove('selected'));
-            document.getElementById('additionalInfo').value = '';
-        }
+      // Reset Assessment
+      function resetAssessment() {
+        assessmentState = {
+          currentStep: 1,
+          selectedArea: "",
+          selectedSymptoms: [],
+          severity: 0,
+          duration: "",
+          additionalInfo: "",
+        };
 
-        // Print Results
-        function printResults() {
-            window.print();
-        }
+        goToStep(1);
 
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        }
+        // Reset all selections
+        document
+          .querySelectorAll(".body-area-card")
+          .forEach((btn) => btn.classList.remove("selected"));
+        document
+          .querySelectorAll(".severity-btn")
+          .forEach((btn) => btn.classList.remove("selected"));
+        document
+          .querySelectorAll(".duration-btn")
+          .forEach((btn) => btn.classList.remove("selected"));
+        document.getElementById("additionalInfo").value = "";
+      }
 
-        // Emergency Banner
-        function toggleEmergencyBanner() {
-            document.getElementById('emergencyBanner').classList.toggle('hidden');
-        }
+      // Print Results
+      function printResults() {
+        window.print();
+      }
 
-        function showEmergencyBanner() {
-            setTimeout(() => {
-                document.getElementById('emergencyBanner').classList.remove('hidden');
-            }, 2000);
-        }
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+        document.getElementById("mobileMenu").classList.toggle("hidden");
+      }
 
-        // Language Change
-        function handleLanguageChange(e) {
-            const selectedLang = e.target.value;
-            localStorage.setItem('preferredLanguage', selectedLang);
-            
-            const notification = document.createElement('div');
-            notification.className = 'fixed top-20 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-            notification.innerHTML = `
+      // Emergency Banner
+      function toggleEmergencyBanner() {
+        document.getElementById("emergencyBanner").classList.toggle("hidden");
+      }
+
+      function showEmergencyBanner() {
+        setTimeout(() => {
+          document.getElementById("emergencyBanner").classList.remove("hidden");
+        }, 2000);
+      }
+
+      // Language Change
+      function handleLanguageChange(e) {
+        const selectedLang = e.target.value;
+        localStorage.setItem("preferredLanguage", selectedLang);
+
+        const notification = document.createElement("div");
+        notification.className =
+          "fixed top-20 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in";
+        notification.innerHTML = `
                 <div class="flex items-center gap-2">
                     <img src="https://api.iconify.design/mdi/check-circle.svg?color=white" alt="Success icon" class="w-5 h-5">
                     <span>Language preference saved</span>
                 </div>
             `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => notification.remove(), 3000);
-        }
+        document.body.appendChild(notification);
 
-        // Scroll Functions
-        function handleScroll() {
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-                scrollToTopBtn.classList.add('opacity-100');
-            } else {
-                scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-                scrollToTopBtn.classList.remove('opacity-100');
+        setTimeout(() => notification.remove(), 3000);
+      }
+
+      // Scroll Functions
+      function handleScroll() {
+        const scrollToTopBtn = document.getElementById("scrollToTop");
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+          scrollToTopBtn.classList.add("opacity-100");
+        } else {
+          scrollToTopBtn.classList.add("opacity-0", "pointer-events-none");
+          scrollToTopBtn.classList.remove("opacity-100");
+        }
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Scroll Reveal
+      function initScrollReveal() {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
             }
-        }
+          });
+        }, observerOptions);
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        document.querySelectorAll(".scroll-reveal").forEach((el) => {
+          observer.observe(el);
+        });
+      }
 
-        // Scroll Reveal
-        function initScrollReveal() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.scroll-reveal').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
-        // Load saved language preference
-        const savedLanguage = localStorage.getItem('preferredLanguage');
-        if (savedLanguage) {
-            document.getElementById('languageSelector').value = savedLanguage;
-        }
+      // Load saved language preference
+      const savedLanguage = localStorage.getItem("preferredLanguage");
+      if (savedLanguage) {
+        document.getElementById("languageSelector").value = savedLanguage;
+      }
     </script>
-<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
-</body>
+    <script>
+
+      // Also initialize when DOM is loaded
+      document.addEventListener("DOMContentLoaded", initializeTheme);
+    </script>
+    <script
+      id="dhws-dataInjector"
+      src="../public/dhws-data-injector.js"
+    ></script>
+  </body>
 </html>
