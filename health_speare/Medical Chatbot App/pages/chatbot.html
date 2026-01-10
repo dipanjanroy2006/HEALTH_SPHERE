@@ -70,26 +70,7 @@
         <div class="flex items-center justify-between">
           <!-- Logo -->
           <a href="homepage.html" class="flex items-center gap-3 group">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-label="HEALTH SPHERE logo"
-            >
-              <rect width="48" height="48" rx="12" fill="#2E86AB" />
-              <path
-                d="M24 12C24 12 16 16 16 24C16 32 24 36 24 36C24 36 32 32 32 24C32 16 24 12 24 12Z"
-                fill="#A8DADC"
-              />
-              <path
-                d="M24 18V30M18 24H30"
-                stroke="white"
-                stroke-width="3"
-                stroke-linecap="round"
-              />
-            </svg>
+            <img src="../public/logo.svg" alt="HEALTH SPHERE logo" class="w-12 h-12 rounded-full" />
             <div>
               <h1
                 class="text-xl font-headline font-bold text-violet-500 group-hover:text-violet-500-600 transition-colors"
@@ -108,12 +89,6 @@
               class="text-slate-600 hover:text-violet-500 transition-colors"
               data-i18n="nav_home"
               >Home</a
-            >
-            <a
-              href="dashboard.html"
-              class="text-slate-600 hover:text-violet-500 transition-colors"
-              data-i18n="nav_dashboard"
-              >Dashboard</a
             >
             <a
               href="healthopedia.html"
@@ -147,7 +122,7 @@
             </a>
           </div>
 
-          <!-- Language Selector & Mobile Menu -->
+          <!-- Language Selector & Profile & Mobile Menu -->
           <div class="flex items-center gap-4">
             <select
               id="languageSelector"
@@ -159,6 +134,19 @@
               <option value="hi">हिन्दी</option>
               <option value="bn">বাংলা</option>
             </select>
+
+            <!-- User Profile -->
+            <div class="hidden lg:flex items-center gap-3 border-l border-slate-200 pl-4">
+              <div class="text-right">
+                <p class="text-sm font-semibold text-slate-900">RIMEL DAS</p>
+                <p class="text-xs text-slate-600">Health Explorer</p>
+              </div>
+              <img
+                src="https://api.iconify.design/mdi/account-circle.svg?color=%23a855f7"
+                alt="User profile"
+                class="w-8 h-8"
+              />
+            </div>
 
             <button
               id="mobileMenuBtn"
@@ -184,11 +172,6 @@
               href="homepage.html"
               class="text-slate-600 hover:text-violet-500 transition-colors"
               >Home</a
-            >
-            <a
-              href="dashboard.html"
-              class="text-slate-600 hover:text-violet-500 transition-colors"
-              >Dashboard</a
             >
             <a
               href="healthopedia.html"
@@ -906,13 +889,6 @@
                   href="homepage.html"
                   class="text-gray-400 hover:text-white transition-colors"
                   >Home</a
-                >
-              </li>
-              <li>
-                <a
-                  href="dashboard.html"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >Dashboard</a
                 >
               </li>
               <li>

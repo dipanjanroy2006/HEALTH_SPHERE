@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" class="smooth-scroll">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HEALTH SPHERE AI Health Assistant - Get instant answers to your health questions through our conversational chatbot with multilingual support and evidence-based guidance."
+    />
+    <meta
+      name="keywords"
+      content="health chatbot, medical assistant, AI health guidance, symptom consultation, multilingual health support"
+    />
+    <title>AI Health Assistant - HEALTH SPHERE</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../public/i18n.js"></script>
+
+    <script
+      type="module"
+      async
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"
+    ></script>
+    <script
+      type="module"
+      defer
+      src="https://static.rocket.new/rocket-shot.js?v=0.0.2"
+    ></script>
+  </head>
+  <body class="bg-surface">
+    <script>
+      // Auth guard: redirect to sign-in if not logged in
+      (function(){
+        const auth = localStorage.getItem('authUser');
+        if(!auth) {
+          window.location.href = 'sign_in_screen.html';
+        }
+      })();
+    </script>
+    <!-- Emergency Banner -->
+    <div id="emergencyBanner" class="emergency-banner hidden">
+      <div class="container-custom flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://api.iconify.design/mdi/alert-circle.svg?color=white"
+            alt="Emergency alert icon"
+            class="w-6 h-6"
+          />
+          <p class="font-semibold" data-i18n="emergency_text">
+            In case of medical emergency, call your local emergency services
+            immediately
+          </p>
+        </div>
+        <button
+          onclick="toggleEmergencyBanner()"
+          class="text-white hover:text-error-100 transition-colors"
+          aria-label="Close emergency banner"
+        >
+          <img
+            src="https://api.iconify.design/mdi/close.svg?color=white"
+            alt="Close icon"
+            class="w-6 h-6"
+          />
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <nav class="container-custom py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="homepage.html" class="flex items-center gap-3 group">
+            <img src="../public/logo.svg" alt="HEALTH SPHERE logo" class="w-12 h-12 rounded-full" />
+            <div>
+              <h1
+                class="text-xl font-headline font-bold text-violet-500 group-hover:text-violet-500-600 transition-colors"
+                data-i18n="site_title"
+              >
+                HEALTH SPHERE
+              </h1>
+              <p class="text-xs text-slate-500" data-i18n="site_subtitle">Health Knowledge Ecosystem</p>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center gap-8">
+            <a
+              href="homepage.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              data-i18n="nav_home"
+              >Home</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              data-i18n="nav_healthopedia"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-violet-500 font-semibold border-b-2 border-violet-500 pb-1"
+              data-i18n="nav_chatbot"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              data-i18n="nav_symptom"
+              >Symptom Checker</a
+            >
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency text-sm py-2 px-4"
+              data-i18n="nav_emergency"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency
+            </a>
+          </div>
+
+          <!-- Language Selector & Mobile Menu -->
+          <div class="flex items-center gap-4">
+            <select
+              id="languageSelector"
+              data-i18n-select
+              class="hidden lg:block px-4 py-2 border border-slate-200 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              aria-label="Select language"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+
+            <button
+              id="mobileMenuBtn"
+              class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              <img
+                src="https://api.iconify.design/mdi/menu.svg?color=%23a855f7"
+                alt="Menu icon"
+                class="w-6 h-6"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="hidden lg:hidden mt-4 pb-4 border-t border-slate-200 pt-4"
+        >
+          <div class="flex flex-col gap-4">
+            <a
+              href="homepage.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Home</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Healthopedia</a
+            >
+            <a href="chatbot.html" class="text-violet-500 font-semibold"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-slate-600 hover:text-violet-500 transition-colors"
+              >Symptom Checker</a
+            >
+            <select
+              class="px-4 py-2 border border-slate-200 rounded-lg bg-white text-slate-900"
+              aria-label="Select language mobile"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency justify-center"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency Resources
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Medical Disclaimer Alert -->
+    <div class="container-custom mt-6">
+      <div class="alert-warning">
+        <img
+          src="https://api.iconify.design/mdi/alert.svg?color=%23D69E2E"
+          alt="Warning icon"
+          class="w-6 h-6 flex-shrink-0"
+        />
+        <div>
+          <h4 class="font-semibold mb-1" data-i18n="medical_disclaimer_title">Important Medical Disclaimer</h4>
+          <p class="text-sm" data-i18n="medical_disclaimer_text">
+            This AI assistant provides general health information only and
+            should not replace professional medical advice. For diagnosis or
+            treatment, always consult a qualified healthcare provider. In
+            emergencies, call your local emergency services immediately.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Chat Interface -->
+    <main class="container-custom py-8">
+      <div class="max-w-5xl mx-auto">
+        <!-- Chat Header -->
+        <div
+          class="bg-white rounded-t-xl shadow-md p-6 border-b border-slate-200"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div
+                class="bg-gradient-to-br from-violet-500 to-purple-600 p-3 rounded-full shadow-lg"
+              >
+                <img
+                  src="https://api.iconify.design/mdi/robot.svg?color=%23ffffff"
+                  alt="AI assistant icon"
+                  class="w-8 h-8"
+                />
+              </div>
+              <div>
+                <h2
+                  class="text-2xl font-headline font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent"
+                >
+                  Health AI
+                </h2>
+                <div class="flex items-center gap-2 mt-1">
+                  <span
+                    class="w-3 h-3 bg-emerald-500 rounded-full animate-pulse shadow-lg shadow-emerald-500"
+                  ></span>
+                  <p class="text-sm text-slate-600 font-medium">
+                    Ready to assist
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              id="clearChatBtn"
+              class="btn-ghost text-sm"
+              aria-label="Clear conversation"
+            >
+              <img
+                src="https://api.iconify.design/mdi/refresh.svg?color=%23a855f7"
+                alt="Refresh icon"
+                class="w-5 h-5"
+              />
+              Clear Chat
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat Messages Container -->
+        <div
+          id="chatContainer"
+          class="bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 shadow-xl rounded-t-xl border-t border-slate-200"
+          style="
+            height: 500px;
+            overflow-y: auto;
+            background: linear-gradient(
+              to bottom,
+              #f8fafc 0%,
+              #f1f5f9 50%,
+              #e2e8f0 100%
+            );
+          "
+        >
+          <div id="chatMessages" class="p-6 space-y-4">
+            <!-- Welcome Message -->
+            <div class="flex gap-3 animate-fade-in-up">
+              <div class="flex-shrink-0">
+                <div
+                  class="bg-gradient-to-br from-violet-500 to-purple-600 p-2 rounded-full shadow-lg"
+                >
+                  <img
+                    src="https://api.iconify.design/mdi/robot.svg?color=%23ffffff"
+                    alt="AI assistant avatar"
+                    class="w-6 h-6"
+                  />
+                </div>
+              </div>
+              <div class="flex-1">
+                <div
+                  class="bg-white rounded-2xl rounded-tl-none p-4 max-w-2xl shadow-sm border border-slate-200"
+                >
+                  <p class="text-slate-900 mb-3 font-semibold">
+                    Hello! I'm your Health AI Assistant. I'm here to provide
+                    general health information and guidance. How can I help you
+                    today?
+                  </p>
+                  <p class="text-sm text-slate-600">
+                    💡 Tip: I provide educational information only. For medical
+                    diagnosis or treatment, please consult a healthcare
+                    professional.
+                  </p>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">Just now</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Typing Indicator (Hidden by default) -->
+          <div id="typingIndicator" class="px-6 pb-4 hidden">
+            <div class="flex gap-3">
+              <div class="flex-shrink-0">
+                <div class="bg-violet-100 p-2 rounded-full">
+                  <img
+                    src="https://api.iconify.design/mdi/robot.svg?color=%23a855f7"
+                    alt="AI assistant typing"
+                    class="w-6 h-6"
+                  />
+                </div>
+              </div>
+              <div class="bg-violet-50 rounded-lg p-4">
+                <div class="flex gap-1">
+                  <span
+                    class="w-2 h-2 bg-violet-500 rounded-full animate-bounce"
+                  ></span>
+                  <span
+                    class="w-2 h-2 bg-violet-500 rounded-full animate-bounce"
+                    style="animation-delay: 0.1s"
+                  ></span>
+                  <span
+                    class="w-2 h-2 bg-violet-500 rounded-full animate-bounce"
+                    style="animation-delay: 0.2s"
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Response Buttons -->
+        <div
+          id="quickResponses"
+          class="bg-white border-t border-slate-200 p-4"
+          style="display: none"
+        >
+          <p class="text-sm text-slate-500 mb-3">Quick questions:</p>
+          <div class="flex flex-wrap gap-2">
+            <button
+              class="quick-response-btn"
+              data-query="What are common cold symptoms?"
+            >
+              <img
+                src="https://api.iconify.design/mdi/thermometer.svg?color=%23a855f7"
+                alt="Temperature icon"
+                class="w-4 h-4"
+              />
+              Common Cold Symptoms
+            </button>

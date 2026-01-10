@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="smooth-scroll">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Emergency Resources - Quick access to emergency services, first aid guides, and crisis intervention resources. Get immediate help when you need it most."
+    />
+    <meta
+      name="keywords"
+      content="emergency services, first aid, crisis intervention, emergency contacts, medical emergency, health emergency"
+    />
+    <title>Emergency Resources - HEALTH SPHERE</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../public/i18n.js"></script>
+    <script>
+      // Initialize theme immediately before page renders to prevent flashing
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const isDark =
+          savedTheme === "dark" || (savedTheme === null && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    <script
+      type="module"
+      async
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmedicareh1463back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12"
+    ></script>
+    <script
+      type="module"
+      defer
+      src="https://static.rocket.new/rocket-shot.js?v=0.0.2"
+    ></script>
+  </head>
+  <body class="bg-background">
+    <script>
+      // Auth guard: redirect to sign-in if not logged in
+      (function(){
+        const auth = localStorage.getItem('authUser');
+        if(!auth) {
+          window.location.href = 'sign_in_screen.html';
+        }
+      })();
+    </script>
+    <!-- Emergency Alert Banner -->
+    <div id="emergencyAlert" class="emergency-banner">
+      <div class="container-custom flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://api.iconify.design/mdi/alert-circle.svg?color=white"
+            alt="Emergency alert icon"
+            class="w-6 h-6 animate-pulse"
+          />
+          <p class="font-semibold" data-i18n="emergency_text">
+            🚨 For immediate life-threatening emergencies, call your local
+            emergency services now!
+          </p>
+        </div>
+        <button
+          onclick="toggleEmergencyAlert()"
+          class="text-white hover:text-error-100 transition-colors"
+          aria-label="Close emergency alert"
+        >
+          <img
+            src="https://api.iconify.design/mdi/close.svg?color=white"
+            alt="Close icon"
+            class="w-6 h-6"
+          />
+          <!-- Logo -->
+          <a href="homepage.html" class="flex items-center gap-3 group">
+            <img src="../public/logo.svg" alt="HEALTH SPHERE logo" class="w-12 h-12 rounded-full" />
+            <div>
+              <h1
+                class="text-xl font-headline font-bold text-violet-500 group-hover:text-violet-500-600 transition-colors"
+                data-i18n="site_title"
+              >
+                HEALTH SPHERE
+              </h1>
+              <p class="text-xs text-slate-500" data-i18n="site_subtitle">Health Knowledge Ecosystem</p>
+            </div>
+          </a>
+                class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors"
+                data-i18n="site_title"
+              >
+                HEALTH SPHERE
+              </h1>
+              <p class="text-xs text-text-tertiary" data-i18n="site_subtitle">
+                Health Knowledge Ecosystem
+              </p>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center gap-8">
+            <a
+              href="homepage.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              data-i18n="nav_home"
+              >Home</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              data-i18n="nav_healthopedia"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              data-i18n="nav_chatbot"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              data-i18n="nav_symptom"
+              >Symptom Checker</a
+            >
+            <a
+              href="emergency_resources.html"
+              class="text-error font-semibold border-b-2 border-error pb-1"
+              data-i18n="nav_emergency"
+              >Emergency</a
+            >
+          </div>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="smooth-scroll">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HEALTH SPHERE - Your trusted source for comprehensive medical information, health education, and wellness resources. Access reliable health knowledge in multiple languages."
+    />
+    <meta
+      name="keywords"
+      content="medical information, health education, wellness, healthcare, medical knowledge, health resources"
+    />
+    <title>HEALTH SPHERE - Empowering Health Through Knowledge</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../public/i18n.js"></script>
+  </head>
+  <body
+    style="
+      background-color: white;
+      color: #1a365d;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    "
+  >
+    <script>
+      // Auth guard: redirect to sign-in if not logged in
+      (function(){
+        const auth = localStorage.getItem('authUser');
+        if(!auth) {
+          window.location.href = 'sign_in_screen.html';
+        }
+      })();
+    </script>
+    <!-- Emergency Banner -->
+    <div id="emergencyBanner" class="emergency-banner hidden">
+      <div class="container-custom flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://api.iconify.design/mdi/alert-circle.svg?color=white"
+            alt="Emergency alert icon"
+            class="w-6 h-6"
+          />
+          <p class="font-semibold">
+            In case of medical emergency, call your local emergency services
+            immediately
+          </p>
+        </div>
+        <button
+          onclick="toggleEmergencyBanner()"
+          class="text-white hover:text-error-100 transition-colors"
+          aria-label="Close emergency banner"
+        >
+          <img
+            src="https://api.iconify.design/mdi/close.svg?color=white"
+            alt="Close icon"
+            class="w-6 h-6"
+          />
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header
+      class="bg-white dark:bg-slate-950 shadow-sm dark:shadow-lg sticky top-0 z-50 transition-colors duration-300"
+    >
+      <nav class="container-custom py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="homepage.html" class="flex items-center gap-3 group">
+            <img src="../public/logo.svg" alt="HEALTH SPHERE logo" class="w-12 h-12 rounded-full" />
+            <div>
+              <h1
+                class="text-xl font-headline font-bold text-primary group-hover:text-primary-600 transition-colors"
+                data-i18n="site_title"
+              >
+                HEALTH SPHERE
+              </h1>
+              <p class="text-xs text-text-tertiary" data-i18n="site_subtitle">
+                Health Knowledge Ecosystem
+              </p>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center gap-8">
+            <a
+              href="homepage.html"
+              class="text-primary font-semibold border-b-2 border-primary pb-1"
+              >Home</a
+            >
+            <a
+              href="healthopedia.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Symptom Checker</a
+            >
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency text-sm py-2 px-4"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency
+            </a>
+          </div>
+
+          <!-- Language Selector & Mobile Menu -->
+          <div class="flex items-center gap-4">
+            <select
+              id="pageLangSelect"
+              data-i18n-select
+              class="hidden lg:block px-4 py-2 border border-border rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary dark:bg-surface-dark dark:text-text-primary-dark dark:border-border-dark"
+              aria-label="Select language"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+
+            <button
+              id="mobileMenuBtn"
+              class="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              <img
+                src="https://api.iconify.design/mdi/menu.svg?color=%232E86AB"
+                alt="Menu icon"
+                class="w-6 h-6"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="hidden lg:hidden mt-4 pb-4 border-t border-border pt-4"
+        >
+          <div class="flex flex-col gap-4">
+            <a href="homepage.html" class="text-primary font-semibold">Home</a>
+            <a
+              href="healthopedia.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Healthopedia</a
+            >
+            <a
+              href="chatbot.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >AI Assistant</a
+            >
+            <a
+              href="symptom_checker.html"
+              class="text-text-secondary hover:text-primary transition-colors"
+              >Symptom Checker</a
+            >
+            <select
+              class="px-4 py-2 border border-border rounded-lg bg-white text-text-primary"
+              aria-label="Select language mobile"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+            </select>
+            <a
+              href="emergency_resources.html"
+              class="btn-emergency justify-center"
+            >
+              <img
+                src="https://api.iconify.design/mdi/phone-alert.svg?color=white"
+                alt="Emergency icon"
+                class="w-5 h-5"
+              />
+              Emergency Resources
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="relative bg-gradient-to-br from-primary-50 via-white to-secondary-50 overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#2E86AB"
+                stroke-width="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      <div class="container-custom section relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="scroll-reveal">
+            <div
+              class="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-6"
+            >
+              <img
+                src="https://api.iconify.design/mdi/shield-check.svg?color=%232E86AB"
+                alt="Verified icon"
+                class="w-5 h-5"
+              />
+              <span class="text-sm font-semibold"
+                >Trusted Medical Information</span
+              >
+            </div>
+
+            <h1
+              class="text-5xl lg:text-6xl font-headline font-bold text-text-primary mb-6 leading-tight"
+              data-i18n-html="hero_title"
+            >
+              Empowering Health Through
+              <span class="gradient-text">Knowledge</span>
+            </h1>
+            <p class="text-xl text-text-secondary mb-8 leading-relaxed" data-i18n="hero_desc">
+              Your comprehensive health knowledge ecosystem. Access reliable
+              medical information, reduce health anxiety through understanding,
+              and make informed decisions across diverse communities.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+              <a href="healthopedia.html" class="btn-outline" data-i18n="browse_healthopedia">
+                <img
+                  src="https://api.iconify.design/mdi/book-open-page-variant.svg?color=%232E86AB"
+                  alt="Book icon"
+                  class="w-5 h-5"
+                />
+                Browse Healthopedia
+              </a>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="mt-12 flex flex-wrap items-center gap-8">
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://api.iconify.design/mdi/account-group.svg?color=%232E86AB"
+                  alt="Users icon"
+                  class="w-6 h-6"
+                />
+                <div>
+                  <p class="text-2xl font-bold text-primary">50K+</p>
+                  <p class="text-sm text-text-tertiary" data-i18n="active_users">Active Users</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://api.iconify.design/mdi/file-document-multiple.svg?color=%232E86AB"
+                  alt="Articles icon"
+                  class="w-6 h-6"
+                />
+                <div>
+                  <p class="text-2xl font-bold text-primary">1000+</p>
+                  <p class="text-sm text-text-tertiary" data-i18n="medical_articles">Medical Articles</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://api.iconify.design/mdi/translate.svg?color=%232E86AB"
+                  alt="Languages icon"
+                  class="w-6 h-6"
+                />
+                <div>
+                  <p class="text-2xl font-bold text-primary">3+</p>
+                  <p class="text-sm text-text-tertiary" data-i18n="languages">Languages</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative scroll-reveal">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2940&auto=format&fit=crop"
+                alt="Medical professional reviewing health information on digital tablet in modern healthcare setting"
+                class="w-full h-[500px] object-cover"
+                onerror="this.src='https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;"
+              />
+            </div>
+
+            <!-- Floating Health Tip Card -->
+            <div
+              class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6 max-w-xs animate-fade-in-up"
+            >
+              <div class="flex items-start gap-4">
+                <div class="bg-success-100 p-3 rounded-lg">
+                  <img
+                    src="https://api.iconify.design/mdi/heart-pulse.svg?color=%2338A169"
+                    alt="Health tip icon"
+                    class="w-6 h-6"
+                  />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-text-primary mb-1">
+                    Daily Health Tip
+                  </h3>
+                  <p class="text-sm text-text-secondary">
+                    Stay hydrated! Drink 8 glasses of water daily for optimal
+                    health.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Access Tools -->
+    <section class="section-compact bg-white">
+      <div class="container-custom">
+        <div class="text-center mb-12 scroll-reveal">
+          <h2 class="text-4xl font-headline font-bold text-text-primary mb-4">
+            Quick Access Health Tools
+          </h2>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Explore our comprehensive suite of health management tools designed
+            for your wellbeing
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Symptom Checker -->
+          <a
+            href="symptom_checker.html"
+            class="card-interactive group scroll-reveal"
+          >
+            <div
+              class="bg-primary-50 p-4 rounded-xl mb-4 group-hover:bg-primary-100 transition-colors"
+            >
+              <img
+                src="https://api.iconify.design/mdi/stethoscope.svg?color=%232E86AB"
+                alt="Symptom checker icon"
+                class="w-12 h-12 mx-auto"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              Symptom Checker
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Assess your symptoms and get personalized health recommendations
+            </p>
+            <div
+              class="flex items-center text-primary font-semibold group-hover:gap-2 transition-all"
+            >
+              <span>Check Symptoms</span>
+              <img
+                src="https://api.iconify.design/mdi/arrow-right.svg?color=%232E86AB"
+                alt="Arrow icon"
+                class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+            </div>
+          </a>
+
+          <!-- AI Chatbot -->
+          <a href="chatbot.html" class="card-interactive group scroll-reveal">
+            <div
+              class="bg-secondary-50 p-4 rounded-xl mb-4 group-hover:bg-secondary-100 transition-colors"
+            >
+              <img
+                src="https://api.iconify.design/mdi/robot.svg?color=%2364B0B4"
+                alt="AI chatbot icon"
+                class="w-12 h-12 mx-auto"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary mb-2">
+              AI Health Assistant
+            </h3>
+            <p class="text-text-secondary mb-4">
+              Get instant answers to your health questions 24/7
+            </p>
+            <div
+              class="flex items-center text-primary font-semibold group-hover:gap-2 transition-all"
+            >
+              <span>Chat Now</span>
+              <img
+                src="https://api.iconify.design/mdi/arrow-right.svg?color=%23`

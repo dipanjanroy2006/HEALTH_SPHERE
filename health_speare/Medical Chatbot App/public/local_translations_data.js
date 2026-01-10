@@ -50,7 +50,7 @@ window.__HS_TRANSLATIONS_EN__ = {
   account_created_subtext: "Redirecting to sign-in...",
   // navigation and UI keys (kept in sync with i18n.js)
   nav_home: "Home",
-  nav_dashboard: "Dashboard",
+
   nav_healthopedia: "Healthopedia",
   nav_chatbot: "AI Assistant",
   nav_symptom: "Symptom Checker",
@@ -154,7 +154,7 @@ window.__HS_TRANSLATIONS_HI__ = {
   account_created_subtext: "साइन-इन पर पुनर्निर्देश कर रहे हैं...",
   // navigation and UI keys
   nav_home: "होम",
-  nav_dashboard: "डैशबोर्ड",
+
   nav_healthopedia: "हेल्थोपीडिया",
   nav_chatbot: "एआई सहायक",
   nav_symptom: "लक्षण जाँच",
@@ -257,7 +257,7 @@ window.__HS_TRANSLATIONS_BN__ = {
   account_created_subtext: "সাইন-ইনে পুনর্নির্দেশ করা হচ্ছে...",
   // navigation and UI keys
   nav_home: "হোম",
-  nav_dashboard: "ড্যাশবোর্ড",
+
   nav_healthopedia: "হেলথোপিডিয়া",
   nav_chatbot: "এআই সহকারী",
   nav_symptom: "লক্ষণ পরীক্ষা",
